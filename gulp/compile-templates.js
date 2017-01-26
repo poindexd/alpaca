@@ -34,10 +34,10 @@ var opts = {
 //For each set, compile all templates
 gulp.task('compile-templates', function() {
 	return merge(
-					gulp.src('templates/*.pug')
+					gulp.src('viewer/templates/*.pug')
 						.pipe(pug())
 						.pipe(templateCache('alpaca-templates.js', opts.compile)),
-					gulp.src('templates/*.pug')
+					gulp.src('viewer/templates/*.pug')
 						.pipe(templateCache('alpaca-templates-list.js', opts.list))
 				)
 				.pipe(concat('alpaca-templates.js'))

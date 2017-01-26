@@ -33,5 +33,8 @@
     "require-dir": "^0.3.1",
     "yaml-front-matter": "^3.4.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "global": "^4.3.1",
+    "phantomjs": "1.9"
+  }
 }

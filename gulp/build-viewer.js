@@ -8,8 +8,8 @@ var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('build-viewer', function(){
 	return gulp.src([
-		'js/swiperRepeat.js',
-		'js/viewer.js',
+		'viewer/js/swiperRepeat.js',
+		'viewer/js/viewer.js',
 	])
 	.pipe(sourcemaps.init())
 	.pipe(concat('alpaca-viewer.js'))

@@ -1,14 +1,13 @@
 var gulp = require('gulp');
 var forreach = require('gulp-foreach');
 var inject = require('gulp-inject');
+var localScreenshots = require('gulp-local-screenshots');
 var webshot = require('gulp-webshot');
 
-
-gulp.task('template-thumbnails', function(){
-	return gulp.src('templates/*.pug')
+gulp.task('template-thumbnails-helper', function(){
+		return gulp.src('viewer/templates/*.pug')
 	//For each template
 	.pipe(forreach(function(stream, template){
-
 		return gulp.src('gulp/_include/thumbnail.html')
 			.pipe(inject(
 				gulp.src([
@@ -32,11 +31,27 @@ gulp.task('template-thumbnails', function(){
 						}
 				})
 			))
-			.pipe(webshot({
-				dest: 'dist/thumbnails/' + template.name + '.jpg',
-				root: 'gulp/_include/'
-			}));
+			.pipe(gulp.dest('gulp/temp/' + template.name + '.html'))
 
 	}));
+
+});
+
+
+gulp.task('template-thumbnails', ['template-thumbnails-helper'], function(){
+	return gulp.src('gulp/temp/*.html')
+	.pipe(webshot({
+				dest: 'thumbnails',
+				filename: template.name,
+				root: 'dist/thumbnails',
+				siteType: 'html'
+	}))
+			/*
+			.pipe(localScreenshots({
+				suffix: template.name,
+				folder: 'dist/thumbnails',
+				protocol: 'html'
+			}));
+*/
 
 });

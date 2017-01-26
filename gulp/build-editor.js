@@ -8,8 +8,8 @@ var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('build-editor', function(){
 	return gulp.src([
-		'js/editor.js',
-		'js/device-preview.js'
+		'editor/js/editor.js',
+		'editor/js/device-preview.js'
 	])
 	.pipe(sourcemaps.init())
 	.pipe(concat('alpaca-editor.js'))
