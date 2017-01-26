@@ -1,0 +1,118 @@
+@import "materialize";
+@import "custom/likert";
+
+.container-wide{
+	margin: 0 auto;
+	width: 90%;
+}
+
+.indent{
+	margin-left: 2em;
+}
+
+.card-image img{
+	max-height: 400px;
+}
+
+.wrapper{
+	width:100%;
+}
+
+body {
+/* 	display: flex;
+	min-height: 100vh;
+	flex-direction: column; */
+	font-family: "Raleway", sans-serif;
+	//background: #fbfbfb;
+	overflow: hidden;
+}
+
+.content-wrapper{
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+main {
+	display: flex;
+	flex: 1 0;
+	align-content: center;
+	//align-items: center;
+}
+
+header, footer{
+	display: flex;
+	height: 150px;
+}
+
+a, p, span, input {
+	font-size:1.25em !important;
+}
+
+sup{
+	font-size:0.5em !important;
+	vertical-align: super;
+}
+
+p{
+	color: #aaa;
+}
+
+.dot{
+	width:20px;
+	height: 20px;
+	background: #aaa;
+	border-radius: 100%;
+	opacity: 0.25;
+	margin: 0 auto;
+	display: inline-block;
+	margin: 10px;
+}
+
+.dot.filled{
+	opacity: 1.0;
+}
+
+.btn-floating.btn-floating-huge {
+
+    width: 180px;
+    height: 180px;
+    i {
+    	line-height: 180px;
+    	font-size: 100px;
+    }
+}
+
+.btn-large {
+	height:72px;
+	line-height:72px;
+}
+
+.animate-enter, 
+.animate-leave
+{ 
+    -webkit-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+} 
+ 
+.animate-enter {
+    left: 100%;
+}
+.animate-enter.animate-enter-active {
+    left: 0;
+}
+ 
+.animate-leave {
+    left: 0;
+}
+.animate-leave.animate-leave-active{
+    left: -100%;
+}
+
+.toast{
+	background: #4caf50;
+}

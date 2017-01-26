@@ -1,0 +1,12 @@
+html
+	head
+		title Viewer
+		link(rel='stylesheet' href='./css/index.css')
+	
+	body(ng-app='alpacaViewer' ng-controller='alpacaViewerController')
+		alpaca-viewer(survey='survey' selected='selected')
+
+	script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+	script(src='./js/alpaca-templates.js')
+	script(src='./js/alpaca-viewer.min.js')
+	

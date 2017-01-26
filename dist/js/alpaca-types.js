@@ -1,0 +1,2 @@
+angular.module('alpacaTypes', []).run(['$templateCache', function($templateCache) {$templateCache.put('alpaca-type-input','<input ng-model="model"/>');
+$templateCache.put('alpaca-type-textarea','<textarea class="materialize-textarea" ng-model="model"></textarea>');}]);

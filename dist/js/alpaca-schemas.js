@@ -1,0 +1,2 @@
+angular.module("alpacaSchemas", [])		.service("$schemas", function() { this.schemas = {green:[{"key":"title","type":"input","placeholder":"title"},{"key":"content","type":"textarea","placeholder":"content"}],
+orange:[{"key":"title","type":"input","placeholder":"title"},{"key":"content","type":"textarea","placeholder":"content"},{"key":"Note","type":"input"}],}});

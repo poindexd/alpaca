@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My index</title>
+  <!-- inject:css -->
+  <!-- endinject -->
+</head>
+<body>
+
+	<alpaca-slide template='template' schema='schemas[template]' />
+
+  <!-- inject:js -->
+  <!-- endinject -->
+  <script>
+		var app = angular.module('app', 'alpacaViewer');
+		app.controller('alpacaEditorController', [
+		'$scope',
+		'$templateList',
+		'$schemas',
+		function($scope, $templateList, $schemas){
+
+			$scope.template = THUMBNAIL_TEMPLATE;
+			$scope.schemas = $schemas.schemas;
+		  
+		}]);
+	</script>
+
+</body>
+</html>

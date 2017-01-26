@@ -1,0 +1,16 @@
+[
+	{
+		"key": "title",
+		"type": "input",
+		"placeholder": "title"
+	},
+	{
+		"key": "content",
+		"type": "textarea",
+		"placeholder": "content"
+	},
+	{
+		"key": "Note",
+		"type": "input"
+	}
+]

@@ -1,0 +1,37 @@
+<html><head><title>Editor</title><link rel="stylesheet" href="./css/index.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/><style>html,body{
+	height: 100%;
+}
+iframe{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+.frame-wrapper{
+	height: 100vh;
+	width: 100%;
+	background: #ddd;
+	position: relative;
+}
+wrap-in-frame {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+#controls {
+	position: absolute;
+	right: 0px;
+	bottom: 120px;
+}
+#controls .btn {
+	display: block;
+}
+#controls #device {
+	color: white;
+	text-align: right;
+	position: absolute;
+	right: 15px;
+	bottom: -100px;
+}
+</style></head><body ng-app="alpacaEditor" ng-controller="alpacaEditorController"><div class="row" style="width:100%"><!--.col.s2.card.small(ng-repeat='slide in survey.slides') {{slide.name}}--><div class="col s6"><div class="container"><h3>Controls</h3><div ng-repeat="field in schemas[selected.template]"><alpaca-field model="selected[field.key]" type="field.type"></alpaca-field></div><div class="row"><div class="col s4" ng-repeat="template in templates"><div class="frame-wrapper" style="height:100px"><wrap-in-frame><device-preview device="selectedDevice"><alpaca-slide template="template" schema="schemas[template]"></alpaca-slide></device-preview></wrap-in-frame></div></div></div></div></div><div class="col s6"><div class="frame-wrapper container"><wrap-in-frame><device-preview device="selectedDevice"><alpaca-viewer survey="survey" selected="selected"></alpaca-viewer></device-preview></wrap-in-frame></div><div class="center" id="controls" ng-cloak="ng-cloak"><a class="btn btn-large" ng-repeat="device in devices" ng-click="setDevice(device)" ng-class="{blue:device===selectedDevice, grey:device!==selectedDevice}"><i class="material-icons">{{device.material_icon}}</i></a><div id="device"><p>{{selectedDevice.name}}</p><p>{{selectedDevice.width + 'x' + selectedDevice.height}}</p></div></div></div></div></body><!--TODO: REMOVE--><script src="https://code.jquery.com/jquery-2.2.4.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script><script src="./js/alpaca-templates.js"></script><script src="./js/alpaca-schemas.js"></script><script src="./js/alpaca-types.js"></script><script src="./js/alpaca-viewer.min.js"></script><script src="./js/alpaca-editor.min.js"></script></html>
