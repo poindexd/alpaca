@@ -137,7 +137,8 @@ angular.module('alpacaEditor').directive('alpacaField', [
 			link: link,
 			scope: {
 				model: '=',
-				type: '='
+				type: '=',
+				field: '='
 			}
 		};
 }]);

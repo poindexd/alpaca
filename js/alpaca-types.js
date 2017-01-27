@@ -1,2 +1,2 @@
-angular.module('alpacaTypes', []).run(['$templateCache', function($templateCache) {$templateCache.put('alpaca-type-input','<input ng-model="model"/>');
-$templateCache.put('alpaca-type-textarea','<textarea class="materialize-textarea" ng-model="model"></textarea>');}]);
+angular.module('alpacaTypes', []).run(['$templateCache', function($templateCache) {$templateCache.put('alpaca-type-input','<label>{{field.label}}</label><input ng-model="model"/>');
+$templateCache.put('alpaca-type-textarea','<label>{{field.label}}</label><textarea class="materialize-textarea" ng-model="model"></textarea>');}]);
