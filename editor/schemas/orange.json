@@ -1,16 +1,19 @@
 [
 	{
 		"key": "title",
+		"label": "Title",
 		"type": "input",
 		"placeholder": "title"
 	},
 	{
 		"key": "content",
+		"label": "Content",
 		"type": "textarea",
 		"placeholder": "content"
 	},
 	{
-		"key": "Note",
+		"key": "note",
+		"label": "Note",
 		"type": "input"
 	}
 ]

@@ -21,7 +21,6 @@
     "gulp-intercept": "^0.1.0",
     "gulp-json-transform": "^0.4.2",
     "gulp-local-screenshots": "^2.2.0",
-    "gulp-markdown-docs": "^0.1.5",
     "gulp-merge": "^0.1.1",
     "gulp-pug": "^3.2.0",
     "gulp-pug-inheritance": "^0.2.1",

@@ -126,8 +126,9 @@ pre {
   overflow: hidden;
 }
 .doc-nav {
+  background: #002b36;
   position: fixed;
-  width: 32vw;
+  width: 200px;
   left: 0;
   top: 0;
   bottom: 0;
@@ -158,14 +159,14 @@ pre {
 .doc-nav-group-header,
 .doc-nav-group-header a:active,
 .doc-nav-group-header a:visited {
-  color: #212121;
+  color: white;
 }
 .doc-nav-item {
   padding: 0.5em 0 0.5em 1.5em;
 }
 .doc-nav-item a:active,
 .doc-nav-item a:visited {
-  color: #454545;
+  color: white;
 }
 .doc-section-header {
   font-size: 1.7em;
@@ -182,9 +183,129 @@ pre {
 .doc-article + .doc-article {
   padding-top: 3em;
   border-top: 1px solid #323232;
+}
+
+.doc-content{
+  position: relative;
+  width: 700px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 15px;
+  
+}
+
+.doc-content-wrapper{
+  position: fixed;
+  top: 0px;
+  left: 200px;
+  right: 0px;
+  height: 100%;
+  overflow-y: scroll;
 }</style><link rel="stylesheet" type="text/css" href="../css/materialize.css"></head>
   <body>
-    <section class="doc-nav"><ul class="doc-nav-group"><li class="doc-nav-item"><a href="#undefined">undefined</a></li></ul></section>
-    <section class="doc-content"><section class="doc-section"><article class="doc-article"><a class="doc-nav-anchor" name="undefined"></a></article></section></section>
+    <section class="doc-nav"><ul class="doc-nav-group"><li class="doc-nav-group-header"><a href="#Introduction">Introduction</a></li><li class="doc-nav-item"><a href="#introduction_summary">Summary</a></li><li class="doc-nav-item"><a href="#introduction_installation">Installation</a></li></ul><ul class="doc-nav-group"><li class="doc-nav-group-header"><a href="#Viewer">Viewer</a></li><li class="doc-nav-item"><a href="#viewer_getting-started">Getting Started</a></li><li class="doc-nav-item"><a href="#viewer_templates">Templates</a></li></ul><ul class="doc-nav-group"><li class="doc-nav-group-header"><a href="#Editor">Editor</a></li><li class="doc-nav-item"><a href="#editor_getting-started">Getting Started</a></li><li class="doc-nav-item"><a href="#editor_schemas">Schemas</a></li><li class="doc-nav-item"><a href="#editor_types">Types</a></li></ul></section>
+    <div class="doc-content-wrapper">
+      <section class="doc-content"><section class="doc-section"><h1 class="doc-section-header"><a class="doc-nav-anchor" name="Introduction"></a>Introduction</h1><article class="doc-article"><a class="doc-nav-anchor" name="introduction_summary"></a><h3 id="summary">Summary</h3>
+<p>Alpaca is a framework for viewing and editing multimedia presentations or surveys, built on <a href="https://angularjs.org/">Angular</a> and <a href="http://gulpjs.com/">Gulp</a>. It is composed of two main parts: a viewer and an editor.</p>
+</article><article class="doc-article"><a class="doc-nav-anchor" name="introduction_installation"></a><h3 id="installation">Installation</h3>
+<p>Clone the repo and install using node or yarn:</p>
+<p><code>npm install</code> or <code>yarn install</code></p>
+<h3 id="run">Run</h3>
+<p><code>gulp</code></p>
+</article></section><section class="doc-section"><h1 class="doc-section-header"><a class="doc-nav-anchor" name="Viewer"></a>Viewer</h1><article class="doc-article"><a class="doc-nav-anchor" name="viewer_getting-started"></a><h3 id="getting-started">Getting Started</h3>
+<ol>
+<li>Include the following scripts:<ul>
+<li>angular 1.5.X</li>
+<li>alpaca-templates.js</li>
+<li>alpaca-viewer.min.js</li>
+</ul>
+</li>
+<li><p>Include the <code>alpaca-viewer</code> module as a dependency in your app</p>
+<pre><code> <span class="hljs-tag">var</span> app = angular.<span class="hljs-function"><span class="hljs-title">module</span><span class="hljs-params">(<span class="hljs-string">&apos;app&apos;</span>, [<span class="hljs-string">&apos;alpacaViewer&apos;</span>])</span></span>
+</code></pre></li>
+<li><p>Add the <code>alpaca-viewer</code> directive to the html</p>
+<pre><code> <span class="hljs-tag">&lt;<span class="hljs-title">alpaca-viewer</span> <span class="hljs-attribute">survey</span>=<span class="hljs-value">&apos;survey&apos;</span> /&gt;</span>
+</code></pre></li>
+</ol>
+<h4 id="notes">Notes</h4>
+<ul>
+<li>Templates are kept in a separate module to allow for third-party template modules</li>
+<li>The viewer will take the full size of its container</li>
+</ul>
+</article><article class="doc-article"><a class="doc-nav-anchor" name="viewer_templates"></a><h3 id="templates">Templates</h3>
+<p>A Template describes how a Slide should render.</p>
+<h4 id="example">Example</h4>
+<p><em>sample.pug</em></p>
+<pre><code>.container
+    .card.medium.green
+        h1 <span class="hljs-expansion">{{slide.title}}</span>
+        h2 <span class="hljs-expansion">{{slide.content}}</span>
+</code></pre><h4 id="the-index-template">The <em>index</em> Template</h4>
+<p><strong>Required:</strong> There must be a Template named <em>index</em>. This is used for the root view of the presentation. This template <strong>must</strong> contain the <code>alpaca-slides</code> directive. This directive marks where the slides will be rendered. The index template is useful for adding a header and footer.</p>
+<h4 id="adding-a-template">Adding a Template</h4>
+<p>Add a pug/html template to <em>/viewer/templates</em></p>
+<h4 id="compilation">Compilation</h4>
+<p>Templates are compiled automatically. The output is an <code>alpaca-templates</code> module. This module is a dependency for the viewer. It populates Angular&apos;s <code>$templateCache</code>. It also includes a <code>$templateList</code> service, which contains an array of all the template names.</p>
+<h4 id="usage">Usage</h4>
+<p>Each Slide must specify a root property of <em>template</em> that maps to an existing template.</p>
+</article></section><section class="doc-section"><h1 class="doc-section-header"><a class="doc-nav-anchor" name="Editor"></a>Editor</h1><article class="doc-article"><a class="doc-nav-anchor" name="editor_getting-started"></a><h3 id="getting-started">Getting Started</h3>
+<ol>
+<li>Include the following scripts:<ul>
+<li>angular 1.5.X</li>
+<li>alpaca-templates.js</li>
+<li>alpaca-types.js</li>
+<li>alpaca-schemas.js</li>
+<li>alpaca-editor.min.js</li>
+</ul>
+</li>
+<li><p>Include the <code>alpaca-editor</code> module as a dependency</p>
+<pre><code> <span class="hljs-tag">var</span> app = angular.<span class="hljs-function"><span class="hljs-title">module</span><span class="hljs-params">(<span class="hljs-string">&apos;app&apos;</span>, [<span class="hljs-string">&apos;alpacaEditor&apos;</span>])</span></span>
+</code></pre></li>
+<li><p>Add the <code>alpaca-form</code> directive to html</p>
+<pre><code> <span class="hljs-tag">&lt;<span class="hljs-title">alpaca-form</span> <span class="hljs-attribute">slide</span>=<span class="hljs-value">&apos;slide&apos;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">alpaca-form</span>&gt;</span>
+</code></pre></li>
+<li><p>Add the preview to html</p>
+<pre><code> <span class="hljs-tag">&lt;<span class="hljs-title">wrap-in-frame</span>&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-title">device-preview</span> <span class="hljs-attribute">device</span>=<span class="hljs-value">&apos;device&apos;</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-title">alpaca-viewer</span> <span class="hljs-attribute">slide</span>=<span class="hljs-value">&apos;slide&apos;</span> /&gt;</span>
+     <span class="hljs-tag">&lt;/<span class="hljs-title">device-preview</span>&gt;</span>
+ <span class="hljs-tag">&lt;/<span class="hljs-title">wrap-in-frame</span>&gt;</span>
+</code></pre></li>
+</ol>
+</article><article class="doc-article"><a class="doc-nav-anchor" name="editor_schemas"></a><h3 id="schemas">Schemas</h3>
+<p>A Schema is a json file that describes what properties belong to all slides of a template.</p>
+<h4 id="example">Example</h4>
+<p><em>sample.json</em></p>
+<pre><code>[
+    {
+        &quot;<span class="hljs-attribute">key</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;title&quot;</span></span>,
+        &quot;<span class="hljs-attribute">type</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;input&quot;</span>
+    </span>},
+    {
+        &quot;<span class="hljs-attribute">key</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;content&quot;</span></span>,
+        &quot;<span class="hljs-attribute">type</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;textarea&quot;</span>
+    </span>}
+]
+</code></pre><h4 id="structure">Structure</h4>
+<p>A Schema consists of an array of <em>fields</em> that will be rendered on the editor form. Each schema field must contain a <code>key</code>, which maps to the model property with the same name. It must also contain a <code>type</code>, which is covered in the next section.</p>
+<h4 id="adding-a-schema">Adding a Schema</h4>
+<p>In order to build, Schemas must be mapped 1-to-1 with a Template. To add a Schema, simply create a json file in <em>/editor/schemas</em> with the same base file name as the corresponding Template in <em>/viewer/templates</em></p>
+<h4 id="compilation">Compilation</h4>
+<p>Schemas are automatically compiled by default. The result of the compile task is a <code>alpaca-schemas</code> module. This module is a dependency of the editor. It includes a <code>$schemas</code> service, which contains the data.</p>
+<h4 id="usage">Usage</h4>
+<p>Include the <code>alpaca-schemas</code> javascript that corresponds to the <code>alpaca-templates</code> module used. <strong>It is important that the Schema and Template module come from the same build</strong></p>
+</article><article class="doc-article"><a class="doc-nav-anchor" name="editor_types"></a><h3 id="types">Types</h3>
+<p>Types are templates that tell property fields how to render in the editor form.</p>
+<h4 id="example">Example</h4>
+<p><em>input.pug</em></p>
+<pre><code><span class="hljs-function"><span class="hljs-title">input</span><span class="hljs-params">(ng-model=<span class="hljs-string">&apos;model&apos;</span>)</span></span>
+</code></pre><h4 id="adding-a-type">Adding a Type</h4>
+<p>Add a pug/html template to <em>/editor/types</em></p>
+<h4 id="compilation">Compilation</h4>
+<p>Types are compiled automatically. The output is an <code>alpaca-types</code> module, which is a dependency of the editor.</p>
+<h4 id="usage">Usage</h4>
+<p>Each field in a Schema must specify a root property of <em>type</em> that maps to a Type.</p>
+</article></section></section>
+    </div>
   </body>
 

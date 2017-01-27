@@ -13,7 +13,7 @@ var concat = require('gulp-concat');
 var merge = require('gulp-merge');
 var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
-var markdownDocs = require('gulp-markdown-docs');
+var markdownDocs = require('./gulp/_include/gulp-markdown-docs-master');
 
 //Require tasks in Gulp directory
 require('require-dir')('./gulp');
@@ -68,13 +68,14 @@ gulp.task('watch', function() {
   gulp.watch('viewer/js/**/*.js', ['build-viewer']);
   gulp.watch('editor/js/**/*.js', ['build-editor']);
   gulp.watch('docs/**/*.md', ['compile-docs']);
+  gulp.watch('gulp/_include/gulp-markdown-docs-master/**/*', ['compile-docs'])
 });
 
 gulp.task('default', [
 	'compile-templates',
 	'compile-types',
 	'compile-schemas',
-	//'compile-docs',
+	'compile-docs',
 	'pug',
 	'sass',
 	'build-viewer',

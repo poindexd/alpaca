@@ -43,12 +43,17 @@ html
 	
 	body(ng-app='alpacaEditor' ng-controller='alpacaEditorController')
 		.row(style='width:100%')
-			//.col.s2
-				.card.small(ng-repeat='slide in survey.slides') {{slide.name}}
-			.col.s6: .container
-				h3 Controls
-				div(ng-repeat='field in schemas[selected.template]')
-					alpaca-field(model='selected[field.key]' type='field.type')
+			.col.s2(style='position:relative;z-index:99')
+				.card(ng-repeat='slide in survey.slides' style='height:200px') 
+					wrap-in-frame
+						device-preview(device='selectedDevice')
+							alpaca-viewer(survey='survey' selected='slide')
+
+			.col.s5(style='position:relative;z-index:99')
+				.card: .container
+					
+					div(ng-repeat='field in schemas[selected.template]')
+						alpaca-field(model='selected[field.key]' type='field.type' field='field')
 
 				//.row
 					.col.s4(ng-repeat='template in templates')
@@ -57,7 +62,7 @@ html
 								device-preview(device='selectedDevice')
 									alpaca-slide(template='template' schema='schemas[template]')
 
-			.col.s6
+			.col.s5
 
 				.frame-wrapper.container
 					wrap-in-frame
