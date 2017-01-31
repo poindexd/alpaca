@@ -1,0 +1,50 @@
+ul#device-dropdown.dropdown-content
+	li(ng-repeat='_device in devices')
+		a.waves-effect.waves-light(href='#!' ng-class='{selected: device == _device}' ng-click='setDevice(_device)') 
+			i.material-icons.left {{_device.material_icon}}
+			| {{_device.name}}
+			| {{_device.width}}x{{_device.height}}
+
+ul#language-dropdown.dropdown-content
+	li
+		a(href='#!') en
+	li
+		a(href='#!') es
+
+ul#version-dropdown.dropdown-content
+	li
+		a(href='#!') v1
+	li
+		a(href='#!') v2
+			i.material-icons.right.green-text done
+	li
+		a(href='#!') v3
+
+nav(style='position:relative;z-index:100'): .nav-wrapper
+
+	ul.left(ng-show='!searching')
+		a.breadcrumb General Wellness Survey
+		a.breadcrumb.dropdown-button(href='#!' data-activates='language-dropdown') en
+		a.breadcrumb.dropdown-button(href='#!' data-activates='version-dropdown') v2
+
+	ul.right(ng-show='!searching')
+		//li
+			a.waves-effect.waves-light(style='margin-right:10px') Print
+				i.material-icons.left print
+		li(ng-show='false')
+			a.waves-effect.waves-light Publish
+				i.material-icons.left publish
+
+		li(ng-show='true')
+			a.waves-effect.waves-light.green-text Published
+				i.material-icons.left done
+		li
+			a.dropdown-button(href='#!' data-activates='device-dropdown' style='min-width:300px !important;padding: 0px 50px') {{device.name || 'Device Preview'}}
+				i.material-icons.right arrow_drop_down
+
+	form(ng-show='searching')
+		.input-field
+			input#search(type='search' ng-model='searchtext' required)
+			label.label-icon(for='search')
+				i.material-icons search
+			i.material-icons(ng-click='searching = false') close

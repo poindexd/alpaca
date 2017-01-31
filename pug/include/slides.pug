@@ -1,0 +1,8 @@
+#slide-nav(style='padding-bottom:200px;padding-right:10px;position:relative;overflow-y:auto')
+	.card-panel.waves-effect.waves-light(ng-repeat='slide in survey.slides' ng-click='setSlide(slide)' ng-class='{selected: selected==slide}' style='display:block') {{slide.title}}
+div(style='position: absolute; bottom: 100px;width:100%')
+	.center
+		.btn-floating.btn-large.waves-effect.waves-light(style='margin:5px')
+			i.material-icons add
+		.btn-floating.btn-large.waves-effect.waves-light(ng-click='search()' style='margin:5px')
+			i.material-icons search

@@ -7,6 +7,7 @@
   "author": "Dan Poindexter",
   "license": "MIT",
   "devDependencies": {
+    "cheerio": "^0.22.0",
     "gulp": "^3.9.1",
     "gulp-angular-templatecache": "^2.0.0",
     "gulp-cached": "^1.1.1",
@@ -29,6 +30,7 @@
     "gulp-sourcemaps": "^1.9.1",
     "gulp-uglify": "^2.0.0",
     "gulp-webshot": "^0.2.3",
+    "marked": "^0.3.6",
     "require-dir": "^0.3.1",
     "yaml-front-matter": "^3.4.0"
   },

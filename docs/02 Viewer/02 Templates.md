@@ -5,10 +5,12 @@ A Template describes how a Slide should render.
 #### Example
 *sample.pug*
 
+```pug
     .container
         .card.medium.green
             h1 {{slide.title}}
             h2 {{slide.content}}
+```
 
 #### The *index* Template
 **Required:** There must be a Template named *index*. This is used for the root view of the presentation. This template **must** contain the `alpaca-slides` directive. This directive marks where the slides will be rendered. The index template is useful for adding a header and footer.

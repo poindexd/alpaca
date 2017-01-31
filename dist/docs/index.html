@@ -17,100 +17,77 @@ Orginal Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmai
   padding: 0.5em;
   background: #002b36;
   color: #839496;
-  -webkit-text-size-adjust: none;
 }
 
 .hljs-comment,
-.diff .hljs-header,
-.hljs-doctype,
-.hljs-pi,
-.lisp .hljs-string {
+.hljs-quote {
   color: #586e75;
 }
 
 /* Solarized Green */
 .hljs-keyword,
-.hljs-winutils,
-.method,
-.hljs-addition,
-.css .hljs-tag,
-.hljs-request,
-.hljs-status,
-.nginx .hljs-title {
+.hljs-selector-tag,
+.hljs-addition {
   color: #859900;
 }
 
 /* Solarized Cyan */
 .hljs-number,
-.hljs-command,
 .hljs-string,
-.hljs-tag .hljs-value,
-.hljs-rule .hljs-value,
+.hljs-meta .hljs-meta-string,
+.hljs-literal,
 .hljs-doctag,
-.tex .hljs-formula,
-.hljs-regexp,
-.hljs-hexcolor,
-.hljs-link_url {
+.hljs-regexp {
   color: #2aa198;
 }
 
 /* Solarized Blue */
 .hljs-title,
-.hljs-localvars,
-.hljs-chunk,
-.hljs-decorator,
-.hljs-built_in,
-.hljs-identifier,
-.vhdl .hljs-literal,
-.hljs-id,
-.css .hljs-function,
-.hljs-name {
+.hljs-section,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
   color: #268bd2;
 }
 
 /* Solarized Yellow */
 .hljs-attribute,
+.hljs-attr,
 .hljs-variable,
-.lisp .hljs-body,
-.smalltalk .hljs-number,
-.hljs-constant,
+.hljs-template-variable,
 .hljs-class .hljs-title,
-.hljs-parent,
-.hljs-type,
-.hljs-link_reference {
+.hljs-type {
   color: #b58900;
 }
 
 /* Solarized Orange */
-.hljs-preprocessor,
-.hljs-preprocessor .hljs-keyword,
-.hljs-pragma,
-.hljs-shebang,
 .hljs-symbol,
-.hljs-symbol .hljs-string,
-.diff .hljs-change,
-.hljs-special,
-.hljs-attr_selector,
+.hljs-bullet,
 .hljs-subst,
-.hljs-cdata,
-.css .hljs-pseudo,
-.hljs-header {
+.hljs-meta,
+.hljs-meta .hljs-keyword,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-link {
   color: #cb4b16;
 }
 
 /* Solarized Red */
-.hljs-deletion,
-.hljs-important {
+.hljs-built_in,
+.hljs-deletion {
   color: #dc322f;
 }
 
-/* Solarized Violet */
-.hljs-link_label {
-  color: #6c71c4;
+.hljs-formula {
+  background: #073642;
 }
 
-.tex .hljs-formula {
-  background: #073642;
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
 }
 </style><style>body {
   margin-left: 35vw;
@@ -221,10 +198,10 @@ pre {
 </ul>
 </li>
 <li><p>Include the <code>alpaca-viewer</code> module as a dependency in your app</p>
-<pre><code> <span class="hljs-tag">var</span> app = angular.<span class="hljs-function"><span class="hljs-title">module</span><span class="hljs-params">(<span class="hljs-string">&apos;app&apos;</span>, [<span class="hljs-string">&apos;alpacaViewer&apos;</span>])</span></span>
+<pre><code> <span class="hljs-keyword">var</span> app = angular.<span class="hljs-built_in">module</span>(<span class="hljs-string">&apos;app&apos;</span>, [<span class="hljs-string">&apos;alpacaViewer&apos;</span>])
 </code></pre></li>
 <li><p>Add the <code>alpaca-viewer</code> directive to the html</p>
-<pre><code> <span class="hljs-tag">&lt;<span class="hljs-title">alpaca-viewer</span> <span class="hljs-attribute">survey</span>=<span class="hljs-value">&apos;survey&apos;</span> /&gt;</span>
+<pre><code> <span class="hljs-tag">&lt;<span class="hljs-name">alpaca-viewer</span> <span class="hljs-attr">survey</span>=<span class="hljs-string">&apos;survey&apos;</span> /&gt;</span>
 </code></pre></li>
 </ol>
 <h4 id="notes">Notes</h4>
@@ -236,11 +213,12 @@ pre {
 <p>A Template describes how a Slide should render.</p>
 <h4 id="example">Example</h4>
 <p><em>sample.pug</em></p>
-<pre><code>.container
-    .card.medium.green
-        h1 <span class="hljs-expansion">{{slide.title}}</span>
-        h2 <span class="hljs-expansion">{{slide.content}}</span>
-</code></pre><h4 id="the-index-template">The <em>index</em> Template</h4>
+<pre><code class="lang-pug">    <span class="hljs-selector-class">.container</span>
+        <span class="hljs-selector-class">.card</span><span class="hljs-selector-class">.medium</span><span class="hljs-selector-class">.green</span>
+            <span class="hljs-selector-tag">h1</span> {{slide.title}}
+            <span class="hljs-selector-tag">h2</span> {{slide.<span class="hljs-attribute">content</span>}}
+</code></pre>
+<h4 id="the-index-template">The <em>index</em> Template</h4>
 <p><strong>Required:</strong> There must be a Template named <em>index</em>. This is used for the root view of the presentation. This template <strong>must</strong> contain the <code>alpaca-slides</code> directive. This directive marks where the slides will be rendered. The index template is useful for adding a header and footer.</p>
 <h4 id="adding-a-template">Adding a Template</h4>
 <p>Add a pug/html template to <em>/viewer/templates</em></p>
@@ -259,17 +237,17 @@ pre {
 </ul>
 </li>
 <li><p>Include the <code>alpaca-editor</code> module as a dependency</p>
-<pre><code> <span class="hljs-tag">var</span> app = angular.<span class="hljs-function"><span class="hljs-title">module</span><span class="hljs-params">(<span class="hljs-string">&apos;app&apos;</span>, [<span class="hljs-string">&apos;alpacaEditor&apos;</span>])</span></span>
+<pre><code> <span class="hljs-keyword">var</span> app = angular.<span class="hljs-built_in">module</span>(<span class="hljs-string">&apos;app&apos;</span>, [<span class="hljs-string">&apos;alpacaEditor&apos;</span>])
 </code></pre></li>
 <li><p>Add the <code>alpaca-form</code> directive to html</p>
-<pre><code> <span class="hljs-tag">&lt;<span class="hljs-title">alpaca-form</span> <span class="hljs-attribute">slide</span>=<span class="hljs-value">&apos;slide&apos;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">alpaca-form</span>&gt;</span>
+<pre><code> <span class="hljs-tag">&lt;<span class="hljs-name">alpaca-form</span> <span class="hljs-attr">slide</span>=<span class="hljs-string">&apos;slide&apos;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">alpaca-form</span>&gt;</span>
 </code></pre></li>
 <li><p>Add the preview to html</p>
-<pre><code> <span class="hljs-tag">&lt;<span class="hljs-title">wrap-in-frame</span>&gt;</span>
-     <span class="hljs-tag">&lt;<span class="hljs-title">device-preview</span> <span class="hljs-attribute">device</span>=<span class="hljs-value">&apos;device&apos;</span>&gt;</span>
-         <span class="hljs-tag">&lt;<span class="hljs-title">alpaca-viewer</span> <span class="hljs-attribute">slide</span>=<span class="hljs-value">&apos;slide&apos;</span> /&gt;</span>
-     <span class="hljs-tag">&lt;/<span class="hljs-title">device-preview</span>&gt;</span>
- <span class="hljs-tag">&lt;/<span class="hljs-title">wrap-in-frame</span>&gt;</span>
+<pre><code> <span class="hljs-tag">&lt;<span class="hljs-name">wrap-in-frame</span>&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-name">device-preview</span> <span class="hljs-attr">device</span>=<span class="hljs-string">&apos;device&apos;</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">alpaca-viewer</span> <span class="hljs-attr">slide</span>=<span class="hljs-string">&apos;slide&apos;</span> /&gt;</span>
+     <span class="hljs-tag">&lt;/<span class="hljs-name">device-preview</span>&gt;</span>
+ <span class="hljs-tag">&lt;/<span class="hljs-name">wrap-in-frame</span>&gt;</span>
 </code></pre></li>
 </ol>
 </article><article class="doc-article"><a class="doc-nav-anchor" name="editor_schemas"></a><h3 id="schemas">Schemas</h3>
@@ -278,13 +256,13 @@ pre {
 <p><em>sample.json</em></p>
 <pre><code>[
     {
-        &quot;<span class="hljs-attribute">key</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;title&quot;</span></span>,
-        &quot;<span class="hljs-attribute">type</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;input&quot;</span>
-    </span>},
+        <span class="hljs-attr">&quot;key&quot;</span>: <span class="hljs-string">&quot;title&quot;</span>,
+        <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;input&quot;</span>
+    },
     {
-        &quot;<span class="hljs-attribute">key</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;content&quot;</span></span>,
-        &quot;<span class="hljs-attribute">type</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;textarea&quot;</span>
-    </span>}
+        <span class="hljs-attr">&quot;key&quot;</span>: <span class="hljs-string">&quot;content&quot;</span>,
+        <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;textarea&quot;</span>
+    }
 ]
 </code></pre><h4 id="structure">Structure</h4>
 <p>A Schema consists of an array of <em>fields</em> that will be rendered on the editor form. Each schema field must contain a <code>key</code>, which maps to the model property with the same name. It must also contain a <code>type</code>, which is covered in the next section.</p>

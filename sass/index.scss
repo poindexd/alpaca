@@ -1,5 +1,6 @@
 @import "materialize";
 @import "custom/likert";
+@import "custom/angular-resizable";
 
 .container-wide{
 	margin: 0 auto;
@@ -115,4 +116,124 @@ p{
 
 .toast{
 	background: #4caf50;
+}
+
+.dropdown-content li .selected{
+	background: $secondary-color;
+	color: white !important;
+}
+
+label{
+	display: block;
+	clear: both;
+}
+
+.breadcrumb{
+	color: white;
+}
+
+#slide-nav{
+	height: 100%;
+}
+
+nav{
+	background: white;
+
+	a, .breadcrumb, .breadcrumb:before{
+		@extend .orange-text;
+		@extend .text-darken-2;
+	}
+
+	.dropdown-content a{
+		color: $secondary-color !important;
+	}
+}
+
+.side-nav{
+	@extend .grey;
+	@extend .darken-4;
+	@extend .center;
+	width: 75px;
+
+	.logo{
+		@extend .center;
+
+		img{
+			padding:15px;
+			height: 100%;
+		}
+
+		width: 100%;
+		padding: 5px;
+	}
+
+	&.fixed a{
+		padding: 0px;
+	}
+
+	a i{
+		line-height: 64px;
+	}
+
+	a:hover{
+		@extend .grey;
+		@extend .darken-3;
+		@extend .white-text;
+	}
+
+	a.selected, a.selected:hover{
+		@extend .orange;
+		@extend .darken-2;
+		@extend .white-text;
+	}
+}
+
+#slide-nav{
+	.selected{
+		background: $secondary-color;
+		color: white;
+	}
+}
+
+
+::-webkit-scrollbar {
+	width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	//-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	background: #ddd; 
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: #eee; 
+}
+
+.resizable-wrapper{
+	.resizable-section{
+		transition: all 0.3s ease-in-out;
+	}
+	
+
+	&.minimized{
+		#form-resizable-section{
+			flex: 0 !important;
+		}
+		#preview-resizable-section{
+			flex: 4 !important;
+		}
+	}
+}
+
+.card-panel, nav {
+	box-shadow: none;
 }

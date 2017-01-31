@@ -626,7 +626,7 @@ app.controller('alpacaViewerController', ['$scope', function($scope){
 
 	}
 
-	$scope.selected = $scope.survey.slides[1];
+	$scope.selected = $scope.survey.slides[0];
 
 }]);
 
@@ -660,11 +660,14 @@ app.directive('alpacaSlide', [
 				})
 			}
 
-			$templateRequest('alpaca-template-' + $scope.slide.template).then(function(tpl){
-				var template = angular.element(tpl);
-				element.after(template);
-				$compile(template)($scope);
+			$scope.$watch('slide.template', function(){
+				$templateRequest('alpaca-template-' + $scope.slide.template).then(function(tpl){
+					var template = angular.element(tpl);
+					element.after(template);
+					$compile(template)($scope);
+				});
 			});
+
 		}
 
 		return {
@@ -686,6 +689,7 @@ app.directive('alpacaSlides',
 			restrict: 'E',
 			replace: true,
 			template: "<div swiper-repeat='slide in survey.slides' swiper-repeat-selected='selected'><alpaca-slide slide='slide'/></div>"
+			//template: "<div style='width:100%'><alpaca-slide slide='selected'/></div>"
 
 		};
 });

@@ -1,4 +1,4 @@
-angular.module('alpacaEditor', ['swiperRepeat','alpacaViewer', 'alpacaSchemas', 'alpacaTypes']);
+angular.module('alpacaEditor', ['dndLists', 'swiperRepeat', 'flow', 'angularResizable', 'alpacaViewer', 'alpacaSchemas', 'alpacaTypes']);
 
 
 angular.module('alpacaEditor').directive('alpacaForm', [
@@ -30,7 +30,8 @@ angular.module('alpacaEditor').controller('alpacaEditorController', [
 	'$scope',
 	'$templateList',
 	'$schemas',
-	function($scope, $templateList, $schemas){
+	'$timeout',
+	function($scope, $templateList, $schemas, $timeout){
 
 
 	$scope.templates = $templateList.templates;
@@ -38,20 +39,46 @@ angular.module('alpacaEditor').controller('alpacaEditorController', [
 	
 	$scope.survey = {
 
-		slides: [
-			{
+		slides: {
+			1: {
 				id: 1, title: 'Slide 1', content: 'Foo', template: 'green'
 			},
-			{
+			2: {
 				id: 2, title: 'Slide 2', content: 'Bar', template: 'orange'
+			},
+			3: {
+				id: 3, title: 'Slide 3', content: 'Fluf', template: 'orange'
 			}
-		]
+		},
+
+
+		nodes: {
+			1: {
+				id: 1, title: 'Slide 1', content: 'Foo', template: 'green'
+			},
+			2: {
+				kind: 'folder', title: 'Smoking'
+			},
+			3: {
+				id: 3, title: 'Slide 3', content: 'Fluf', template: 'orange'
+			}
+		}
 
 	};
 	$scope.selected = $scope.survey.slides[1];
-
 	$scope.schemas = $schemas.schemas;
-	$scope.schema = $scope.schemas['orange'];
+
+	$scope.maximized = false;
+
+	$scope.maximizePreview = function(maximized){
+		/*$('.resizable-section.white').animate({
+			flex: '0 0 0px'
+		}, 1000, function(){
+			maximized = !maximized;
+		})*/
+		$('.resizable-wrapper').toggleClass('minimized');
+		$scope.maximized = !$scope.maximized;
+	}
 
 	/*
 	$scope.schema = [
@@ -88,13 +115,37 @@ angular.module('alpacaEditor').controller('alpacaEditorController', [
   };
 
   $scope.setDevice = function(device) {
-    $scope.selectedDevice = device;
+    $scope.device = device;
     console.log('set device:', device);
   }
 
+  $scope.setSlide = function(slide){
+  	$scope.selected = slide;
+  	console.log(slide);
+  }
+
+  $scope.loading = true;
+
+  $scope.search = function(){
+  	$scope.searching = true;
+  	
+  	$timeout(function(){$('#search').focus()});
+  }
+
   $scope.$on('device-ready', function(){
-  	$scope.setDevice($scope.devices.iphone);
+  	$scope.setDevice($scope.devices.tablet);
+  	$scope.loading = false;
+  	
   });
+
+  $scope.fn = {
+  	tags: {
+	  	init: function(){
+	  		$('.chips').material_chip();
+	  		console.log('loaded chips');
+	  	}
+		}
+  };
   
 }]);
 
@@ -138,7 +189,8 @@ angular.module('alpacaEditor').directive('alpacaField', [
 			scope: {
 				model: '=',
 				type: '=',
-				field: '='
+				field: '=',
+				fn: '='
 			}
 		};
 }]);

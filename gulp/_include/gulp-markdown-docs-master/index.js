@@ -8,7 +8,7 @@ var yaml = require('js-yaml');
 var PluginError = gutil.PluginError;
 var fs = require('fs');
 var File = gutil.File;
-var highlight = require('highlight.js');
+var highlight = require('../pug-highlight.js-master/lib');
 var yamlFrontMatter = require('yaml-front-matter');
 
 function gulpMarkdownDocs(fileOpt, opt) {
@@ -22,7 +22,7 @@ function gulpMarkdownDocs(fileOpt, opt) {
 		documentSort: 'alphabetical', // 'alphabetical' || 'rank'
 		layoutStylesheetUrl: __dirname + '/resources/layout.css',
 		templatePath: __dirname + '/resources/index.html',
-		highlightTheme: 'solarized_dark', // see /node_modules/highlight.js/styles
+		highlightTheme: 'solarized-dark', // see /node_modules/highlight.js/styles
 		markdown: {
 			highlight: function (code) {
 		    return highlight.highlightAuto(code).value;
@@ -48,7 +48,7 @@ function gulpMarkdownDocs(fileOpt, opt) {
 
 	// gather needed resources
 	var indexHtml = fs.readFileSync(options.templatePath);
-	var highlightCss = fs.readFileSync(require.resolve('highlight.js/styles/'+options.highlightTheme+'.css'));
+	var highlightCss = fs.readFileSync(require.resolve('../pug-highlight.js-master/styles/'+options.highlightTheme+'.css'));
 	var layoutCss = options.layoutStylesheetUrl && fs.readFileSync(options.layoutStylesheetUrl);
 
 	// place css resources

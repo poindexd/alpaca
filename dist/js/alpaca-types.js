@@ -1,2 +1,4 @@
-angular.module('alpacaTypes', []).run(['$templateCache', function($templateCache) {$templateCache.put('alpaca-type-input','<label>{{field.label}}</label><input ng-model="model"/>');
+angular.module('alpacaTypes', []).run(['$templateCache', function($templateCache) {$templateCache.put('alpaca-type-file','<label>{{field.label}}</label><br/><div class="row" flow-init="flow-init"><div class="col s12 center" ng-if="!model"><div class="btn" flow-btn="flow-btn" flow-drop="flow-drop">Upload<i class="material-icons left">cloud_upload</i></div></div><div class="col s12" ng-if="model"><div class="btn">{{$flow.files[0].name}}</div></div></div>');
+$templateCache.put('alpaca-type-input','<label>{{field.label}}</label><input ng-model="model"/>');
+$templateCache.put('alpaca-type-tags','<label>{{field.label}}</label><br/><div class="chips" ng-init="fn.init()"></div>');
 $templateCache.put('alpaca-type-textarea','<label>{{field.label}}</label><textarea class="materialize-textarea" ng-model="model"></textarea>');}]);

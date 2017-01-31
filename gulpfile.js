@@ -53,7 +53,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('pug', function(){
-	return gulp.src('./pug/**/*.pug')
+	return gulp.src('./pug/*.pug')
 		.pipe(pug())
 		.pipe(gulp.dest('dist'))
 		.pipe(connect.reload());

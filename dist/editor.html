@@ -7,10 +7,11 @@ iframe{
 	border: 0;
 }
 .frame-wrapper{
-	height: 100vh;
+	height: 100%;
 	width: 100%;
-	background: #ddd;
+	//background: #eee;
 	position: relative;
+	overflow:hidden;
 }
 wrap-in-frame {
 	position: absolute;
@@ -18,6 +19,9 @@ wrap-in-frame {
 	bottom: 0;
 	left: 0;
 	right: 0;
+	//display: flex;
+	//justify-content: center;
+	//align-items:center;
 }
 #controls {
 	position: absolute;
@@ -34,9 +38,13 @@ wrap-in-frame {
 	right: 15px;
 	bottom: -100px;
 }
-</style></head><body ng-app="alpacaEditor" ng-controller="alpacaEditorController"><div class="row" style="width:100%"><div class="col s2" style="position:relative;z-index:99"><div class="card" ng-repeat="slide in survey.slides" style="height:200px"> <wrap-in-frame><device-preview device="selectedDevice"><alpaca-viewer survey="survey" selected="slide"></alpaca-viewer></device-preview></wrap-in-frame></div></div><div class="col s5" style="position:relative;z-index:99"><div class="card"><div class="container"><div ng-repeat="field in schemas[selected.template]"><alpaca-field model="selected[field.key]" type="field.type" field="field"></alpaca-field></div></div></div><!--.row.col.s4(ng-repeat='template in templates')
-	.frame-wrapper(style='height:100px')
-		wrap-in-frame
-			device-preview(device='selectedDevice')
-				alpaca-slide(template='template' schema='schemas[template]')
---></div><div class="col s5"><div class="frame-wrapper container"><wrap-in-frame><device-preview device="selectedDevice"><alpaca-viewer survey="survey" selected="selected"></alpaca-viewer></device-preview></wrap-in-frame></div><div class="center" id="controls" ng-cloak="ng-cloak"><a class="btn btn-large" ng-repeat="device in devices" ng-click="setDevice(device)" ng-class="{blue:device===selectedDevice, grey:device!==selectedDevice}"><i class="material-icons">{{device.material_icon}}</i></a><div id="device"><p>{{selectedDevice.name}}</p><p>{{selectedDevice.width + 'x' + selectedDevice.height}}</p></div></div></div></div></body><!--TODO: REMOVE--><script src="https://code.jquery.com/jquery-2.2.4.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script><script src="./js/alpaca-templates.js"></script><script src="./js/alpaca-schemas.js"></script><script src="./js/alpaca-types.js"></script><script src="./js/alpaca-viewer.min.js"></script><script src="./js/alpaca-editor.min.js"></script></html>
+</style></head><body class="grey lighten-3" ng-app="alpacaEditor" ng-controller="alpacaEditorController" flow-init="flow-init" flow-prevent-drop="flow-prevent-drop"><div ng-show="loading"><div class="container center" style="height:100vh;display:flex;flex-direction:column;justify-content:center; align-items:center"><div style="width: 400px;height: 200px"><img src="./img/hotpath_logo.svg" width="400"/><div class="progress orange lighten-4"><div class="indeterminate orange"></div></div></div></div></div><div ng-show="!loading" ng-cloak="ng-cloak"><ul class="side-nav fixed" id="side-nav"><li><a class="waves-effect waves-light logo" href="#!"><img src="./img/hotpath_logo_small.svg"/></a></li><li><a class="waves-effect waves-light" href="#!"><i class="material-icons">view_module</i></a></li><li><a class="waves-effect waves-light selected" href="#!"><i class="material-icons">mode_edit</i></a></li><li><a class="waves-effect waves-light" href="#!"><i class="material-icons">timeline</i></a></li><li><a class="waves-effect waves-light" href="#!"><i class="material-icons">settings</i></a></li></ul><div style="margin-left:75px;max-height:100%"><ul class="dropdown-content" id="device-dropdown"><li ng-repeat="_device in devices"><a class="waves-effect waves-light" href="#!" ng-class="{selected: device == _device}" ng-click="setDevice(_device)"> <i class="material-icons left">{{_device.material_icon}}</i>{{_device.name}}
+{{_device.width}}x{{_device.height}}</a></li></ul><ul class="dropdown-content" id="language-dropdown"><li><a href="#!">en</a></li><li><a href="#!">es</a></li></ul><ul class="dropdown-content" id="version-dropdown"><li><a href="#!">v1</a></li><li><a href="#!">v2<i class="material-icons right green-text">done</i></a></li><li><a href="#!">v3</a></li></ul><nav style="position:relative;z-index:100"><div class="nav-wrapper"><ul class="left" ng-show="!searching"><a class="breadcrumb">General Wellness Survey</a><a class="breadcrumb dropdown-button" href="#!" data-activates="language-dropdown">en</a><a class="breadcrumb dropdown-button" href="#!" data-activates="version-dropdown">v2</a></ul><ul class="right" ng-show="!searching"><!--lia.waves-effect.waves-light(style='margin-right:10px') Print
+	i.material-icons.left print--><li ng-show="false"><a class="waves-effect waves-light">Publish<i class="material-icons left">publish</i></a></li><li ng-show="true"><a class="waves-effect waves-light green-text">Published<i class="material-icons left">done</i></a></li><li><a class="dropdown-button" href="#!" data-activates="device-dropdown" style="min-width:300px !important;padding: 0px 50px">{{device.name || 'Device Preview'}}<i class="material-icons right">arrow_drop_down</i></a></li></ul><form ng-show="searching"><div class="input-field"><input id="search" type="search" ng-model="searchtext" required="required"/><label class="label-icon" for="search"><i class="material-icons">search</i></label><i class="material-icons" ng-click="searching = false">close</i></div></form></div></nav><div class="resizable-wrapper" style="display:flex; width:100%"><div class="resizable-section grey lighten-3" r-flex="true" style="flex:1;position:relative;z-index:99"><div id="slide-nav" style="padding-bottom:200px;padding-right:10px;position:relative;overflow-y:auto"><div class="card-panel waves-effect waves-light" ng-repeat="slide in survey.slides" ng-click="setSlide(slide)" ng-class="{selected: selected==slide}" style="display:block">{{slide.title}}</div></div><div style="position: absolute; bottom: 100px;width:100%"><div class="center"><div class="btn-floating btn-large waves-effect waves-light" style="margin:5px"><i class="material-icons">add</i></div><div class="btn-floating btn-large waves-effect waves-light" ng-click="search()" style="margin:5px"><i class="material-icons">search</i></div></div></div></div><div class="resizable-section white" id="form-resizable-section" resizable="resizable" r-flex="true" style="flex:2;position:relative;z-index:99;overflow-y:auto"><div style="padding: 50px"><div ng-repeat="field in schemas[&quot;index&quot;].concat(schemas[selected.template])"><alpaca-field model="selected[field.key]" type="field.type" field="field" fn="fn[field.type]"></alpaca-field></div></div></div><div class="resizable-section grey lighten-3" id="preview-resizable-section" resizable="resizable" r-flex="true" r-width="0" style="flex:2"><div class="frame-wrapper container center"><wrap-in-frame><device-preview device="device"><alpaca-viewer survey="survey" selected="selected"></alpaca-viewer></device-preview></wrap-in-frame></div><div class="btn-floating btn-large waves-effect waves-light cyan" ng-click="maximizePreview(maximized)" style="position:absolute;bottom: 105px;left:-50px;z-index:150"><i class="material-icons" ng-show="!maximized">arrow_left</i><i class="material-icons" ng-show="maximized">arrow_right</i></div></div></div><div class="grey lighten-3" ng-show="searching &amp;&amp; !loading" style="position:absolute;top:64;left:0;right:0;bottom:0;z-index:200"><div class="container" style="height:100%;display:flex;align-items:center;justify-content:center"><p class="flow-text" ng-show="!searchtext || searchtext == &quot;&quot;">Search for slides by tag. Results will appear here.</p></div></div></div></div></body><!--TODO: REMOVE--><script src="https://code.jquery.com/jquery-2.2.4.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script><script src="./js/alpaca-templates.js"></script><script src="./js/alpaca-schemas.js"></script><script src="./js/alpaca-types.js"></script><script src="./js/alpaca-viewer.min.js"></script><script src="./js/alpaca-editor.min.js"></script><script>$('#device-dropdown').dropdown();
+$('select').material_select();
+$('.button-collapse').sideNav({
+	menuWidth: 75, // Default is 300
+	//edge: 'right', // Choose the horizontal origin
+	//closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+	draggable: true // Choose whether you can drag to open on touch screens
+});</script></html>

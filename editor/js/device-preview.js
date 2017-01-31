@@ -12,21 +12,32 @@ angular.module('alpacaEditor').directive('devicePreview', function() {
 
   var link = function($scope, el, attrs) {
 
-    console.log($scope.$parent);
+    //console.log($scope.$parent);
     var parent = angular.element(el).parent();
-    parent.width = $scope.$parent.frame_size.width;//$('#wrapper').width();
-    parent.height = $scope.$parent.frame_size.height;//$('#wrapper').height();
+
 
     console.log('device-size', $scope.$parent.frame_size);
 
     var child = angular.element(el);
+/*function(){
 
-    $scope.$watch('device', function() {
+      return {
+        frame_size: $scope.$parent.frame_size
+        device: $scope.device
+      }
+
+    },*/
+
+    $scope.$watch('device',
+     function() {
 
       var device = $scope.device;
 
       if (!angular.element(el).parent()[0])
         return false;
+
+      parent.width = $scope.$parent.frame_size.width;
+      parent.height = $scope.$parent.frame_size.height;
 
       console.log($scope.device);
       
@@ -101,6 +112,21 @@ angular.module('alpacaEditor').directive("wrapInFrame", [
     transclude: true,
     replace: false,
     link: function($scope, $directiveElement, $attrs, $controller, $transclude) {
+      
+
+      /*$scope.$watch(
+          function () { 
+              return {
+                 width: $directiveElement.parent().width(),
+                 height: $directiveElement.parent().height(),
+              }
+         },
+         function (data) {
+          $scope.$parent.frame_size = data;
+          //alert('size changed!');
+         }, //listener 
+         true //deep watch
+      );*/
       
       $scope.$parent.frame_size = {
         width: $directiveElement.parent().width(),

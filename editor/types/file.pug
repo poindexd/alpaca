@@ -1,0 +1,9 @@
+label {{field.label}}
+br
+.row(flow-init)
+	.col.s12.center(ng-if='!model')
+		.btn(flow-btn flow-drop) Upload
+			i.material-icons.left cloud_upload
+
+	.col.s12(ng-if='model')
+		.btn {{$flow.files[0].name}}

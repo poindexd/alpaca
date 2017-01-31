@@ -1,11 +1,5 @@
 [
 	{
-		"key": "title",
-		"label": "Title",
-		"type": "input",
-		"placeholder": "title"
-	},
-	{
 		"key": "content",
 		"label": "Content",
 		"type": "textarea",

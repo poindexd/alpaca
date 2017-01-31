@@ -13,10 +13,11 @@ html
 				border: 0;
 			}
 			.frame-wrapper{
-				height: 100vh;
+				height: 100%;
 				width: 100%;
-				background: #ddd;
+				//background: #eee;
 				position: relative;
+				overflow:hidden;
 			}
 			wrap-in-frame {
 				position: absolute;
@@ -24,6 +25,9 @@ html
 				bottom: 0;
 				left: 0;
 				right: 0;
+				//display: flex;
+				//justify-content: center;
+				//align-items:center;
 			}
 			#controls {
 				position: absolute;
@@ -41,47 +45,49 @@ html
 				bottom: -100px;
 			}
 	
-	body(ng-app='alpacaEditor' ng-controller='alpacaEditorController')
-		.row(style='width:100%')
-			.col.s2(style='position:relative;z-index:99')
-				.card(ng-repeat='slide in survey.slides' style='height:200px') 
-					wrap-in-frame
-						device-preview(device='selectedDevice')
-							alpaca-viewer(survey='survey' selected='slide')
+	body.grey.lighten-3(ng-app='alpacaEditor' ng-controller='alpacaEditorController' flow-init flow-prevent-drop)
 
-			.col.s5(style='position:relative;z-index:99')
-				.card: .container
-					
-					div(ng-repeat='field in schemas[selected.template]')
-						alpaca-field(model='selected[field.key]' type='field.type' field='field')
+		div(ng-show='loading')
+			include include/loading.pug
 
-				//.row
-					.col.s4(ng-repeat='template in templates')
-						.frame-wrapper(style='height:100px')
-							wrap-in-frame
-								device-preview(device='selectedDevice')
-									alpaca-slide(template='template' schema='schemas[template]')
+		div(ng-show='!loading' ng-cloak)
+			include include/side-nav.pug
 
-			.col.s5
+			div(style='margin-left:75px;max-height:100%')
+				include include/nav.pug
 
-				.frame-wrapper.container
-					wrap-in-frame
-						device-preview(device='selectedDevice')
-							alpaca-viewer(survey='survey' selected='selected')
+				.resizable-wrapper(style='display:flex; width:100%')
+					.resizable-section.grey.lighten-3(r-flex='true' style='flex:1;position:relative;z-index:99;')
+						include include/slides.pug
 
-				#controls.center(ng-cloak)
-					a.btn.btn-large(ng-repeat='device in devices' ng-click='setDevice(device)' ng-class='{blue:device===selectedDevice, grey:device!==selectedDevice}')
-						i.material-icons {{device.material_icon}}
-					#device
-						p {{selectedDevice.name}}
-						p {{selectedDevice.width + 'x' + selectedDevice.height}}
+					#form-resizable-section.resizable-section.white(resizable r-flex='true' style='flex:2;position:relative;z-index:99;overflow-y:auto')
+						include include/form.pug
+
+					#preview-resizable-section.resizable-section.grey.lighten-3(resizable r-flex='true' r-width='0' style='flex:2')
+						include include/preview.pug
+
+				.grey.lighten-3(ng-show='searching && !loading' style='position:absolute;top:64;left:0;right:0;bottom:0;z-index:200;')
+					.container(style='height:100%;display:flex;align-items:center;justify-content:center')
+						p.flow-text(ng-show='!searchtext || searchtext == ""') Search for slides by tag. Results will appear here.
+
 
 	//TODO: REMOVE
 	script(src='https://code.jquery.com/jquery-2.2.4.min.js')
+	script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js')
 	script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
 	script(src='./js/alpaca-templates.js')
 	script(src='./js/alpaca-schemas.js')
 	script(src='./js/alpaca-types.js')
 	script(src='./js/alpaca-viewer.min.js')
 	script(src='./js/alpaca-editor.min.js')
-	
+	script.
+		$('#device-dropdown').dropdown();
+		$('select').material_select();
+		$('.button-collapse').sideNav({
+			menuWidth: 75, // Default is 300
+			//edge: 'right', // Choose the horizontal origin
+			//closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+			draggable: true // Choose whether you can drag to open on touch screens
+		});
+
+		
