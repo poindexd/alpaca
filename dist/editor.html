@@ -34,7 +34,7 @@ wrap-in-frame {
 	right: 15px;
 	bottom: -100px;
 }
-</style></head><body ng-app="alpacaEditor" ng-controller="alpacaEditorController"><div class="row" style="width:100%"><div class="col s2" style="position:relative;z-index:99"><div class="card" ng-repeat="slide in survey.slides" style="height:200px"> <wrap-in-frame><device-preview device="selectedDevice"><alpaca-viewer survey="survey" selected="slide"></alpaca-viewer></device-preview></wrap-in-frame></div></div><div class="col s5" style="position:relative;z-index:99"><div class="card"><div class="container"><div ng-repeat="field in schemas[selected.template]"><alpaca-field model="selected[field.key]" type="field.type" field="field"></alpaca-field></div></div></div><!--.row.col.s4(ng-repeat='template in templates')
+</style></head><body ng-app="alpacaEditor" ng-controller="alpacaEditorController"><div class="row" style="width:100%;"><div class="col s2" style="position:relative;z-index:99;"><div class="card" ng-repeat="slide in survey.slides" style="height:200px;"> <wrap-in-frame><device-preview device="selectedDevice"><alpaca-viewer survey="survey" selected="slide"></alpaca-viewer></device-preview></wrap-in-frame></div></div><div class="col s5" style="position:relative;z-index:99;"><div class="card"><div class="container"><div ng-repeat="field in schemas[selected.template]"><alpaca-field model="selected[field.key]" type="field.type" field="field"></alpaca-field></div></div></div><!--.row.col.s4(ng-repeat='template in templates')
 	.frame-wrapper(style='height:100px')
 		wrap-in-frame
 			device-preview(device='selectedDevice')

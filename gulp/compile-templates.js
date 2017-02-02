@@ -35,12 +35,12 @@ var opts = {
 gulp.task('compile-templates', function() {
 	return merge(
 					gulp.src('viewer/templates/*.pug')
-						.pipe(pug())
-						.pipe(templateCache('alpaca-templates.js', opts.compile)),
+						.pipe(pug().on('error', console.error.bind(console)))
+						.pipe(templateCache('alpaca-templates.js', opts.compile).on('error', console.error.bind(console))),
 					gulp.src('viewer/templates/*.pug')
-						.pipe(templateCache('alpaca-templates-list.js', opts.list))
+						.pipe(templateCache('alpaca-templates-list.js', opts.list).on('error', console.error.bind(console)))
 				)
-				.pipe(concat('alpaca-templates.js'))
-				.pipe(gulp.dest('dist/js'))
+				.pipe(concat('alpaca-templates.js').on('error', console.error.bind(console)))
+				.pipe(gulp.dest('dist/js').on('error', console.error.bind(console)))
 				.pipe(connect.reload());
 });

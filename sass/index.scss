@@ -11,7 +11,7 @@
 }
 
 .card-image img{
-	max-height: 400px;
+	max-height: 250px;
 }
 
 .wrapper{
@@ -43,7 +43,7 @@ main {
 
 header, footer{
 	display: flex;
-	height: 150px;
+	height: 100px;
 }
 
 a, p, span, input {
@@ -116,3 +116,15 @@ p{
 .toast{
 	background: #4caf50;
 }
+
+.radioset {
+	padding: 50px 0px 70px 0px;
+}
+
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
+  box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0px 0px 0 rgba(0, 0, 0, 0); }
+
+// .card-content {
+// 	 height: 500px;
+// }  
+

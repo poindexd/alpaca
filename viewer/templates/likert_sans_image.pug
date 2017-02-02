@@ -1,0 +1,18 @@
+.containter: .card.large
+
+	.card-title() {{slide.question}}	
+	.row()
+
+		//CONTENT
+		.col.s12.center()
+			.card-content()
+				i.material-icons.large.grey-text.text-lighten-3(ng-if='slide.icon') {{slide.icon}}
+				h3.grey-text.text-darken-2 {{slide.content}}
+				div(ng-if='slide.custom', ng-bind-html='trustAsHtml(slide.custom)') {{slide.custom}}
+
+	//Likert/MULTIPLE CHOICE
+	.radioset(): ul
+		li(ng-repeat='option in slide.options')
+			input(type='radio', name='radio[]', id='radio-{{$index}}' ng-click='$timeout(advanceSlide, 400)')
+			label(for='radio-{{$index}}')
+	.text-labels: .text-label(ng-repeat='option in slide.options') {{option.text}}

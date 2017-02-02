@@ -621,12 +621,34 @@ app.controller('alpacaViewerController', ['$scope', function($scope){
 			},
 			{
 				id: 2, title: 'Slide 2', template: 'orange'
+			},
+			{
+				id: 3, question: 'Testing multiple choice with image', template: 'multiplechoice', options:[{text: "one"}, {text: "two"}, {text: "three"}, {text: "four"}, {text: "five"}] 
+				, image_align: "Top", image_url: 'http://i.imgur.com/t0FE1LP.jpg', content: "This is Content section"
+			},
+			{
+				id: 4, question: 'Testing multiple choice without image', template: 'multiplechoice_sans_image', options:[{text: "one"}, {text: "two"}, {text: "three"}, {text: "four"}, {text: "five"}] 
+				, content: "This is content section"
+			},
+			{
+				id: 5, question: 'Testing Likert with image', template: 'likert', options:[{text: "Not likely"}, {text: "likely"}, {text: "very likely"}] 
+				, image_align: "Top", image_url: 'http://i.imgur.com/t0FE1LP.jpg', content: "This is content section"
+			},
+			{
+				id: 6, question: 'Testing Likert without image', template: 'likert_sans_image', options:[{text: "Not likely"}, {text: "likely"}, {text: "very likely"}] 
+				, content: "This is content section"
+			},
+			{
+				id: 7, question: 'Testing Just Plain image', template: 'image', image_align: "Top", image_url: 'http://i.imgur.com/t0FE1LP.jpg'
+				, content: "This is content section"
 			}
+
+
 		]
 
 	}
 
-	$scope.selected = $scope.survey.slides[1];
+	$scope.selected = $scope.survey.slides[4];
 
 }]);
 

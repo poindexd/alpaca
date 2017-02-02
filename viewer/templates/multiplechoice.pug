@@ -1,0 +1,59 @@
+//- doctype html
+//- html
+//- 	head
+//- 		style
+//- 			include my.css
+//- 	.container
+//- 		.card.medium
+//- 			h4 {{slide.question}}
+//- 			.toggle_radio
+//- 				input(type = "radio" class = "toggle_option" id = "first_toggle" name = "toggle_option")
+//- 				input(type = "radio" checked class = "toggle_option" id = "second_toggle" name = "toggle_option")
+//- 				input(type = "radio" class = "toggle_option" id = "third_toggle" name = "toggle_option")
+//- 				ul
+//- 					li(ng-repeat = "option in slide.options")
+//- 						label(for = "f-option") {{option.text}}
+
+//- .container
+//- 	.card.medium.yellow
+//- 		h5 {{slide.question}}
+
+//- 		.radioset.nobar() 
+//- 			ul
+//- 				li(ng-repeat = 'option in slide.options')
+//- 					input(type='radio' name='radio[]' id='radio-{{$index}}' ng-click='$timeout(advanceSlide, 400)')
+//- 					label(for='radio-{{$index}}').text-labels: .text-label {{option.text}}
+
+//- 		
+.containter: .card.large
+
+	.card-title() {{slide.question}}	
+	.row(ng-class="{'valign-wrapper': slide.image_align=='Left' || slide.image_align=='Right'}")
+
+		//IMAGE TOP
+		.col.s12.l12.center(ng-if='slide.image_align=="Top"')
+			.card-image: img(src='{{slide.image_url}}')
+
+		//IMAGE LEFT
+		.col.s12.l4.center(ng-if='slide.image_align=="Left"')
+			.card-image: img(src='{{slide.image_url}}')
+
+		//CONTENT
+		.col.s12.center(ng-class="{l8: slide.image_align=='Left' || slide.image_align=='Right', l12: slide.image_align!='Left' && slide.image_align!='Right'}")
+			.card-content()
+				i.material-icons.large.grey-text.text-lighten-3(ng-if='slide.icon') {{slide.icon}}
+				h3.grey-text.text-darken-2 {{slide.content}}
+				div(ng-if='slide.custom', ng-bind-html='trustAsHtml(slide.custom)') {{slide.custom}}
+
+		//IMAGE RIGHT
+		.col.s12.l4.center(ng-if='slide.image_align=="Right"')
+			.card-image: image(src='{{slide.image_url}}')
+
+	//Likert/MULTIPLE CHOICE
+	.radioset.nobar(): ul
+		li(ng-repeat='option in slide.options')
+			input(type='radio', name='radio[]', id='radio-{{$index}}' ng-click='$timeout(advanceSlide, 400)')
+			label(for='radio-{{$index}}')
+	.text-labels: .text-label(ng-repeat='option in slide.options') {{option.text}}
+
+
