@@ -1,3 +1,3 @@
-angular.module("alpacaSchemas", [])		.service("$schemas", function() { this.schemas = {green:[{"key":"content","label":"Content","type":"textarea","placeholder":"content"}],
-index:[{"key":"title","label":"Title","type":"input","placeholder":"title"},{"key":"tags","label":"Tags","type":"tags"}],
+angular.module("alpacaSchemas", [])		.service("$schemas", function() { this.schemas = {green:[{"key":"content","label":"Content","type":"textarea","placeholder":"content"},{"key":"options","label":"Options","type":"multiple","fields":[{"key":"text","label":"Text","type":"input","placeholder":"text"},{"key":"correct","label":"Correct","type":"checkbox"}]}],
+index:[{"key":"title","label":"Title","type":"input","placeholder":"title"},{"key":"tags","label":"Tags","type":"tags"},{"key":"template","label":"Template","type":"template"}],
 orange:[{"key":"content","label":"Content","type":"textarea","placeholder":"content"},{"key":"note","label":"Note","type":"input"},{"key":"audio","label":"Audio","type":"file"}],}});

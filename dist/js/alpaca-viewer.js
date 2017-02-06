@@ -663,7 +663,7 @@ app.directive('alpacaSlide', [
 			$scope.$watch('slide.template', function(){
 				$templateRequest('alpaca-template-' + $scope.slide.template).then(function(tpl){
 					var template = angular.element(tpl);
-					element.after(template);
+					element.html(template);
 					$compile(template)($scope);
 				});
 			});
@@ -688,8 +688,8 @@ app.directive('alpacaSlides',
 		return {
 			restrict: 'E',
 			replace: true,
-			template: "<div swiper-repeat='slide in survey.slides' swiper-repeat-selected='selected'><alpaca-slide slide='slide'/></div>"
-			//template: "<div style='width:100%'><alpaca-slide slide='selected'/></div>"
+			//template: "<div swiper-repeat='slide in survey.slides' swiper-repeat-selected='selected'><alpaca-slide slide='slide'/></div>"
+			template: "<div style='width:100%'><alpaca-slide slide='selected'/></div>"
 
 		};
 });

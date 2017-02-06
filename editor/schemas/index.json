@@ -9,5 +9,10 @@
 		"key": "tags",
 		"label": "Tags",
 		"type": "tags"
+	},
+	{
+		"key": "template",
+		"label": "Template",
+		"type": "template"
 	}
 ]

@@ -1,0 +1,16 @@
+.container
+	.row
+		.col.s12.l6
+			h5 Devices
+			ul.collection
+				li.collection-item.avatar(ng-repeat='device in devices')
+					i.material-icons.circle {{device.material_icon}}
+					p {{device.name}} 
+					label {{device.width}} x {{device.height}}
+					a.secondary-content(href='#!' ng-click='devices.remove(device);'): i.material-icons close
+				//li.collection-item.avatar
+					i.material-icons.circle person
+					input()
+			h5 Default Tags
+			ul.collection: .collection-item
+				tags-input(ng-model='config.tags' replace-spaces-with-dashes='false')

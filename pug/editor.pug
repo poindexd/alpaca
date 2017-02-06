@@ -29,65 +29,63 @@ html
 				//justify-content: center;
 				//align-items:center;
 			}
-			#controls {
-				position: absolute;
-				right: 0px;
-				bottom: 120px;
+
+			.row {
+				margin-bottom: 0px;
 			}
-			#controls .btn {
+
+			.waves-effect{
 				display: block;
-			}
-			#controls #device {
-				color: white;
-				text-align: right;
-				position: absolute;
-				right: 15px;
-				bottom: -100px;
 			}
 	
 	body.grey.lighten-3(ng-app='alpacaEditor' ng-controller='alpacaEditorController' flow-init flow-prevent-drop)
 
-		div(ng-show='loading')
+		div(ng-hide='!loading')
 			include include/loading.pug
 
-		div(ng-show='!loading' ng-cloak)
+		div(ng-show='loading == false' ng-cloak)
 			include include/side-nav.pug
 
 			div(style='margin-left:75px;max-height:100%')
-				include include/nav.pug
-
-				.resizable-wrapper(style='display:flex; width:100%')
-					.resizable-section.grey.lighten-3(r-flex='true' style='flex:1;position:relative;z-index:99;')
-						include include/slides.pug
-
-					#form-resizable-section.resizable-section.white(resizable r-flex='true' style='flex:2;position:relative;z-index:99;overflow-y:auto')
-						include include/form.pug
-
-					#preview-resizable-section.resizable-section.grey.lighten-3(resizable r-flex='true' r-width='0' style='flex:2')
-						include include/preview.pug
-
-				.grey.lighten-3(ng-show='searching && !loading' style='position:absolute;top:64;left:0;right:0;bottom:0;z-index:200;')
-					.container(style='height:100%;display:flex;align-items:center;justify-content:center')
-						p.flow-text(ng-show='!searchtext || searchtext == ""') Search for slides by tag. Results will appear here.
+				.nga-fast.nga-fade(ng-show='tab.name == "edit"')
+					include tabs/edit/edit.pug
+				.nga-fast.nga-fade(ng-show='tab.name == "settings"')
+					include tabs/settings/settings.pug
 
 
 	//TODO: REMOVE
 	script(src='https://code.jquery.com/jquery-2.2.4.min.js')
 	script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js')
 	script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+	script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js')
+	script(src='https://www.gstatic.com/firebasejs/3.6.6/firebase.js')
+	script(src='https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js')
+	script.
+		var config = {
+			apiKey: "AIzaSyBCAJtmUVpWjFUIw4yLUuPhbCJWNufA_gU",
+			authDomain: "hotpath-f9c54.firebaseapp.com",
+			databaseURL: "https://hotpath-f9c54.firebaseio.com",
+			storageBucket: "hotpath-f9c54.appspot.com",
+			messagingSenderId: "340378037531"
+		};
+		firebase.initializeApp(config);
 	script(src='./js/alpaca-templates.js')
 	script(src='./js/alpaca-schemas.js')
 	script(src='./js/alpaca-types.js')
 	script(src='./js/alpaca-viewer.min.js')
 	script(src='./js/alpaca-editor.min.js')
 	script.
-		$('#device-dropdown').dropdown();
-		$('select').material_select();
-		$('.button-collapse').sideNav({
-			menuWidth: 75, // Default is 300
-			//edge: 'right', // Choose the horizontal origin
-			//closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-			draggable: true // Choose whether you can drag to open on touch screens
-		});
+		$(document).ready(function(){
+			$('#device-dropdown').dropdown();
+			$('select').material_select();
+			$('.button-collapse').sideNav({
+				menuWidth: 75, // Default is 300
+				//edge: 'right', // Choose the horizontal origin
+				//closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+				draggable: true // Choose whether you can drag to open on touch screens
+			});
+			$('.modal').modal();
+		})
+
 
 		

@@ -3,4 +3,4 @@ $templateCache.put('alpaca-template-index','<div class="content-wrapper"><header
 $templateCache.put('alpaca-template-orange','<div class="container"><div class="card medium orange"><h1>{{slide.title}}</h1><h2>{{slide.content}}</h2><img ng-src="{{slide.note}}"/></div></div>');}]);
 angular.module("alpacaTemplates")			.service("$templateList", function() { this.templates = [];this.templates.push("green");
 this.templates.push("index");
-this.templates.push("orange");});
+this.templates.push("orange");this.templates.splice(this.templates.indexOf("index"),1);});

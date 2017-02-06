@@ -11,6 +11,7 @@ gulp.task('build-editor', function(){
 		'editor/js/angular-drag-and-drop-lists.js',
 		'editor/js/ng-flow-standalone.js',
 		'editor/js/angular-resizable.js',
+		'editor/js/ng-tags-input.js',
 		'editor/js/editor.js',
 		'editor/js/device-preview.js'
 	])

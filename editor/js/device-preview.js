@@ -12,13 +12,19 @@ angular.module('alpacaEditor').directive('devicePreview', function() {
 
   var link = function($scope, el, attrs) {
 
-    //console.log($scope.$parent);
     var parent = angular.element(el).parent();
-
-
-    console.log('device-size', $scope.$parent.frame_size);
-
     var child = angular.element(el);
+
+    child.css({
+      'background': 'white',
+    })
+      
+    parent.css({
+      'display': 'flex',
+      'align-items': 'center',
+      'justify-content': 'center',
+    });
+
 /*function(){
 
       return {
@@ -58,30 +64,28 @@ angular.module('alpacaEditor').directive('devicePreview', function() {
       var width = fit ? device.width * parent.height / device.height : parent.width;
       var height = fit ? parent.height : device.height * parent.width / device.width;
       
-      child.css({
-        'background': 'white',
-      })
-      
-      parent.css({
-        'display': 'flex',
-        'align-items': 'center',
-        'justify-content': 'center',
-      });
+
 
       child.css({
-        'zoom': scale,
+        'transform': 'scale(' + scale +')',
+        //'zoom': scale,
         'width': width / scale + 'px',
         'height': height / scale + 'px',
       });
 
+
+      var use = {
+        x: Math.max(device.width, width),
+        y: Math.max(device.height, height)
+      }
       var translate = {
-        x: -1 * ((Math.max(device.width, width) - parent.width) / 2),
-        y: -1 * ((Math.max(device.height, height) - parent.height) / 2)
+        x: -1 * ((use.x - parent.width) / 2),
+        y: -1 * ((use.y - parent.height) / 2)
       };
 
       $scope.$parent.iframe.css({
-        'width': Math.max(device.width, width),
-        'height': Math.max(device.height, height),
+        'width': use.x,
+        'height': use.y,
         'transform': 'translate(' + translate.x + 'px,' + translate.y + 'px)'
       })
 

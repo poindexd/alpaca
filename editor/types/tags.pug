@@ -1,3 +1,11 @@
 label {{field.label}}
-br
-.chips(ng-init='fn.init()')
+tags-input(ng-model='model' replace-spaces-with-dashes='false')
+	auto-complete(source='fn.search($query);')
+
+
+
+//.chips(ng-init='fn.init()')
+//.chip(ng-repeat='tag in model') {{tag}}
+	i.material-icons(ng-click='model.remove(tag)') close
+
+//input(type='text' ng-enter='model=model||[]; if (!model.indexOf(tagText)){model.push(tagText)}; tagText=""'  ng-model='tagText')

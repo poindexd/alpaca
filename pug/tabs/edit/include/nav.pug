@@ -1,5 +1,5 @@
 ul#device-dropdown.dropdown-content
-	li(ng-repeat='_device in devices')
+	li(ng-repeat='_device in devices | toArray | orderBy:"name"')
 		a.waves-effect.waves-light(href='#!' ng-class='{selected: device == _device}' ng-click='setDevice(_device)') 
 			i.material-icons.left {{_device.material_icon}}
 			| {{_device.name}}
@@ -24,8 +24,8 @@ nav(style='position:relative;z-index:100'): .nav-wrapper
 
 	ul.left(ng-show='!searching')
 		a.breadcrumb General Wellness Survey
-		a.breadcrumb.dropdown-button(href='#!' data-activates='language-dropdown') en
-		a.breadcrumb.dropdown-button(href='#!' data-activates='version-dropdown') v2
+		a.breadcrumb.dropdown-button(href='#' data-activates='language-dropdown') en
+		a.breadcrumb.dropdown-button(href='#' data-activates='version-dropdown') v2
 
 	ul.right(ng-show='!searching')
 		//li

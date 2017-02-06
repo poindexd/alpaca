@@ -1,0 +1,14 @@
+label {{field.label}}
+br
+.row
+	.col.s12.center
+		.btn(data-target='template-modal') Template
+			i.material-icons.left code
+
+#template-modal.modal.modal-fixed-footer
+	.modal-content
+		.template-thumbnail(ng-repeat='template in templates' ng-class='{selected: slide.template == template}' ng-click='slide.template = template')
+			img.responsive-img(ng-src='./thumbnails/{{template}}.png')
+			label {{template}}
+	.modal-footer
+		.btn-flat.modal-action.modal-close Close

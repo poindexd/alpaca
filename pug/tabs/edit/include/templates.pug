@@ -1,0 +1,25 @@
+script(type='text/ng-template' id='list.html')
+	ul(dnd-list='list')
+		li(
+				ng-repeat='node in list' 
+				dnd-draggable='node' 
+				dnd-effect-allowed='move' 
+				dnd-moved='list.splice($index, 1)'
+				ng-include='node.kind + ".html"'
+			)
+			
+script(type='text/ng-template' id='slide.html')
+	.node.waves-effect.waves-light(ng-click='setSlide(node)' ng-class='{selected: selected==node}' ) {{node.title}}
+				i.material-icons.left crop_landscape
+
+script(type='text/ng-template' id='folder.html')
+	.node.waves-effect.waves-light(ng-click='node.visible = !node.visible') {{node.title}}
+		i.material-icons.left folder
+	div(style='margin-left: 10px' ng-repeat='list in [node.contents]' ng-show='node.visible' ng-include='"list.html"')
+	.clearfix(style='min-height:6px')
+
+script(type='text/ng-template' id='external.html')
+	.node.waves-effect.waves-light(ng-click='node.visible = !node.visible') {{node.title}}
+		i.material-icons.left folder_shared
+	div(style='margin-left: 10px' ng-repeat='list in [node.contents]' ng-show='node.visible' ng-include='"list.html"')
+	.clearfix(style='min-height:6px')

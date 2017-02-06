@@ -1,0 +1,9 @@
+div(style='padding: 50px;margin-bottom: 100px')
+
+	.center(ng-show='selected.readonly')
+		i.material-icons.orange-text.large person
+		p This slide belongs to a shared folder.
+		p It cannot be edited here.
+
+	div(ng-show='!selected.readonly' ng-repeat='field in schemas["index"].concat(schemas[selected.template])')
+		alpaca-field(model='selected[field.key]' type='field.type' field='field' fn='fn[field.type]' templates='templates' slide='selected')
