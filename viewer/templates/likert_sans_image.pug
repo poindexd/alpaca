@@ -11,7 +11,7 @@
 				div(ng-if='slide.custom', ng-bind-html='trustAsHtml(slide.custom)') {{slide.custom}}
 
 	//Likert/MULTIPLE CHOICE
-	.radioset(): ul
+	.radioset.radioset-sans-image(): ul
 		li(ng-repeat='option in slide.options')
 			input(type='radio', name='radio[]', id='radio-{{$index}}' ng-click='$timeout(advanceSlide, 400)')
 			label(for='radio-{{$index}}')

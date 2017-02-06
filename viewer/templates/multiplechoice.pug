@@ -36,7 +36,7 @@
 
 		//IMAGE LEFT
 		.col.s12.l4.center(ng-if='slide.image_align=="Left"')
-			.card-image: img(src='{{slide.image_url}}')
+			.card-image.card-image-side: img(src='{{slide.image_url}}')
 
 		//CONTENT
 		.col.s12.center(ng-class="{l8: slide.image_align=='Left' || slide.image_align=='Right', l12: slide.image_align!='Left' && slide.image_align!='Right'}")
@@ -47,7 +47,7 @@
 
 		//IMAGE RIGHT
 		.col.s12.l4.center(ng-if='slide.image_align=="Right"')
-			.card-image: image(src='{{slide.image_url}}')
+			.card-image.card-image-side: image(src='{{slide.image_url}}')
 
 	//Likert/MULTIPLE CHOICE
 	.radioset.nobar(): ul

@@ -10,8 +10,28 @@
 	margin-left: 2em;
 }
 
+// .border-image-content {
+// 	max-width: 100%;
+// 	max-height: 250px;
+// 	border-style: groove;
+// }
+
 .card-image img{
 	max-height: 250px;
+	max-width: 500px;
+	margin: auto;
+
+
+}
+
+.card-image-side img {
+	margin-bottom: 200px;
+}
+
+.card-content {
+
+	max-width: 100%;
+	max-height: 100%;
 }
 
 .wrapper{
@@ -44,6 +64,7 @@ main {
 header, footer{
 	display: flex;
 	height: 100px;
+	background-color: #00bcd4;
 }
 
 a, p, span, input {
@@ -119,6 +140,9 @@ p{
 
 .radioset {
 	padding: 50px 0px 70px 0px;
+}
+.radioset-sans-image {
+	padding: 150px 0px 80px 0px;
 }
 
 .z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
