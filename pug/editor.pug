@@ -13,7 +13,7 @@ html
 				border: 0;
 			}
 			.frame-wrapper{
-				height: 100%;
+				height: calc(100% - 64px);
 				width: 100%;
 				//background: #eee;
 				position: relative;
@@ -47,11 +47,13 @@ html
 			include include/side-nav.pug
 
 			div(style='margin-left:75px;max-height:100%')
-				.nga-fast.nga-fade(ng-show='tab.name == "edit"')
+				
+				.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "edit"')
 					include tabs/edit/edit.pug
-				.nga-fast.nga-fade(ng-show='tab.name == "settings"')
+				.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "settings"')
 					include tabs/settings/settings.pug
-
+				.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "collections"')
+					include tabs/collections/collections.pug
 
 	//TODO: REMOVE
 	script(src='https://code.jquery.com/jquery-2.2.4.min.js')

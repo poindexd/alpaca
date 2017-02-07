@@ -53,7 +53,7 @@ angular.module('alpacaEditor').controller('alpacaEditorController', [
 
 	$scope.tabs = [
 		{
-			name: 'surveys',
+			name: 'collections',
 			icon: 'view_module'
 		},
 		{
@@ -70,40 +70,19 @@ angular.module('alpacaEditor').controller('alpacaEditorController', [
 		}
 	];
 
-	$scope.tab = $scope.tabs[3];
+	$scope.tab = $scope.tabs[0];
 	
 	$scope.setTab = function(tab){
-		$scope.tab = tab;
+		$scope.tab = null;
+		$timeout(function(){
+			$scope.tab = tab;
+		}, 200)
+		
 	}
 
 	$scope.survey = {
 
-		slides: {
-			1: {
-				id: 1, title: 'Slide 1', content: 'Foo', template: 'green'
-			},
-			2: {
-				id: 2, title: 'Slide 2', content: 'Bar', template: 'orange'
-			},
-			3: {
-				id: 3, title: 'Slide 3', content: 'Fluf', template: 'orange'
-			}
-		},
-
-
-		nodes: {
-			1: {
-				kind:'slide', title: 'Slide 1', content: 'Foo', template: 'green'
-			},
-			2: {
-				kind: 'folder', title: 'Smoking'
-			},
-			3: {
-				kind:'slide', title: 'Slide 3', content: 'Fluf', template: 'orange'
-			}
-		},
-
-		nodest: [
+		nodes: [
 			{
 				kind: 'external', title: 'Onboarding', contents: [
 					{
@@ -137,7 +116,7 @@ angular.module('alpacaEditor').controller('alpacaEditorController', [
 
 
 	};
-	$scope.selected = $scope.survey.nodest[1];
+	$scope.selected = $scope.survey.nodes[1];
 	$scope.schemas = $schemas.schemas;
 
 	$scope.maximized = false;

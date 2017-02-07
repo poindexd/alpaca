@@ -469,3 +469,48 @@ tags-input:focus, div:focus{
 	border: none;
 	box-shadow: none;
 }
+
+
+// BUTTERFLY LOGO
+$height: 110px;
+$width: 110px;
+$bg-color: #fefefe;
+$wings-separation: 5px;
+$svg-per: 70%;
+$bg-color--ebfblue: rgb(0, 120, 191);
+
+.butterfly {
+  position: relative;
+  height: $height;
+  width: $width;
+  border-radius: 50%;
+  background-color: $bg-color;
+  //background-image: url("http://www.transparenttextures.com/patterns/scribble-light.png");
+  //border: 5px solid darken($bg-color, 20);
+  margin: 40 auto;
+  box-shadow: 0 9px 12px rgba(0,0,0,.25), 0 3px 6px rgba(0,0,0,0.16);
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    //transform: scale(1.2);
+  }
+
+  // obfuscate the texture bg
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    //background-color: rgba(0,0,0,0.1);
+  }
+}
+
+
+.nga-fade{
+  .card{
+    box-shadow: none;
+  }
+}

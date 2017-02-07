@@ -70,5 +70,5 @@
   width: 100%;
   display: flex; }
   .resizable-wrapper .resizable-section {
-    height: 100%;
+    position: relative;
     margin: 0 10px; }

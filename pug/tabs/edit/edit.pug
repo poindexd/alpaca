@@ -1,30 +1,31 @@
-include include/nav.pug
+div(style='display:flex;flex-direction:column;height: 100%')
+	include include/nav.pug
 
-.resizable-wrapper(style='display:flex; width:100%')
-	.resizable-section.grey.lighten-3(
-		
-		r-flex='true' 
-		r-directions='["right"]'
-		style='flex:1;position:relative;z-index:99;'
-	)
-		include include/slides.pug
+	.resizable-wrapper(style='flex: 1')
+		.resizable-section.grey.lighten-3(
+			
+			r-flex='true' 
+			r-directions='["right"]'
+			style='flex:1;position:relative;z-index:99;'
+		)
+			include include/slides.pug
 
-	#form-resizable-section.resizable-section.white(
-		
-		r-flex='true' 
-		r-directions='["left","right"]'
-		style='flex:2;position:relative;z-index:99;overflow-y:auto'
-	)
-		include include/form.pug
+		#form-resizable-section.resizable-section.white(
+			
+			r-flex='true' 
+			r-directions='["left","right"]'
+			style='flex:2;position:relative;z-index:99;overflow-y:auto'
+		)
+			include include/form.pug
 
-	#preview-resizable-section.resizable-section.grey.lighten-3(
-		 
-		r-flex='true' 
-		r-directions='["left"]' 
-		style='flex:2'
-	)
-		include include/preview.pug
+		#preview-resizable-section.resizable-section.grey.lighten-3(
+			 
+			r-flex='true' 
+			r-directions='["left"]' 
+			style='flex:2'
+		)
+			include include/preview.pug
 
-.grey.lighten-3(ng-show='searching && loading == false' style='position:absolute;top:64;left:0;right:0;bottom:0;z-index:200;')
-	.container(style='height:100%;display:flex;align-items:center;justify-content:center')
-		p.flow-text(ng-show='!loading && !searchtext || searchtext == ""') Search for slides by tag. Results will appear here.
+	.grey.lighten-3(ng-show='searching && loading == false' style='position:absolute;top:64;left:0;right:0;bottom:0;z-index:200;')
+		.container(style='height:100%;display:flex;align-items:center;justify-content:center')
+			p.flow-text(ng-show='!loading && !searchtext || searchtext == ""') Search for slides by tag. Results will appear here.

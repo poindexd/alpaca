@@ -4,7 +4,7 @@
 include templates.pug
 
 #slide-nav(style='padding-bottom:200px;padding-right:10px;position:relative;overflow-y:auto')
-	div(ng-repeat='list in [survey.nodest]' ng-include='"list.html"')
+	div(ng-repeat='list in [survey.nodes]' ng-include='"list.html"')
 
 div(style='position: absolute; bottom: 100px;width:100%')
 	.center

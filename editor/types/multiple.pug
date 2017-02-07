@@ -6,5 +6,5 @@ label {{field.label}}
 		a(href='#!' style='position: absolute; right: 10px; top:10px' ng-click='model.splice($index, 1);')
 			i.material-icons.grey-text close
 	.collection-item.center
-		a(href='#!' ng-click='model.push({});')
+		a(href='#!' ng-click='model=model||[];model.push({});')
 			i.material-icons.grey-text add
