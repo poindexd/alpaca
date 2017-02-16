@@ -1,0 +1,21 @@
+[
+	{
+		"key": "content",
+		"label": "Content",
+		"type": "textarea",
+		"placeholder": "content"
+	},
+	{
+		"key": "options",
+		"label": "Options",
+		"type": "multiple",
+		"fields": [
+			{
+				"key": "text",
+				"label": "Text",
+				"type": "input",
+				"placeholder": "text"
+			}
+		]
+	}
+]
