@@ -537,3 +537,40 @@ $bg-color--ebfblue: rgb(0, 120, 191);
     box-shadow: none;
   }
 }
+
+.survey-container {
+ 
+  // margin:auto;
+  background: #f57c00;
+  color: black;
+}
+.survey-list {
+ 
+
+  width: 600px;
+  //border: solid 1px black;
+  position: relative;
+  margin:auto;
+  //overflow: scroll;
+
+}
+
+.search-items {
+  //overflow: auto;
+}
+.search-item {
+  background: white;
+  padding: 5px 10px;
+  color: black;
+  border: solid 1px #f57c00;
+  width:100%;
+  //overflow: scroll;
+}
+
+nav ul li {
+  clear: left;
+}
+
+.survey-image {
+  height:50px;
+}
