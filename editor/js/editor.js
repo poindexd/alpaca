@@ -1,4 +1,19 @@
-angular.module('alpacaEditor', ['firebase', 'dndLists', 'ngTagsInput','swiperRepeat', 'ngAnimate', 'flow', 'angularResizable', 'alpacaViewer', 'alpacaSchemas', 'alpacaTypes']);
+angular.module('alpacaEditor', [
+	'firebase',					//Authentication, DB, Storage
+	'rzModule', 				//**Range Slider 
+	'dndLists',					//Drag and drop lists
+	'ngTagsInput',			//**Multiple Tag Input
+	'swiperRepeat', 		//Swipeable repeat
+	'ngAnimate',				//Animations
+	'flow',							//File upload
+	'angularResizable',	//Make elements user-resizable
+	'alpacaViewer', 
+	'alpacaSchemas', 
+	'alpacaTypes'
+]);
+
+//** Type dependencies
+//@TODO: offload these
 
 angular.module('alpacaEditor').directive('alpacaForm', [
 	'$compile', 
@@ -31,8 +46,8 @@ angular.module('alpacaEditor').controller('alpacaEditorController', [
 	'$schemas',
 	'$timeout',
 	'$firebaseObject',
-	'$q',
-	function($scope, $templateList, $schemas, $timeout, $firebaseObject, $q){
+	'$window',
+	function($scope, $templateList, $schemas, $timeout, $firebaseObject, $window){
 
 	var config = firebase.database().ref().child('config');
 	$firebaseObject(config).$bindTo($scope, 'config');
@@ -76,11 +91,72 @@ angular.module('alpacaEditor').controller('alpacaEditorController', [
 		$scope.tab = null;
 		$timeout(function(){
 			$scope.tab = tab;
-		}, 200)
+			$timeout(function(){$window.dispatchEvent(new Event("resize"))});
+		}, 200);
 		
 	}
 
 	$scope.survey = {
+
+		slides: [
+			{
+				kind:'slide', title: 'Nested Slide 1', content: 'How certain are you that your situation will improve?', template: 'green',
+				options: [
+					{
+						text: 'Uncertain',
+						weight: 1,
+						suggestions: [
+							'Eat more broccoli',
+							'Work out every day'
+						]
+					},
+					{
+						text: 'Somewhat uncertain',
+						weight: 2
+					},
+					{
+						text: 'Unsure',
+						weight: 3
+					},
+					{
+						text: 'Somewhat certain',
+						weight: 4
+					},
+					{
+						text: 'Certain',
+						weight: 5
+					}
+
+				]
+			},
+			{
+				kind:'slide', title: 'Nested Slide 2', content: 'How certain are you that you will achieve your goals you set?', template: 'orange',
+				options: [
+					{
+						text: 'Uncertain',
+						weight: 1
+					},
+					{
+						text: 'Somewhat uncertain',
+						weight: 2
+					},
+					{
+						text: 'Unsure',
+						weight: 3
+					},
+					{
+						text: 'Somewhat certain',
+						weight: 4
+					},
+					{
+						text: 'Certain',
+						weight: 5
+					}
+				]
+			}
+		],
+
+
 
 		nodes: [
 			{
@@ -270,7 +346,7 @@ angular.module('alpacaEditor').filter('toArray', function () {
     }
   };
 });
-
+/*
 angular.module('alpacaEditor').directive('ngEnter', function() {
         return function(scope, element, attrs) {
             element.bind("keydown keypress", function(event) {
@@ -284,3 +360,4 @@ angular.module('alpacaEditor').directive('ngEnter', function() {
             });
         };
 });
+*/

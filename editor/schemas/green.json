@@ -20,6 +20,19 @@
 				"key": "correct",
 				"label": "Correct",
 				"type": "checkbox"
+			},
+			{
+				"key": "suggestions",
+				"label": "Suggestions",
+				"type": "multiple",
+				"fields": [
+					{
+						"key": "text",
+						"label": "Text",
+						"type": "input"
+					}
+
+				]
 			}
 		]
 	}

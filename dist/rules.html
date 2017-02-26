@@ -1,0 +1,72 @@
+<html><head><title>Rules Mock</title><link rel="stylesheet" href="./css/index.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata"/><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/><style>.chip input[type=text]{
+	min-width: 100px;
+	width: 100px;
+	max-width: 400px;
+	display: inline-block;
+	height: 2rem;
+	color: black;
+	font-family: "Inconsolata", monospace;
+}
+.chip select{
+	height: 2rem;
+	background: transparent;
+	border: none;
+	outline: none;
+}
+.chip select option{
+	color: black;
+}
+.chip{
+	color: #fff;
+	margin: 0px 5px;
+	position: relative;
+}
+
+.path > .chip{
+	height: 52px;
+	border-radius: 26px;
+	padding: 10px;
+	//min-width: 52px;
+}
+
+.path{
+	display: inline-block;
+	position: relative;
+}
+.path .chip:before{
+	content: '';
+	position: absolute;
+	height: 10px;
+	width: 14px;
+	top: 21px;
+	left: -12px;
+	right: 10px;
+	background: #F44336;
+}
+.path .chip:first-child:before{
+	background: transparent;
+}
+/*.path-line{
+	position: absolute;
+	height: 4px;
+	top: 14px;
+	left: 100px;
+	right: 10px;
+	background: #F44336;
+}*/
+.chip.large{
+	height: 72px;
+	border-radius: 36px;
+	padding: 10px;
+}
+i.add.material-icons{
+	margin-left: -12px;
+}</style></head><body><div class="container"><h5>$sum(Account.Order.Product.(Price * Quantity))</h5><br/><div class="collection-itemf"><div class="collection-item4"><div class="chip large blue">Sum<div class="path"><!--.path-line--><div class="chip red">Account<i class="close material-icons">close</i></div><div class="chip red">Order<i class="close material-icons">close</i></div><div class="chip red">Product<i class="close material-icons">close</i></div><div class="chip red"><div class="chip green"><select class="browser-default"><option>Price</option></select></div><div class="chip orange"><select class="browser-default"><option>*</option></select></div><div class="chip green"><select class="browser-default"><option>Quantity</option></select><!--span *--><!--select.browser-defaultoption Quantity--></div><i class="close material-icons">close</i></div><div class="chip red">&nbsp;<i class="add material-icons">add</i></div></div></div></div></div><!--.collection.collection-item
+	.chip.green let
+	.chip: input(type='text' onkeyup="this.style.width = ((this.value.length) * 8) + 'px';")
+	.chip.green be equal to
+	.chip.purple Average
+	.chip.red
+		select.browser-default
+			option and
+			option or--></div></body></html>

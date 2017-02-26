@@ -54,6 +54,8 @@ html
 					include tabs/settings/settings.pug
 				.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "collections"')
 					include tabs/collections/collections.pug
+				.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "metadata"')
+					include tabs/metadata/metadata.pug
 
 	//TODO: REMOVE
 	script(src='https://code.jquery.com/jquery-2.2.4.min.js')

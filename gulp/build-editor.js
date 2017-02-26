@@ -8,10 +8,11 @@ var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('build-editor', function(){
 	return gulp.src([
-		'editor/js/angular-drag-and-drop-lists.js',
-		'editor/js/ng-flow-standalone.js',
-		'editor/js/angular-resizable.js',
-		'editor/js/ng-tags-input.js',
+		'editor/js/ng/angular-drag-and-drop-lists.js',
+		'editor/js/ng/ng-flow-standalone.js',
+		'editor/js/ng/angular-resizable.js',
+		'editor/js/ng/ng-tags-input.js',
+		'editor/js/ng/rzslider.js',
 		'editor/js/editor.js',
 		'editor/js/device-preview.js'
 	])
