@@ -10,6 +10,10 @@ gulp.task('build-viewer', function(){
 	return gulp.src([
 		'viewer/js/swiperRepeat.js',
 		'viewer/js/viewer.js',
+		'viewer/js/directives/alpaca-viewer.js',
+		'viewer/js/directives/alpaca-slides.js',
+		'viewer/js/directives/alpaca-slide.js',
+		'viewer/js/controllers/viewer-controller.js'
 	])
 	.pipe(sourcemaps.init())
 	.pipe(concat('alpaca-viewer.js'))
