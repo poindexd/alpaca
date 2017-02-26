@@ -52,8 +52,15 @@ gulp.task('sass', function () {
     .pipe(connect.reload());
 });
 
-gulp.task('pug', function(){
-	return gulp.src('./pug/*.pug')
+gulp.task('editor-pug', function(){
+	return gulp.src('./editor/pug/*.pug')
+		.pipe(pug())
+		.pipe(gulp.dest('dist'))
+		.pipe(connect.reload());
+});
+
+gulp.task('viewer-pug', function(){
+	return gulp.src('./viewer/pug/*.pug')
 		.pipe(pug())
 		.pipe(gulp.dest('dist'))
 		.pipe(connect.reload());
@@ -63,7 +70,8 @@ gulp.task('watch', function() {
   gulp.watch('viewer/templates/*.pug', ['compile-templates']);
   gulp.watch('editor/types/*.pug', ['compile-types']);
   gulp.watch('editor/schemas/*.json', ['compile-schemas']);
-  gulp.watch('pug/**/*.pug', ['pug']);
+  gulp.watch('editor/pug/**/*.pug', ['editor-pug']);
+  gulp.watch('viewer/pug/**/*.pug', ['viewer-pug']);
   gulp.watch('sass/**/*.scss', ['sass']);
   gulp.watch('viewer/js/**/*.js', ['build-viewer']);
   gulp.watch('editor/js/**/*.js', ['build-editor']);
@@ -76,7 +84,8 @@ gulp.task('default', [
 	'compile-types',
 	'compile-schemas',
 	//'compile-docs',
-	'pug',
+	'editor-pug',
+	'viewer-pug',
 	'sass',
 	'build-viewer',
 	'build-editor',

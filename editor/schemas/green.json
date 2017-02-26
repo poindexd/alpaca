@@ -23,6 +23,7 @@
 			},
 			{
 				"key": "suggestions",
+				"frame": "metadata",
 				"label": "Suggestions",
 				"type": "multiple",
 				"fields": [
