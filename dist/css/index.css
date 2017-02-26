@@ -7261,7 +7261,16 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   margin-left: 2em; }
 
 .card-image img {
-  max-height: 400px; }
+  max-height: 250px;
+  max-width: 500px;
+  margin: auto; }
+
+.card-image-side img {
+  margin-bottom: 200px; }
+
+.card-content {
+  max-width: 100%;
+  max-height: 100%; }
 
 .wrapper {
   width: 100%; }
@@ -7286,7 +7295,8 @@ main {
 
 header, footer {
   display: flex;
-  height: 150px; }
+  height: 100px;
+  background-color: #00bcd4; }
 
 sup {
   font-size: 0.5em !important;
@@ -7342,6 +7352,15 @@ sup {
 .dropdown-content li .selected {
   background: #00bcd4;
   color: white !important; }
+
+.radioset {
+  padding: 50px 0px 70px 0px; }
+
+.radioset-sans-image {
+  padding: 150px 0px 80px 0px; }
+
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
+  box-shadow: 0 0px 0px 0 transparent, 0px 0px 0 transparent; }
 
 label {
   display: block;
@@ -7554,3 +7573,25 @@ tags-input:focus, div:focus {
 
 .nga-fade .card {
   box-shadow: none; }
+
+.survey-container {
+  background: #f57c00;
+  color: black; }
+
+.survey-list {
+  width: 600px;
+  position: relative;
+  margin: auto; }
+
+.search-item {
+  background: white;
+  padding: 5px 10px;
+  color: black;
+  border: solid 1px #f57c00;
+  width: 100%; }
+
+nav ul li {
+  clear: left; }
+
+.survey-image {
+  height: 50px; }

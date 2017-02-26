@@ -75,7 +75,7 @@ gulp.task('default', [
 	'compile-templates',
 	'compile-types',
 	'compile-schemas',
-	'compile-docs',
+	//'compile-docs',
 	'pug',
 	'sass',
 	'build-viewer',
