@@ -7964,6 +7964,7 @@ tags-input:focus, div:focus {
 
 .card-title {
   color: black; }
+<<<<<<< HEAD
 
 .survey-list {
   width: 600px;
@@ -7991,3 +7992,5 @@ alpaca-slides {
 
 #form-resizable-section {
   overflow-y: auto; }
+=======
+>>>>>>> f5a448a951b771e183fa52981e0e62e82feadec5

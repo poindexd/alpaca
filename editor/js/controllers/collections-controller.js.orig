@@ -23,10 +23,23 @@ angular.module('alpacaEditor')
 				title: 'Survey 6', author: 'Poo', summary: "This survey is dumb", img_url: 'http://www.ichom.org/wp-content/uploads/2015/03/hf-420x315.jpg', date: "01-20-2017"
 			},
 			{
+<<<<<<< HEAD
+				title: 'Survey7', author: 'Poo'
+			},
+			{
+				title: '☺', author: 'Poo'
+			},
+			{
+				title: 'Survey7', author: 'Poo'
+			},
+			{
+				title: 'Survey7', author: 'Poo'
+=======
 				title: 'Survey 7', author: 'Poo', summary: "This survey is dumb", img_url: 'http://www.ichom.org/wp-content/uploads/2015/03/condi_dementia-420x315.jpg', date: "01-20-2017"
 			},
 			{
 				title: 'Survey 8', author: 'Poo', summary: "This survey is dumb", img_url: 'http://www.ichom.org/wp-content/uploads/2015/03/bp_level_of_pain_01_455x620-420x315.jpg', date: "01-20-2017"
+>>>>>>> f5a448a951b771e183fa52981e0e62e82feadec5
 			}
 		];
 
