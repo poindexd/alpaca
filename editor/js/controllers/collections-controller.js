@@ -5,40 +5,41 @@ angular.module('alpacaEditor')
 
 		$scope.surveys = [
 			{
-				title: 'Survey1', author: 'Haemin Park'
+				title: 'Inflammatory Bowel Disease Survey', author: 'Haemin Park', summary: "This survey is dumb", img_url: 'http://www.ichom.org/wp-content/uploads/2016/05/ibd-420x315.jpg', date: "01-20-2017"
 			},
 			{
-				title: 'Survey2', author: 'No one'
+				title: 'Pregnancy and Childbirth Survey', author: 'No one', summary: "This survey is dumb", img_url: 'http://www.ichom.org/wp-content/uploads/2015/03/pcb-420x315.jpg', date: "02-20-2017"
 			},
 			{
-				title: 'Survey3', author: 'Poo'
+				title: 'Overactive Bladder Survey', author: 'Poo', summary: "This survey is dumb", img_url: 'http://www.ichom.org/wp-content/uploads/2015/03/oab-1-420x315.jpg', date: "01-23-2017"
 			},
 			{
-				title: 'Survey4', author: 'Poo'
+				title: 'Survey 4', author: 'Poo', summary: "This survey is dumb", img_url: 'http://www.ichom.org/wp-content/uploads/2015/03/crc-420x315.jpg', date: "01-01-2017"
 			},
 			{
-				title: 'Survey5', author: 'Poo'
+				title: 'Survey 5', author: 'Poo', summary: "This survey is dumb", img_url: 'http://www.ichom.org/wp-content/uploads/2015/03/bc-420x315.jpg', date: "01-20-2017"
 			},
 			{
-				title: 'Survey6', author: 'Poo'
+				title: 'Survey 6', author: 'Poo', summary: "This survey is dumb", img_url: 'http://www.ichom.org/wp-content/uploads/2015/03/hf-420x315.jpg', date: "01-20-2017"
 			},
 			{
-				title: 'Survey7', author: 'Poo'
+				title: 'Survey 7', author: 'Poo', summary: "This survey is dumb", img_url: 'http://www.ichom.org/wp-content/uploads/2015/03/condi_dementia-420x315.jpg', date: "01-20-2017"
+			},
+			{
+				title: 'Survey 8', author: 'Poo', summary: "This survey is dumb", img_url: 'http://www.ichom.org/wp-content/uploads/2015/03/bp_level_of_pain_01_455x620-420x315.jpg', date: "01-20-2017"
 			}
-			
 		];
 
-		// $scope.addSurvey = function() {
-  //   		$scope.surveys.title.push($scope.enteredTitle);    
-  //   		$scope.enteredTitle = '';
-  //   		$scope.surveys.author.push($scope.enteredAuthor);
-  //   		$scope.enteredAuthor = '';
+		// $scope.add3Dots = function(string, limit) {
 
-  // 		};
-  
- 	// 	$scope.removeSurvey = function(title, author) {
-  //  			 $scope.surveys.title = $scope.surveys.filter(x => x != title);
-  //  			 $scope.surveys.author = $scope.surveys.filter(x => x != author);
+		// 	var dots = "...";
+		// 		if(string.length > limit) {
+		
+		// 		string = string.substring(0,limit) + dots;
+		// 		}
 
-  // 		}
+		// 		return string;
+		// 	}	
+
+		// };
 	}]);

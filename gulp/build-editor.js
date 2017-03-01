@@ -13,6 +13,7 @@ gulp.task('build-editor', function(){
 		'editor/js/ng/angular-resizable.js',
 		'editor/js/ng/ng-tags-input.js',
 		'editor/js/ng/rzslider.js',
+		'editor/js/ng/dirPagination.js',
 		'editor/js/alpaca-editor.js',
 		'editor/js/directives/alpaca-field.js',
 		'editor/js/controllers/collections-controller.js',

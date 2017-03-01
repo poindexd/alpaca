@@ -7574,24 +7574,5 @@ tags-input:focus, div:focus {
 .nga-fade .card {
   box-shadow: none; }
 
-.survey-container {
-  background: #f57c00;
+.card-title {
   color: black; }
-
-.survey-list {
-  width: 600px;
-  position: relative;
-  margin: auto; }
-
-.search-item {
-  background: white;
-  padding: 5px 10px;
-  color: black;
-  border: solid 1px #f57c00;
-  width: 100%; }
-
-nav ul li {
-  clear: left; }
-
-.survey-image {
-  height: 50px; }

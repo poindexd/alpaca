@@ -7,6 +7,7 @@ angular.module('alpacaEditor', [
 	'ngAnimate',				//Animations
 	'flow',							//File upload
 	'angularResizable',	//Make elements user-resizable
+  'angularUtils.directives.dirPagination', //pagination 
 	'alpacaViewer', 
 	'alpacaSchemas', 
 	'alpacaTypes'
