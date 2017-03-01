@@ -3,7 +3,7 @@ angular.module('alpacaViewer').directive('alpacaViewer', function() {
 		restrict: 'E',
 		templateUrl: 'alpaca-template-index',
 		scope: {
-			survey: '=',
+			slides: '=',
 			selected: '='
 		}
 	};

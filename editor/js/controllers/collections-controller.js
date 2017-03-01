@@ -24,6 +24,15 @@ angular.module('alpacaEditor')
 			},
 			{
 				title: 'Survey7', author: 'Poo'
+			},
+			{
+				title: '☺', author: 'Poo'
+			},
+			{
+				title: 'Survey7', author: 'Poo'
+			},
+			{
+				title: 'Survey7', author: 'Poo'
 			}
 			
 		];

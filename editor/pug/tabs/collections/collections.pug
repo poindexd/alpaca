@@ -1,26 +1,26 @@
 //include ../../include/search.pug
 
-.survey-container(ng-controller='collectionsController')
+div(ng-controller='collectionsController')
 	//- .col.s12.m6.l4
 	//- 	.card.small
 	//- 		.card-image
 	//- 			img(src='http://www.ichom.org/wp-content/uploads/2016/05/ibd-420x315.jpg')
 	//- 		.card-content
 	//- 			h5 General Wellness
-	nav(class='survey-container')
+	.survey-container: nav(class='survey-container')
 		div(class='nav-wrapper')
 			form
 				div(class='input-field')
 					input(id='search' type='search' ng-model='searchValue' style='margin-bottom: 5%')
 					label(class='label-icon' for='search')
 						i(class='material-icons') search
-					div(class='survey-list')
-						ul(class='search-items')
-							li(class='search-item' ng-repeat='item in surveys | filter:searchValue') {{item.title}}
-								i(class="material-icons" style='float:right;') delete
-								i(class="material-icons" style='float:right;') mode_edit
-							li(class='search-item')
-								i(class='material-icons' style='text-align:center;') add_circle_outline	
+	div(class='survey-list' style='overflow-y:auto;height: 100%')
+		ul(class='search-items')
+			li(class='search-item' ng-repeat='item in surveys | filter:searchValue') {{item.title}}
+				i(class="material-icons" style='float:right;') delete
+				i(class="material-icons" style='float:right;') mode_edit
+			li(class='search-item')
+				i(class='material-icons' style='text-align:center;') add_circle_outline	
 
 
 
