@@ -7574,5 +7574,13 @@ tags-input:focus, div:focus {
 .nga-fade .card {
   box-shadow: none; }
 
-.card-title {
-  color: black; }
+#container-survey {
+  margin-top: 2%; }
+  #container-survey .card-content {
+    color: black;
+    margin-bottom: 0px; }
+  #container-survey .card.small {
+    height: 300px; }
+
+.pagination li.active {
+  background-color: #f57c00; }
