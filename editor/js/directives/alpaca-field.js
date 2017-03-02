@@ -7,7 +7,7 @@ angular.module('alpacaEditor').directive('alpacaField', [
 			//console.log($scope.type)
 			$templateRequest('alpaca-type-' + $scope.type).then(function(tpl){
 				var template = angular.element(tpl);
-				element.after(template);
+				element.html(template);
 				$compile(template)($scope);
 			});
 		}

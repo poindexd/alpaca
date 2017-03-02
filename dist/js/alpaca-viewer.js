@@ -618,7 +618,7 @@ angular.module('alpacaViewer').directive('alpacaViewer', function() {
 		restrict: 'E',
 		templateUrl: 'alpaca-template-index',
 		scope: {
-			survey: '=',
+			slides: '=',
 			selected: '='
 		}
 	};
@@ -630,8 +630,9 @@ angular.module('alpacaViewer').directive('alpacaSlides', [
 		var link = function($scope, element, attrs){
 			var template = {};
 
-			if (Array.isArray($scope.survey.slides)){
+			if (Array.isArray($scope.slides)){
 				template = angular.element("<div swiper-repeat='slide in survey.slides' swiper-repeat-selected='selected'><alpaca-slide slide='slide'/></div>");
+				console.log('array');
 			} else {
 				template = angular.element("<div style='width:100%'><alpaca-slide slide='selected'/></div>");
 			}
@@ -643,7 +644,7 @@ angular.module('alpacaViewer').directive('alpacaSlides', [
 
 		return {
 			restrict: 'E',
-			replace: true,
+			//replace: true,
 			//template: "<div swiper-repeat='slide in survey.slides' swiper-repeat-selected='selected'><alpaca-slide slide='slide'/></div>"
 			template: "<div style='width:100%'><alpaca-slide slide='selected'/></div>"
 			//link: link
@@ -665,13 +666,16 @@ angular.module('alpacaViewer').directive('alpacaSlide', [
 				$scope.slide.template = $scope.template;
 				angular.forEach($scope.schema, function(field){
 					$scope.slide[field.key] = field.placeholder || 'text';
-				})
+				});
 			}
 
 			$scope.$watch('slide.template', function(){
 				$templateRequest('alpaca-template-' + $scope.slide.template).then(function(tpl){
 					var template = angular.element(tpl);
-					element.html(template);
+					if ($scope.single)
+						element.html(template);
+					else
+						element.html(template);
 					$compile(template)($scope);
 				});
 			});
@@ -681,11 +685,12 @@ angular.module('alpacaViewer').directive('alpacaSlide', [
 		return {
 			restrict: 'E',
 			link: link,
-			replace: true,
+			//replace: true,
 			scope: {
 				slide: '=?',
 				template: '=?',
-				schema: '=?'
+				schema: '=?',
+				single: '=?'
 			}
 		};
 }]);

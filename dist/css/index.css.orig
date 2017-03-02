@@ -7962,20 +7962,9 @@ tags-input:focus, div:focus {
 .nga-fade .card {
   box-shadow: none; }
 
-<<<<<<< HEAD
-#container-survey {
-  margin-top: 2%; }
-  #container-survey .card-content {
-    color: black;
-    margin-bottom: 0px; }
-  #container-survey .card.small {
-    height: 300px; }
-
-.pagination li.active {
-  background-color: #f57c00; }
-=======
 .card-title {
   color: black; }
+<<<<<<< HEAD
 
 .survey-list {
   width: 600px;
@@ -8003,4 +7992,5 @@ alpaca-slides {
 
 #form-resizable-section {
   overflow-y: auto; }
->>>>>>> 444e24083321a2cf8f82460387ce58bb7d7d9ab2
+=======
+>>>>>>> f5a448a951b771e183fa52981e0e62e82feadec5

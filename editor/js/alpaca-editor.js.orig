@@ -7,8 +7,11 @@ angular.module('alpacaEditor', [
 	'ngAnimate',				//Animations
 	'flow',							//File upload
 	'angularResizable',	//Make elements user-resizable
-  	'ui.codemirror',    //Code editor, for writing jsonata
-	'angularUtils.directives.dirPagination', //pagination 	
+<<<<<<< HEAD
+  'ui.codemirror',    //Code editor, for writing jsonata
+=======
+  'angularUtils.directives.dirPagination', //pagination 
+>>>>>>> f5a448a951b771e183fa52981e0e62e82feadec5
 	'alpacaViewer', 
 	'alpacaSchemas', 
 	'alpacaTypes'

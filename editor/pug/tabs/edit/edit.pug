@@ -1,5 +1,6 @@
 div(style='display:flex;flex-direction:column;height: 100%')
 	include include/nav.pug
+	//include include/tabs.pug
 
 	.resizable-wrapper(style='flex: 1')
 		.resizable-section.grey.lighten-3(
@@ -14,7 +15,7 @@ div(style='display:flex;flex-direction:column;height: 100%')
 			
 			r-flex='true' 
 			r-directions='["left","right"]'
-			style='flex:2;position:relative;z-index:99;overflow-y:auto'
+			style='flex:2;position:relative;z-index:99;'
 		)
 			include include/form.pug
 

@@ -6899,7 +6899,11 @@ angular.module('alpacaEditor', [
 	'ngAnimate',				//Animations
 	'flow',							//File upload
 	'angularResizable',	//Make elements user-resizable
+<<<<<<< HEAD
+  'ui.codemirror',    //Code editor, for writing jsonata
+=======
   'angularUtils.directives.dirPagination', //pagination 
+>>>>>>> f5a448a951b771e183fa52981e0e62e82feadec5
 	'alpacaViewer', 
 	'alpacaSchemas', 
 	'alpacaTypes'
@@ -6931,7 +6935,7 @@ angular.module('alpacaEditor').directive('alpacaField', [
 			//console.log($scope.type)
 			$templateRequest('alpaca-type-' + $scope.type).then(function(tpl){
 				var template = angular.element(tpl);
-				element.after(template);
+				element.html(template);
 				$compile(template)($scope);
 			});
 		}
@@ -6974,6 +6978,7 @@ angular.module('alpacaEditor')
 				title: 'Heart Failure', organization: '💩', summary: "This survey is dumb", img_url: 'http://www.ichom.org/wp-content/uploads/2015/03/hf-420x315.jpg', date: "01-20-2017"
 			},
 			{
+<<<<<<< HEAD
 				title: 'Older Person', organization: '💩', summary: "This survey is dumb", img_url: 'http://www.ichom.org/wp-content/uploads/2015/03/condi_dementia-420x315.jpg', date: "01-20-2017"
 			},
 			{
@@ -6996,6 +7001,25 @@ angular.module('alpacaEditor')
 			},
 			{
 				title: 'Craniofacial Microsomia', organization: 'Wellopp', summary: "This survey is dumb", img_url: 'http://www.ichom.org/wp-content/uploads/2015/03/cfm-420x315.jpg', date: "01-20-2017"
+=======
+<<<<<<< HEAD
+				title: 'Survey7', author: 'Poo'
+			},
+			{
+				title: '☺', author: 'Poo'
+			},
+			{
+				title: 'Survey7', author: 'Poo'
+			},
+			{
+				title: 'Survey7', author: 'Poo'
+=======
+				title: 'Survey 7', author: 'Poo', summary: "This survey is dumb", img_url: 'http://www.ichom.org/wp-content/uploads/2015/03/condi_dementia-420x315.jpg', date: "01-20-2017"
+			},
+			{
+				title: 'Survey 8', author: 'Poo', summary: "This survey is dumb", img_url: 'http://www.ichom.org/wp-content/uploads/2015/03/bp_level_of_pain_01_455x620-420x315.jpg', date: "01-20-2017"
+>>>>>>> f5a448a951b771e183fa52981e0e62e82feadec5
+>>>>>>> 444e24083321a2cf8f82460387ce58bb7d7d9ab2
 			}
 		];
 
@@ -7060,6 +7084,18 @@ angular.module('alpacaEditor').controller('demoController', [
 			$scope.tab = tab;
 		}, 200)
 		
+	}
+
+	$scope.codemirrorOpts = {
+		//mode: {name: 'jsonata', jsonata: jsonata, template: true},
+		autoCloseBrackets: {
+				pairs: "()[]{}",
+				triples: "",
+				explode: "[]{}()"
+		},
+		matchBrackets: true,
+		viewportMargin: Infinity,
+		lineNumbers: true
 	}
 
 	$scope.survey = {
@@ -7173,66 +7209,66 @@ angular.module('alpacaEditor').controller('demoController', [
 		$scope.maximized = !$scope.maximized;
 	}
 
-  $scope.devices = {
-    iphone: {
-      name: 'iPhone',
-      width: 480,
-      height: 720,
-      material_icon: 'smartphone'
-    },
-    desktop: {
-      name: 'Desktop',
-      width: 1920,
-      height: 1080,
-      material_icon: 'desktop_windows'
-    },
-    tablet: {
-      name: 'iPad',
-      width: 1024,
-      height: 768,
-      material_icon: 'tablet'
-    }
-  };
-
-  $scope.setDevice = function(device) {
-    $scope.device = device;
-    console.log('set device:', device);
-  }
-
-  $scope.setSlide = function(slide){
-  	$scope.selected = slide;
-  	console.log(slide);
-  }
-
-  $scope.loading = false;
-
-  $scope.search = function(){
-  	$scope.searching = true;
-  	
-  	$timeout(function(){$('#search').focus()});
-  }
-
-  $scope.$on('device-ready', function(){
-  	$scope.setDevice($scope.devices.tablet);
-  	$scope.loading = false;
-  	
-  });
-
-  $scope.fn = {
-  	tags: {
-	  	search: function(query){
-	  		console.log('query', query);
-	  		var ret = [];
-	  		angular.forEach($scope.config.tags, function(el){
-	  			if (el.text.includes(query))
-	  				ret.push(el.text);
-	  		})
-	  		return ret;
-	  	}
+	$scope.devices = {
+		iphone: {
+			name: 'iPhone',
+			width: 480,
+			height: 720,
+			material_icon: 'smartphone'
+		},
+		desktop: {
+			name: 'Desktop',
+			width: 1920,
+			height: 1080,
+			material_icon: 'desktop_windows'
+		},
+		tablet: {
+			name: 'iPad',
+			width: 1024,
+			height: 768,
+			material_icon: 'tablet'
 		}
-  };
+	};
 
-  // $scope.temps = [];
+	$scope.setDevice = function(device) {
+		$scope.device = device;
+		console.log('set device:', device);
+	}
+
+	$scope.setSlide = function(slide){
+		$scope.selected = slide;
+		console.log(slide);
+	}
+
+	$scope.loading = false;
+
+	$scope.search = function(){
+		$scope.searching = true;
+		
+		$timeout(function(){$('#search').focus()});
+	}
+
+	$scope.$on('device-ready', function(){
+		$scope.setDevice($scope.devices.tablet);
+		$scope.loading = false;
+		
+	});
+
+	$scope.fn = {
+		tags: {
+			search: function(query){
+				console.log('query', query);
+				var ret = [];
+				angular.forEach($scope.config.tags, function(el){
+					if (el.text.includes(query))
+						ret.push(el.text);
+				})
+				return ret;
+			}
+		}
+	};
+
+	// $scope.temps = [];
 
 		// $scope.addTemp = function() {
 		// 	$scope.temps.push({'title': $scope.newTemp, 'done':false})
@@ -7242,7 +7278,7 @@ angular.module('alpacaEditor').controller('demoController', [
 		// $scope.deleteTemp = function(index) {	
 		// 	$scope.temps.splice(index, 1);
 		// }
-  
+	
 }]);
 /*  Todo:
  *  *remove jquery dep

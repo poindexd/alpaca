@@ -88,7 +88,14 @@ html
 				//closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
 				draggable: true // Choose whether you can drag to open on touch screens
 			});
-			$('.modal').modal();
+			$('.modal').modal({
+				ready: function(){
+					$('body').addClass('modal-open');
+				},
+				complete: function(){
+					$('body').removeClass('modal-open');
+				}
+			});
 		})
 
 

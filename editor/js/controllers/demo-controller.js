@@ -48,6 +48,18 @@ angular.module('alpacaEditor').controller('demoController', [
 		
 	}
 
+	$scope.codemirrorOpts = {
+		//mode: {name: 'jsonata', jsonata: jsonata, template: true},
+		autoCloseBrackets: {
+				pairs: "()[]{}",
+				triples: "",
+				explode: "[]{}()"
+		},
+		matchBrackets: true,
+		viewportMargin: Infinity,
+		lineNumbers: true
+	}
+
 	$scope.survey = {
 
 		slides: [
@@ -159,66 +171,66 @@ angular.module('alpacaEditor').controller('demoController', [
 		$scope.maximized = !$scope.maximized;
 	}
 
-  $scope.devices = {
-    iphone: {
-      name: 'iPhone',
-      width: 480,
-      height: 720,
-      material_icon: 'smartphone'
-    },
-    desktop: {
-      name: 'Desktop',
-      width: 1920,
-      height: 1080,
-      material_icon: 'desktop_windows'
-    },
-    tablet: {
-      name: 'iPad',
-      width: 1024,
-      height: 768,
-      material_icon: 'tablet'
-    }
-  };
-
-  $scope.setDevice = function(device) {
-    $scope.device = device;
-    console.log('set device:', device);
-  }
-
-  $scope.setSlide = function(slide){
-  	$scope.selected = slide;
-  	console.log(slide);
-  }
-
-  $scope.loading = false;
-
-  $scope.search = function(){
-  	$scope.searching = true;
-  	
-  	$timeout(function(){$('#search').focus()});
-  }
-
-  $scope.$on('device-ready', function(){
-  	$scope.setDevice($scope.devices.tablet);
-  	$scope.loading = false;
-  	
-  });
-
-  $scope.fn = {
-  	tags: {
-	  	search: function(query){
-	  		console.log('query', query);
-	  		var ret = [];
-	  		angular.forEach($scope.config.tags, function(el){
-	  			if (el.text.includes(query))
-	  				ret.push(el.text);
-	  		})
-	  		return ret;
-	  	}
+	$scope.devices = {
+		iphone: {
+			name: 'iPhone',
+			width: 480,
+			height: 720,
+			material_icon: 'smartphone'
+		},
+		desktop: {
+			name: 'Desktop',
+			width: 1920,
+			height: 1080,
+			material_icon: 'desktop_windows'
+		},
+		tablet: {
+			name: 'iPad',
+			width: 1024,
+			height: 768,
+			material_icon: 'tablet'
 		}
-  };
+	};
 
-  // $scope.temps = [];
+	$scope.setDevice = function(device) {
+		$scope.device = device;
+		console.log('set device:', device);
+	}
+
+	$scope.setSlide = function(slide){
+		$scope.selected = slide;
+		console.log(slide);
+	}
+
+	$scope.loading = false;
+
+	$scope.search = function(){
+		$scope.searching = true;
+		
+		$timeout(function(){$('#search').focus()});
+	}
+
+	$scope.$on('device-ready', function(){
+		$scope.setDevice($scope.devices.tablet);
+		$scope.loading = false;
+		
+	});
+
+	$scope.fn = {
+		tags: {
+			search: function(query){
+				console.log('query', query);
+				var ret = [];
+				angular.forEach($scope.config.tags, function(el){
+					if (el.text.includes(query))
+						ret.push(el.text);
+				})
+				return ret;
+			}
+		}
+	};
+
+	// $scope.temps = [];
 
 		// $scope.addTemp = function() {
 		// 	$scope.temps.push({'title': $scope.newTemp, 'done':false})
@@ -228,5 +240,5 @@ angular.module('alpacaEditor').controller('demoController', [
 		// $scope.deleteTemp = function(index) {	
 		// 	$scope.temps.splice(index, 1);
 		// }
-  
+	
 }]);
