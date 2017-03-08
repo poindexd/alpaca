@@ -1,46 +1,59 @@
-div(style='position:relative;overflow-y:auto;height:100%;'): .container(style='padding-top: 80px')
+//- div(style='position:relative;overflow-y:auto;height:100%;'): .container(style='padding-top: 80px')
+//- 	.row
+//- 		.col.s12.l6
+//- 			//.butterfly
+//- 				include include/butterfly.html
+//- 			ul.collection.with-header(style='margin-top: 48px')
+//- 				li.collection-header.center
+//- 					br
+//- 					img.circle.white.z-depth-1(src='http://danpoindexter.com/img/danpoindexter.png' style='height: 110px;width: 110px;')
+//- 					h4 Dan Poindexter
+//- 				li.collection-item
+//- 					label Email
+//- 					p
+//- 						i.material-icons.grey-text.left mail
+//- 						| dan@wellopp.com
+//- 				li.collection-item
+//- 					label Organizations
+//- 					br
+//- 					img.circle.white.z-depth-1(src='./img/hotpath_logo_small.svg' style='height: 60px;width: 60px;')
+//- 					img.circle.white.z-depth-1(src='./img/logo_butterfly_only.svg' style='height: 60px;width: 60px; margin-left: 15px;padding: 4px')
+
+div(style='position:relative;overflow-y:auto;height:100%;' ng-controller= 'settingsController'): .container(style='padding-top: 80px')
 	.row
 		.col.s12.l6
 			//.butterfly
-				include include/butterfly.html
+				include include/butterfly.html	
 			ul.collection.with-header(style='margin-top: 48px')
 				li.collection-header.center
-					br
-					img.circle.white.z-depth-1(src='http://danpoindexter.com/img/danpoindexter.png' style='height: 110px;width: 110px;')
-					h4 Dan Poindexter
+					div(ng-hide='editorEnabled')
+						img.circle.white.z-depth-1(ng-src='{{profilePic}}' style='height: 110px;width: 110px;')
+						div(flow-init="{target: '/upload'}" flow-files-submitted="$flow.upload()" flow-file-success="$file.msg = $message")
+							input(type='file' flow-btn)
+							input(type="file" flow-btn flow-directory ng-show="$flow.supportDirectory")
+							table
+								tr(ng-repeat='file in $flow.files')
+									td {{$index+1}}
+									td 
+										img(ng-src='{{file.name}}')
+									td {{file.msg}}
+						h4 {{firstName}} {{lastName}}
 				li.collection-item
-					label Email
-					p
+					div(ng-hide='editorEnabled')
+						label Email
+						p
 						i.material-icons.grey-text.left mail
-						| dan@wellopp.com
+						| {{email}}
 				li.collection-item
-					label Organizations
-					br
-					img.circle.white.z-depth-1(src='./img/hotpath_logo_small.svg' style='height: 60px;width: 60px;')
-					img.circle.white.z-depth-1(src='./img/logo_butterfly_only.svg' style='height: 60px;width: 60px; margin-left: 15px;padding: 4px')
-		.col.s12.l6
-			//h5 Devices
-			//ul.collection
-				li.collection-item.avatar(ng-repeat='device in devices')
-					i.material-icons.circle {{device.material_icon}}
-					p {{device.name}} 
-					label {{device.width}} x {{device.height}}
-					a.secondary-content(href='#!' ng-click='devices.remove(device);'): i.material-icons close
-				//li.collection-item.avatar
-					i.material-icons.circle person
-					input()
-			//h5 Default Tags
-			//ul.collection: .collection-item
-				tags-input(ng-model='config.tags' replace-spaces-with-dashes='false')
-			h5 Default Endpoints
-			ul.collection
-				li.collection-item
-					div
-						label URL
-						input(type='text')
-					div
-						label Expression
+					div(ng-hide='editorEnabled')
+						label Organizations
 						br
-						ui-codemirror(ui-codemirror-opts='codemirrorOpts')
-				li.collection-item.center
-					i.material-icons.grey-text add
+						img.circle.white.z-depth-1(ng-src='{{orgPic}}' style='height: 60px;width: 60px;')
+						a(href='#' ng-click='enableEditor()') Edit
+					div(ng-show='editorEnabled')
+						input(ng-model='editableFirstName' ng-show='editorEnabled')
+						input(ng-model='editableLastName' ng-show='editorEnabled')
+						input(ng-model='editableEmail' ng-show='editorEnabled')
+						a(href='#' ng-click='save()') Save
+						or
+						a(href='#' ng-click='disableEditor()') Cancel

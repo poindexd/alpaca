@@ -7962,7 +7962,6 @@ tags-input:focus, div:focus {
 .nga-fade .card {
   box-shadow: none; }
 
-<<<<<<< HEAD
 #container-survey {
   margin-top: 2%; }
   #container-survey .card-content {
@@ -7973,21 +7972,6 @@ tags-input:focus, div:focus {
 
 .pagination li.active {
   background-color: #f57c00; }
-=======
-.card-title {
-  color: black; }
-
-.survey-list {
-  width: 600px;
-  position: relative;
-  margin: auto; }
-
-.search-item {
-  background: white;
-  padding: 5px 10px;
-  color: black;
-  border: solid 1px #f57c00;
-  width: 100%; }
 
 #collections-tab nav ul li {
   clear: left; }
@@ -8003,4 +7987,3 @@ alpaca-slides {
 
 #form-resizable-section {
   overflow-y: auto; }
->>>>>>> 444e24083321a2cf8f82460387ce58bb7d7d9ab2
