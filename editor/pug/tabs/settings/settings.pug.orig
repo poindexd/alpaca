@@ -45,6 +45,13 @@ div(style='position:relative;overflow-y:auto;height:100%;' ng-controller= 'setti
 						i.material-icons.grey-text.left mail
 						| {{email}}
 				li.collection-item
+<<<<<<< HEAD
+					label Organizations
+					br
+					img.circle.white.z-depth-1(src='./img/hotpath_logo_small.svg' style='height: 60px;width: 60px;')
+					img.circle.white.z-depth-1(src='./img/logo_butterfly_only.svg' style='height: 60px;width: 60px; margin-left: 15px;padding: 4px')
+
+=======
 					div(ng-hide='editorEnabled')
 						label Organizations
 						br
@@ -57,3 +64,4 @@ div(style='position:relative;overflow-y:auto;height:100%;' ng-controller= 'setti
 						a(href='#' ng-click='save()') Save
 						or
 						a(href='#' ng-click='disableEditor()') Cancel
+>>>>>>> 11152099935106c875354f0be022523bcd32e50f

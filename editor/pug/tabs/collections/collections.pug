@@ -1,34 +1,29 @@
 //include ../../include/search.pug
 	
-div(ng-controller='collectionsController' style='overflow:scroll; position:relative; height:100%;')
-	nav(class='survey-container')
+div(ng-controller='collectionsController')
+	nav
 		div(class='nav-wrapper')
 			form
 				div(class='input-field')
 					input(id='search' type='search' ng-model='searchValue' style='margin-bottom: 5%')
 					label(class='label-icon' for='search')
 						i(class='material-icons' style = 'color:black;') search
-	//div(class='collection-container')
-	//- .row
-	//- 	.col.s12.l4(dir-paginate="item in surveys | filter:searchValue | itemsPerPage: 3") 
-	//- 				a(class='card small' href="#")
-	//- 					span(class='card-header' style='background-image:url({{item.img_url}})')
-	//- 						i(class ='material-icons' style='float:right; color:grey;') clear
-	//- 						span(class="card-title" style = 'text-overflow: ellipsis; white-space: nowrap; overflow:hidden; width: 100%;  display:inline-block;') 	
-	//- 							h3 {{item.title}}
-	//- 					span(class="card-summary" ) {{ item.summary }}
-	//- 					span(class="card-meta") Published: {{item.date}} 
+	div(id='container-survey')
+		.container
+			.row
+				.col.s12.l4(dir-paginate="item in surveys | filter:searchValue | itemsPerPage: 6") 
+					//a(class='card small' href="#" style='box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.7);')
+					.card.small
+						a(href='' alt='#')
+							.card-image 
+								img(src ='{{item.img_url}}')
+								//span.card-title 
+								//h5 {{item.title}}
+							.card-content
+								p {{item.title}}
+								label Organization: {{item.organization}}
+								label Date: {{item.date}}
 
-	.row
-		.col.s12.l4(dir-paginate="item in surveys | filter:searchValue | itemsPerPage: 9") 
-					a(class='card small' href="#")
-						.card-image 
-							img(src ='{{item.img_url}}')
-							span.card-title 
-								h5 {{item.title}}
-						.card-content
-							p {{item.summary}}
 
-		dir-pagination-controls(template-url="/pagination.html")
-
-				
+	//- footer
+	dir-pagination-controls(template-url="/pagination.html" style='position:absolute; left:48%; bottom:10px;')

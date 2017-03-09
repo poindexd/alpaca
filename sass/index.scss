@@ -520,11 +520,27 @@ $bg-color--ebfblue: rgb(0, 120, 191);
   }
 }
 
-.card-title {
-  color:black;
+#container-survey {
+  margin-top: 2%;
+
+  .card-content {
+    color: black;
+    margin-bottom:0px;
+
+    // text-overflow: ellipsis;
+    // white-space: nowrap; 
+    // overflow: hidden;
+
+
+}
+  .card.small {
+    height:300px;
+  }
 }
 
-
+  .pagination li.active {
+    background-color: #f57c00; 
+  }
 
 // .survey-container {
  
@@ -562,6 +578,7 @@ alpaca-slides{
     overflow-y: hidden;
   }
 }
+
 
 #form-resizable-section{
   overflow-y: auto;
