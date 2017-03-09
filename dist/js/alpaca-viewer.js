@@ -728,6 +728,6 @@ angular.module('alpacaViewer').controller('alpacaViewerController', ['$scope', f
 
 	}
 
-	$scope.selected = $scope.survey.slides[1];
+	$scope.selected = $scope.survey.slides[4];
 
 }]);

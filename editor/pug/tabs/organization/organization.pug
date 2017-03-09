@@ -1,0 +1,112 @@
+nav
+	.nav-wrapper
+		ul
+			li: a(href='#'): i.material-icons chevron_left
+			li: a(href='#') Wellopp
+
+div(style='position:relative;overflow-y:auto;height:100%;padding:50px')
+	.row(style='width:100%')
+
+		.col.s2.offset-s1
+
+			ul.table-of-contents
+				li(ng-repeat='tab in organizationSettings.tabs')
+					a(href='#' ng-click='organizationSettings.selectedTab = tab' ng-class='{active: organizationSettings.selectedTab == tab}') {{tab}}
+					
+			ul.table-of-contents
+				li(ng-repeat='tab in organizationSettings.tabs')
+					a(href='#' ng-click='organizationSettings.selectedTab = tab' ng-class='{active: organizationSettings.selectedTab == tab}') {{tab}}
+
+		.col.s6
+			div(ng-show='organizationSettings.selectedTab == "Users"')
+				//h5 Users
+				.collection
+					table
+						thead
+							tr.collection-item
+								td(style='padding-left:20px') User
+								td View
+								td Edit
+								td Admin
+								td
+						tbody
+							tr.collection-item(ng-repeat='user in users')
+								td(style='padding-left: 10px')
+									img.circle(ng-src='{{user.img}}' height='60' width='60' style='vertical-align:middle')
+									div(style='display:inline-block;padding: 10px;vertical-align:middle')
+										span {{user.name}}
+										label {{user.email}}
+								td
+									input(type='checkbox')
+								td
+									input(type='checkbox')
+								td
+									input(type='checkbox')
+								td
+									a(href='#!' ng-click='devices.remove(device);')
+										i.material-icons close
+
+					.collection-item.center(style='border-top: 1px solid #e0e0e0;display:flex;align-items:center')
+						input(type='text' placeholder='Email' style='flex:1')
+						button.btn.waves-effect.waves-light(style='margin-left:10px') Add
+					//.collection-item.center(style='border-top: 1px solid #e0e0e0;')
+						a(href='#')
+							i.material-icons add
+
+			div(ng-show='organizationSettings.selectedTab == "Devices"')
+				//h5 Default Devices
+				.collection
+					table
+						thead
+							tr.collection-item
+								td(style='padding-left: 15px') Name
+								td Width
+								td Height
+								td
+						tbody
+							tr.collection-item(ng-repeat='device in devices')
+								td(style='padding-left: 15px'): input(ng-model='device.name')
+								td: input(ng-model='device.width')
+								td: input(ng-model='device.height')
+								td.center: a(href='#' ng-click='devices.splice($index, 1)'): i.material-icons close
+							tr.collection-item
+								td(style='padding-left: 15px'): input(ng-model='newDevice.name')
+								td: input(ng-model='newDevice.width')
+								td: input(ng-model='newDevice.height')
+								td: button.btn.waves-effect.waves-light(ng-click='addDevice()') Add
+
+				//ul.collection
+					li.collection-item.avatar(ng-repeat='device in devices')
+						i.material-icons.circle {{device.material_icon}}
+						p {{device.name}} 
+						label {{device.width}} x {{device.height}}
+						a.secondary-content(href='#!' ng-click='devices.remove(device);'): i.material-icons close
+					li.collection-item
+						.row
+							.co.s4
+					//li.collection-item.avatar
+						i.material-icons.circle person
+						input()
+
+			div(ng-show='organizationSettings.selectedTab == "Tags"')
+				//h5 Default Tags
+				ul.collection: .collection-item
+					tags-input(ng-model='config.tags' replace-spaces-with-dashes='false')
+
+			div(ng-show='organizationSettings.selectedTab == "Endpoints"')
+				//h5 Default Endpoints
+				ul.collection
+					li.collection-item
+						div
+							label Name
+							input(type='text')
+						div
+							label URL
+							input(type='text')
+						div
+							label Expression
+							br
+							ui-codemirror(ui-codemirror-opts='codemirrorOpts')
+					li.collection-item.center
+						a(href='#')
+							i.material-icons add

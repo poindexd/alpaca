@@ -1,6 +1,6 @@
 div(style='position:relative;overflow-y:auto;height:100%;'): .container(style='padding-top: 80px')
 	.row
-		.col.s12.l6
+		.col.s12
 			//.butterfly
 				include include/butterfly.html
 			ul.collection.with-header(style='margin-top: 48px')
@@ -18,29 +18,4 @@ div(style='position:relative;overflow-y:auto;height:100%;'): .container(style='p
 					br
 					img.circle.white.z-depth-1(src='./img/hotpath_logo_small.svg' style='height: 60px;width: 60px;')
 					img.circle.white.z-depth-1(src='./img/logo_butterfly_only.svg' style='height: 60px;width: 60px; margin-left: 15px;padding: 4px')
-		.col.s12.l6
-			//h5 Devices
-			//ul.collection
-				li.collection-item.avatar(ng-repeat='device in devices')
-					i.material-icons.circle {{device.material_icon}}
-					p {{device.name}} 
-					label {{device.width}} x {{device.height}}
-					a.secondary-content(href='#!' ng-click='devices.remove(device);'): i.material-icons close
-				//li.collection-item.avatar
-					i.material-icons.circle person
-					input()
-			//h5 Default Tags
-			//ul.collection: .collection-item
-				tags-input(ng-model='config.tags' replace-spaces-with-dashes='false')
-			h5 Default Endpoints
-			ul.collection
-				li.collection-item
-					div
-						label URL
-						input(type='text')
-					div
-						label Expression
-						br
-						ui-codemirror(ui-codemirror-opts='codemirrorOpts')
-				li.collection-item.center
-					i.material-icons.grey-text add
+

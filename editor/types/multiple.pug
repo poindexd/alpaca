@@ -4,7 +4,7 @@ label {{field.label}}
 		div(ng-repeat='_field in field.fields')
 			alpaca-field(model='_model[_field.key]' type='_field.type' field='_field' fn='fn[_field.type]' slide='selected')
 		a(href='#!' style='position: absolute; right: 10px; top:10px' ng-click='model.splice($index, 1);')
-			i.material-icons.grey-text close
+			i.material-icons close
 	.collection-item.center
 		a(href='#!' ng-click='model=model||[];model.push({});')
-			i.material-icons.grey-text add
+			i.material-icons add

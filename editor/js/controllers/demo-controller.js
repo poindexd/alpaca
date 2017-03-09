@@ -4,8 +4,9 @@ angular.module('alpacaEditor').controller('demoController', [
 	'$schemas',
 	'$timeout',
 	'$firebaseObject',
+	'$firebaseArray',
 	'$window',
-	function($scope, $templateList, $schemas, $timeout, $firebaseObject, $window){
+	function($scope, $templateList, $schemas, $timeout, $firebaseObject, $firebaseArray, $window){
 
 	var config = firebase.database().ref().child('config');
 	$firebaseObject(config).$bindTo($scope, 'config');
@@ -18,6 +19,11 @@ angular.module('alpacaEditor').controller('demoController', [
 	$scope.templates = $templateList.templates;
 	console.log($templateList);
 
+	$scope.newDevice = {};
+	$scope.addDevice = function(){
+			$scope.devices.push(angular.copy($scope.newDevice));
+			$scope.newDevice = null;	
+	}
 
 	$scope.tabs = [
 		{
@@ -29,14 +35,46 @@ angular.module('alpacaEditor').controller('demoController', [
 			icon: 'mode_edit'
 		},
 		{
-			name: 'metadata',
-			icon: 'timeline'
+			name: 'organization',
+			icon: 'language'
 		},
 		{
 			name: 'settings',
-			icon: 'settings'
+			icon: 'face'
 		}
 	];
+
+	$scope.organizationSettings = {
+		tabs: [
+			'Users',
+			'Devices',
+			'Tags',
+			'Endpoints'
+		],
+		selectedTab: 'Users'
+	}
+
+	$scope.users = [
+		{
+			name: 'Dan Poindexter',
+			email: 'dan@wellopp.com',
+			img: 'http://danpoindexter.com/img/danpoindexter.png'
+		},
+		{
+			name: 'Haemin Park',
+			email: 'haemin@wellopp.com',
+			img: '/img/haemin.png'
+			//img: 'http://cdn3.volusion.com/hpwvr.gdwwx/v/vspfiles/photos/PE-ZA1733-1.jpg?1458140223'
+		},
+		{
+			name: 'Poo',
+			email: 'poo@poo.com',
+			img: 'http://rs619.pbsrc.com/albums/tt276/cardunne09/so_poo.jpg~c200'
+		}
+
+
+	];
+
 
 	$scope.tab = $scope.tabs[0];
 	
@@ -171,26 +209,26 @@ angular.module('alpacaEditor').controller('demoController', [
 		$scope.maximized = !$scope.maximized;
 	}
 
-	$scope.devices = {
-		iphone: {
+	$scope.devices = [
+		{
 			name: 'iPhone',
 			width: 480,
 			height: 720,
 			material_icon: 'smartphone'
 		},
-		desktop: {
+		{
 			name: 'Desktop',
 			width: 1920,
 			height: 1080,
 			material_icon: 'desktop_windows'
 		},
-		tablet: {
+		{
 			name: 'iPad',
 			width: 1024,
 			height: 768,
 			material_icon: 'tablet'
 		}
-	};
+	];
 
 	$scope.setDevice = function(device) {
 		$scope.device = device;
@@ -207,11 +245,12 @@ angular.module('alpacaEditor').controller('demoController', [
 	$scope.search = function(){
 		$scope.searching = true;
 		
+		///JQUERY DEP
 		$timeout(function(){$('#search').focus()});
 	}
 
 	$scope.$on('device-ready', function(){
-		$scope.setDevice($scope.devices.tablet);
+		$scope.setDevice($scope.devices[0]);
 		$scope.loading = false;
 		
 	});
@@ -230,15 +269,13 @@ angular.module('alpacaEditor').controller('demoController', [
 		}
 	};
 
-	// $scope.temps = [];
+	$scope.init = function(){
 
-		// $scope.addTemp = function() {
-		// 	$scope.temps.push({'title': $scope.newTemp, 'done':false})
-		// 	$scope.newTemp = ''
-		// }
-
-		// $scope.deleteTemp = function(index) {	
-		// 	$scope.temps.splice(index, 1);
-		// }
+		$scope.organizations = $firebaseArray(
+			firebase.database().ref().child('organizations/').orderByChild('users').equalTo('dan@wellopp.com')
+		);
+	}
 	
+	$scope.init();
+
 }]);
