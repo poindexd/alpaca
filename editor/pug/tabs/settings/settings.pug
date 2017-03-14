@@ -1,59 +1,34 @@
-//- div(style='position:relative;overflow-y:auto;height:100%;'): .container(style='padding-top: 80px')
-//- 	.row
-//- 		.col.s12.l6
-//- 			//.butterfly
-//- 				include include/butterfly.html
-//- 			ul.collection.with-header(style='margin-top: 48px')
-//- 				li.collection-header.center
-//- 					br
-//- 					img.circle.white.z-depth-1(src='http://danpoindexter.com/img/danpoindexter.png' style='height: 110px;width: 110px;')
-//- 					h4 Dan Poindexter
-//- 				li.collection-item
-//- 					label Email
-//- 					p
-//- 						i.material-icons.grey-text.left mail
-//- 						| dan@wellopp.com
-//- 				li.collection-item
-//- 					label Organizations
-//- 					br
-//- 					img.circle.white.z-depth-1(src='./img/hotpath_logo_small.svg' style='height: 60px;width: 60px;')
-//- 					img.circle.white.z-depth-1(src='./img/logo_butterfly_only.svg' style='height: 60px;width: 60px; margin-left: 15px;padding: 4px')
-
-div(style='position:relative;overflow-y:auto;height:100%;' ng-controller= 'settingsController'): .container(style='padding-top: 80px')
-	.row
-		.col.s12
-			//.butterfly
-				include include/butterfly.html	
-			ul.collection.with-header(style='margin-top: 48px')
-				li.collection-header.center
-					div(ng-hide='editorEnabled')
-						img.circle.white.z-depth-1(ng-src='{{profilePic}}' style='height: 110px;width: 110px;')
-						div(flow-init="{target: '/upload'}" flow-files-submitted="$flow.upload()" flow-file-success="$file.msg = $message")
-							input(type='file' flow-btn)
-							input(type="file" flow-btn flow-directory ng-show="$flow.supportDirectory")
-							table
-								tr(ng-repeat='file in $flow.files')
-									td {{$index+1}}
-									td 
-										img(ng-src='{{file.name}}')
-									td {{file.msg}}
-						h4 {{firstName}} {{lastName}}
-				li.collection-item
-					div(ng-hide='editorEnabled')
-						label Email
-						p
-						i.material-icons.grey-text.left mail
-						| {{email}}
-				li.collection-item
-					div(ng-hide='editorEnabled')
-						label Organizations
-						br
-						img.circle.white.z-depth-1(ng-src='{{orgPic}}' style='height: 60px;width: 60px;')
-						a(href='#' ng-click='enableEditor()') Edit
-					div(ng-show='editorEnabled')
-						input(ng-model='editableFirstName' ng-show='editorEnabled')
-						input(ng-model='editableLastName' ng-show='editorEnabled')
-						input(ng-model='editableEmail' ng-show='editorEnabled')
-						a(href='#' ng-click='save()') Save
-						or
-						a(href='#' ng-click='disableEditor()') Cancel
+div(ng-controller= 'settingsController' flow-init="{target: '/upload'}" flow-files-submitted="$flow.upload()" flow-file-success="$file.msg = $message"): .container(style='width:100%; padding-left:30%; padding-top:60px;')
+    .row
+        .col.s12.l6
+            //.butterfly
+                include include/butterfly.html  
+            ul.collection.with-header(style='margin-top: 48px border-top: solid; border-top-color: #f57c00; border-top-width: 8px;')
+                li.collection-header.center(ng-hide='editorEnabled')
+                    img.circle.white.z-depth-1(flow-img="$flow.files[$flow.files.length-1]" style='height: 110px;width: 110px; margin-top:20px;')
+                    //img.circle.white.z-depth-1(ng-src='{{profilePic}}' style='height: 110px;width: 110px;')
+                    h4 {{firstName}} {{lastName}}
+                li.collection-item(ng-hide='editorEnabled' style='height:80px;')
+                    label Email
+                    p
+                    i.material-icons.grey-text.left mail
+                    | {{email}}
+                li.collection-item(ng-hide='editorEnabled')
+                    label Organizations
+                    br
+                    //img(flow-img="$flow.files[0]")
+                    img.circle.white.z-depth-1(ng-src='{{orgPic}}' style='height: 60px;width: 60px; margin-right: 20px;')
+                    img.circle.white.z-depth-1(src='./img/hotpath_logo_small.svg' style='height: 60px;width: 60px;')
+                    a(href='#' ng-click='editorEnabled = true' class='waves-effect btn' style='margin-top:30px; margin-bottom:15px; width: 30%;') Edit
+                li.collection-item(ng-show='editorEnabled')
+                    input(ng-model='firstName' ng-show='editorEnabled' placeholder='First Name')
+                    label First Name
+                    input(ng-model='lastName' ng-show='editorEnabled' placeholder='Last Name')
+                    label Last Name
+                    input(ng-model='email' ng-show='editorEnabled' placeholder='Email')
+                    label Email
+                    //div(flow-init="{target: '/upload'}" flow-files-submitted="$flow.upload()" flow-file-success="$file.msg = $message")
+                    input(ng-model='editableProfilePic' ng-show='editorEnabled' type='file' flow-btn style='margin-top:10px;')
+                    a(href='#' ng-click='editorEnabled = false' class='waves-effect btn' style='margin-top:30px; margin-bottom:15px; width: 30%;') Save
+                    //or
+                    //a(href='#' ng-click='disableEditor()') Cancel

@@ -1,0 +1,71 @@
+html
+	head
+		title Editor
+		link(rel='stylesheet' href='./css/index.css')
+		link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
+		style.
+						html,body {
+							height: 100%;
+						}
+						html {
+							display: table;
+							margin: auto;
+						}
+						body {
+								display: table-cell;
+								vertical-align: middle;
+								background: #4ECDC4;
+						}
+						#login-page {
+							 width: 500px;
+						}
+	body(ng-app='alpacaEditor' ng-controller='authCtrl')
+		div(id='login-page' class='row')
+			div(class='col s12 z-depth-6 card-panel')
+				form(class='login-form')
+					div(class="row")
+					div(class='row')
+						div(class='input-field col s12')
+							i(class='material-icons prefix') mail_outline
+							input(class='validate' id='email' type='email' ng-model='email')
+							label(for='email' data-error='wrong' data-success='right') Email
+					div(class='row')
+						div(class='input-field col s12')
+							i(class='material-icons prefix') lock_outline
+							input(id='password' type='password' ng-model='password')
+							label(for='password') Password
+					div(class='row')
+						div(class='input-field col s12 m12 l12 login-text')
+							label(for='remember-me') Remember me 
+								input(type='checkbox' id='remember-me')
+					div(class='row')        
+					div(class='row')
+						div(class='input-field col s12')
+							a(href='#' class='btn waves-effect waves-light col s12' ng-click="signIn()") Login
+					div(class='row')
+						div(class='input-field col s6 m6 l6')
+							p(class="margin medium-small")
+								a(href="#") Register Now!   
+						div(class='input-field col s6 m6 l6')
+							p(class='margin right-align medium-small')
+								a(href='#') Forgot Password
+			script(src='https://code.jquery.com/jquery-2.2.4.min.js')
+			script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js')
+			script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+			script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js')
+			script(src='https://www.gstatic.com/firebasejs/3.6.6/firebase.js')
+			script(src='https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js')
+			script.
+				var config = {
+					apiKey: "AIzaSyBCAJtmUVpWjFUIw4yLUuPhbCJWNufA_gU",
+					authDomain: "hotpath-f9c54.firebaseapp.com",
+					databaseURL: "https://hotpath-f9c54.firebaseio.com",
+					storageBucket: "hotpath-f9c54.appspot.com",
+					messagingSenderId: "340378037531"
+				};
+				firebase.initializeApp(config);
+			script(src='./js/alpaca-templates.js')
+			script(src='./js/alpaca-schemas.js')
+			script(src='./js/alpaca-types.js')
+			script(src='./js/alpaca-viewer.min.js')
+			script(src='./js/alpaca-editor.min.js')

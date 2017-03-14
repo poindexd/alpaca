@@ -3,10 +3,11 @@ angular.module('alpacaEditor').controller('demoController', [
 	'$templateList',
 	'$schemas',
 	'$timeout',
+	'$firebaseAuth',
 	'$firebaseObject',
 	'$firebaseArray',
 	'$window',
-	function($scope, $templateList, $schemas, $timeout, $firebaseObject, $firebaseArray, $window){
+	function($scope, $templateList, $schemas, $timeout, $firebaseAuth, $firebaseObject, $firebaseArray, $window){
 
 	var config = firebase.database().ref().child('config');
 	$firebaseObject(config).$bindTo($scope, 'config');
@@ -43,16 +44,6 @@ angular.module('alpacaEditor').controller('demoController', [
 			icon: 'face'
 		}
 	];
-
-	$scope.organizationSettings = {
-		tabs: [
-			'Users',
-			'Devices',
-			'Tags',
-			'Endpoints'
-		],
-		selectedTab: 'Users'
-	}
 
 	$scope.users = [
 		{
@@ -235,10 +226,10 @@ angular.module('alpacaEditor').controller('demoController', [
 		console.log('set device:', device);
 	}
 
-	$scope.setSlide = function(slide){
-		$scope.selected = slide;
-		console.log(slide);
-	}
+	//$scope.setSlide = function(slide){
+	//	$scope.selected = slide;
+	//	console.log(slide);
+	//}
 
 	$scope.loading = false;
 
@@ -269,11 +260,143 @@ angular.module('alpacaEditor').controller('demoController', [
 		}
 	};
 
-	$scope.init = function(){
+	$scope.currentUser = {
+		name: 'Dan Poindexter',
+		id: 1
+	}
 
-		$scope.organizations = $firebaseArray(
-			firebase.database().ref().child('organizations/').orderByChild('users').equalTo('dan@wellopp.com')
-		);
+	$scope.organizations = [];
+	$scope.organization = {
+		init: function(){ 
+			var ref = firebase.database().ref('organizations/').orderByChild('user_id').equalTo($scope.currentUser.id);
+			$scope.organizations = $firebaseArray(ref);
+		},
+		add: function(){
+
+			var organization = {
+				name: $scope.newOrganization.name,
+				email: $scope.newOrganization.email,
+			}
+
+			$scope.organizations.$add(organization);
+		},
+		remove: function(organization){
+			$scope.organizations.$remove(organization);
+		},
+		settings: {
+			tabs: [
+				'Users',
+				'Devices',
+				'Tags',
+				'Endpoints'
+			],
+			selectedTab: 'Users'
+		}
+	} //organization
+
+	$scope.collections = [];
+	$scope.collection = {
+		init: function(){
+			var ref = firebase.database().ref('collections/').orderByChild('user_id').equalTo($scope.currentUser.id);
+			$scope.collections = $firebaseArray(ref);
+		},
+		add: function(){
+			var collection = {
+				name: 'Untitled Collection',
+				user_id: $scope.currentUser.id,
+			}
+
+			$scope.collections.$add(collection);
+			$scope.setTab($scope.tabs[1]);
+		},
+		remove: function(collection){
+			$scope.collections.$remove(collection);
+		},
+		setCurrent: function(collection){
+			$scope.currentCollection = collection;
+		}
+	} //collection
+
+	$scope.$watch('currentCollection', function(){
+		$scope.slide.load($scope.currentCollection);
+	})
+
+	//$scope.currentUser = {};
+	$scope.user = {
+		signin: function() {
+			$firebaseAuth().$signInWithEmailAndPassword(
+
+			)
+		},
+		create: function(){
+			$firebaseAuth().$createUserWithEmailAndPassword(
+					$scope.newUser.email,
+					$scope.newUser.password
+				)
+				.then(function(user){
+					$scope.currentUser = user;
+				}).catch(function(error){
+					console.log(error);
+				})
+		},
+		delete: function(){
+			$firebaseAuth().deleteUser()
+				.then(function(){
+					console.log('User Deleted. :/')
+				}).catch(function(error){
+					console.log(error);
+				})
+		}
+	} //user
+
+	$scope.slides = [];
+	$scope.slide = {
+		add: function(kind){
+
+			//TODO: Add Switch
+
+			var slide = {
+				collectionId: $scope.currentCollection.$id,
+				kind: kind,
+				title: 'untitled'
+			}
+
+			$scope.slides.$add(slide);
+			
+		},
+		load: function(collection){
+			if (!collection)
+				return;
+			$scope.loading = true;
+			console.log('id', collection.$id);
+			var ref = firebase.database().ref('/slides').orderByChild('collectionId').equalTo(collection.$id);
+			$scope.slides = $firebaseArray(ref);
+			$scope.slides.$loaded()
+				.then(function(x){
+					$scope.$watch('selected', function(new_val, old_val, scope){
+						$scope.slides.$save(scope.index);
+					}, true);
+					$scope.loading = false;
+				});
+		},
+		setCurrent: function(slide, index){
+			$scope.selected = slide;
+			$scope.index = index;
+		}
+	} //slide
+
+	$scope.frame = {
+		update: function(){
+			var key = $scope.currentCollection.name + '-'
+								+ $scope.currentLanguage.name + '-'
+								+ $scope.currentVersion.name + '-'
+								+ $scope.currentFrame.name
+		}
+	} //frame
+
+	$scope.init = function(){
+		$scope.organization.init();
+		$scope.collection.init();
 	}
 	
 	$scope.init();

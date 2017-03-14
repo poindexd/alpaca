@@ -8,22 +8,25 @@ div(ng-controller='collectionsController')
 					input(id='search' type='search' ng-model='searchValue' style='margin-bottom: 5%')
 					label(class='label-icon' for='search')
 						i(class='material-icons' style = 'color:black;') search
+
 	div(id='container-survey')
 		.container
 			.row
-				.col.s12.l4(dir-paginate="item in surveys | filter:searchValue | itemsPerPage: 6") 
+				.col.s12.l4(dir-paginate="_collection in collections | filter:searchValue | itemsPerPage: 6") 
 					//a(class='card small' href="#" style='box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.7);')
-					.card.small
+					.card.small(ng-click='collection.setCurrent(_collection)')
 						a(href='' alt='#')
 							.card-image 
-								img(src ='{{item.img_url}}')
+								img(src ='{{_collection.img_url}}')
 								//span.card-title 
-								//h5 {{item.title}}
+								//h5 {{_collection.title}}
 							.card-content
-								p {{item.title}}
-								label Organization: {{item.organization}}
-								label Date: {{item.date}}
+								p {{_collection.title}}
+								label Organization: {{_collection.organization}}
+								label Date: {{_collection.date}}
 
-
+	.fixed-action-btn
+		a.btn-floating.btn-large.orange(href='#' ng-click='collection.add()')
+			i.material-icons add
 	//- footer
 	dir-pagination-controls(template-url="/pagination.html" style='position:absolute; left:48%; bottom:10px;')

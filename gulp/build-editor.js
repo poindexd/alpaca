@@ -24,6 +24,7 @@ gulp.task('build-editor', function(){
 		'editor/js/controllers/collections-controller.js',
 		'editor/js/controllers/settings-controller.js',
 		'editor/js/controllers/demo-controller.js',
+		'editor/js/controllers/auth-controller.js',
 		'editor/js/device-preview.js'
 	])
 	.pipe(sourcemaps.init())

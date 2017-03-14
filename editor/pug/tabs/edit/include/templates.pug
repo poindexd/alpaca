@@ -9,7 +9,7 @@ script(type='text/ng-template' id='list.html')
 			)
 			
 script(type='text/ng-template' id='slide.html')
-	.node.waves-effect.waves-light(ng-click='setSlide(node)' ng-class='{selected: selected==node}' ) {{node.title}}
+	.node.waves-effect.waves-light(ng-click='slide.setCurrent(node, $index)' ng-class='{selected: selected==node}' ) {{node.title}}
 				i.material-icons.left crop_landscape
 
 script(type='text/ng-template' id='folder.html')

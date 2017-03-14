@@ -8,28 +8,27 @@ angular.module('alpacaEditor')
 
         $scope.editorEnabled = false;
 
-        $scope.enableEditor = function() {
-            $scope.editorEnabled = true;
-            $scope.editableFirstName = $scope.firstName;
-            $scope.editableLastName = $scope.lastName;
-            $scope.editableEmail = $scope.email;
-            $scope.editableProfilePic = $scope.profilePic;
-           // $scope.editableOrgPic = $scope.orgPic;
-        }
+        // $scope.enableEditor = function() {
+        //     $scope.editorEnabled = true;
+        //     $scope.editableFirstName = $scope.firstName;
+        //     $scope.editableLastName = $scope.lastName;
+        //     $scope.editableEmail = $scope.email;
+        //     $scope.editableProfilePic = $scope.profilePic;
+        //    // $scope.editableOrgPic = $scope.orgPic;
+        // }
 
-        $scope.disableEditor = function() {
-            $scope.editorEnabled = false;
-        }
+        // $scope.disableEditor = function() {
+        //     $scope.editorEnabled = false;
+        // }
 
-        $scope.save = function() {
-            $scope.firstName = $scope.editableFirstName;
-            $scope.lastName = $scope.editableLastName;
-            $scope.email = $scope.editableEmail;
-            $scope.profilePic = $scope.editableProfilePic;
-           // $scope.orgPic = $scope.editableOrgPic;
-            $scope.disableEditor();
-        }
+        // $scope.save = function() {
+        //     $scope.firstName = $scope.editableFirstName;
+        //     $scope.lastName = $scope.editableLastName;
+        //     $scope.email = $scope.editableEmail;
+        //     $scope.profilePic = $scope.editableProfilePic;
+        //    // $scope.orgPic = $scope.editableOrgPic;
+        //     $scope.disableEditor();
+        // }
 
 
 }]);  
-

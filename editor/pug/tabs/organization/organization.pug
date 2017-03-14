@@ -1,4 +1,4 @@
-nav
+//nav
 	.nav-wrapper
 		ul
 			li: a(href='#'): i.material-icons chevron_left
@@ -8,17 +8,21 @@ div(style='position:relative;overflow-y:auto;height:100%;padding:50px')
 	.row(style='width:100%')
 
 		.col.s2.offset-s1
+			label Organizations
+			ul.table-of-contents
+				li
+					a(href='#') Wellopp
+		
+			a.btn(href='#' ng-click='organization.add()') New
 
+			br
+			label Settings
 			ul.table-of-contents
-				li(ng-repeat='tab in organizationSettings.tabs')
-					a(href='#' ng-click='organizationSettings.selectedTab = tab' ng-class='{active: organizationSettings.selectedTab == tab}') {{tab}}
-					
-			ul.table-of-contents
-				li(ng-repeat='tab in organizationSettings.tabs')
-					a(href='#' ng-click='organizationSettings.selectedTab = tab' ng-class='{active: organizationSettings.selectedTab == tab}') {{tab}}
+				li(ng-repeat='tab in organization.settings.tabs')
+					a(href='#' ng-click='organization.settings.selectedTab = tab' ng-class='{active: organization.settings.selectedTab == tab}') {{tab}}
 
 		.col.s6
-			div(ng-show='organizationSettings.selectedTab == "Users"')
+			div(ng-show='organization.settings.selectedTab == "Users"')
 				//h5 Users
 				.collection
 					table
@@ -53,7 +57,7 @@ div(style='position:relative;overflow-y:auto;height:100%;padding:50px')
 						a(href='#')
 							i.material-icons add
 
-			div(ng-show='organizationSettings.selectedTab == "Devices"')
+			div(ng-show='organization.settings.selectedTab == "Devices"')
 				//h5 Default Devices
 				.collection
 					table
@@ -88,12 +92,12 @@ div(style='position:relative;overflow-y:auto;height:100%;padding:50px')
 						i.material-icons.circle person
 						input()
 
-			div(ng-show='organizationSettings.selectedTab == "Tags"')
+			div(ng-show='organization.settings.selectedTab == "Tags"')
 				//h5 Default Tags
 				ul.collection: .collection-item
 					tags-input(ng-model='config.tags' replace-spaces-with-dashes='false')
 
-			div(ng-show='organizationSettings.selectedTab == "Endpoints"')
+			div(ng-show='organization.settings.selectedTab == "Endpoints"')
 				//h5 Default Endpoints
 				ul.collection
 					li.collection-item
@@ -110,3 +114,16 @@ div(style='position:relative;overflow-y:auto;height:100%;padding:50px')
 					li.collection-item.center
 						a(href='#')
 							i.material-icons add
+
+			div(ng-show='organization.settings.selectedTab == "Endpoints"')
+				ul.collection
+					li.collection-item
+						div
+							label Organization Name
+							input(type='text' ng-model='newOrganization.name')
+						div
+							label Organization Email
+							input(type='text' ng-model='newOrganization.email')
+
+					li.collection-item
+						a.btn(href='#' ng-click='organization.add()') Save
