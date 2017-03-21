@@ -11,7 +11,8 @@ angular.module('alpacaEditor', [
 	'angularUtils.directives.dirPagination', //pagination 	
 	'alpacaViewer', 
 	'alpacaSchemas', 
-	'alpacaTypes'
+	'alpacaTypes',
+  'ui.router'
 ]);
 
 angular.module('alpacaEditor').filter('toArray', function () {
