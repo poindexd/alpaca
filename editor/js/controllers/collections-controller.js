@@ -1,5 +1,5 @@
 angular.module('alpacaEditor')
-	.controller('collectionsController', ['$scope', function($scope) {
+	.controller('collectionsController', ['$scope','$state', function($scope, $state) {
 
 		$scope.searchValue ='';
 
@@ -46,6 +46,6 @@ angular.module('alpacaEditor')
 			{
 				title: 'Craniofacial Microsomia', organization: 'Wellopp', summary: "This survey is dumb", img_url: 'http://www.ichom.org/wp-content/uploads/2015/03/cfm-420x315.jpg', date: "01-20-2017"
 			}
-		];
+		];			
 
 	}]);

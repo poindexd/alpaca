@@ -27,6 +27,10 @@ div(ng-controller='collectionsController')
 
 	.fixed-action-btn
 		a.btn-floating.btn-large.orange(href='#' ng-click='collection.add()')
-			i.material-icons add
+			i.material-icons add			
+	div(ng-controller='authCtrl')
+		a(href = '#' ng-click="signOut()") Sign Out 
+		br
+		a(href = '#' ng-click='indexPageRoute()') Home
 	//- footer
 	dir-pagination-controls(template-url="/pagination.html" style='position:absolute; left:48%; bottom:10px;')
