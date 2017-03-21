@@ -18,13 +18,17 @@ angular.module('alpacaViewer').directive('alpacaSlide', [
 			}
 
 			$scope.$watch('slide.template', function(){
-				$templateRequest('alpaca-template-' + $scope.slide.template).then(function(tpl){
+				$templateRequest('alpaca-template-' + $scope.slide.template)
+				.then(function(tpl){
 					var template = angular.element(tpl);
 					if ($scope.single)
 						element.html(template);
 					else
 						element.html(template);
 					$compile(template)($scope);
+				})
+				.catch(function(error){
+					//console.log(error);
 				});
 			});
 

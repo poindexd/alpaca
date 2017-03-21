@@ -6,8 +6,18 @@ angular.module('alpacaEditor').controller('demoController', [
 	'$firebaseAuth',
 	'$firebaseObject',
 	'$firebaseArray',
+	'$firebaseStorage',
 	'$window',
-	function($scope, $templateList, $schemas, $timeout, $firebaseAuth, $firebaseObject, $firebaseArray, $window){
+	function(
+		$scope, 
+		$templateList, 
+		$schemas, 
+		$timeout, 
+		$firebaseAuth, 
+		$firebaseObject, 
+		$firebaseArray,
+		$firebaseStorage, 
+		$window){
 
 	var config = firebase.database().ref().child('config');
 	$firebaseObject(config).$bindTo($scope, 'config');
@@ -31,10 +41,10 @@ angular.module('alpacaEditor').controller('demoController', [
 			name: 'collections',
 			icon: 'view_module'
 		},
-		{
-			name: 'edit',
-			icon: 'mode_edit'
-		},
+		//{
+		//	name: 'edit',
+		//	icon: 'mode_edit'
+		//},
 		{
 			name: 'organization',
 			icon: 'language'
@@ -89,103 +99,7 @@ angular.module('alpacaEditor').controller('demoController', [
 		lineNumbers: true
 	}
 
-	$scope.survey = {
-
-		slides: [
-			{
-				kind:'slide', title: 'Nested Slide 1', content: 'How certain are you that your situation will improve?', template: 'green',
-				options: [
-					{
-						text: 'Uncertain',
-						weight: 1,
-						suggestions: [
-							'Eat more broccoli',
-							'Work out every day'
-						]
-					},
-					{
-						text: 'Somewhat uncertain',
-						weight: 2
-					},
-					{
-						text: 'Unsure',
-						weight: 3
-					},
-					{
-						text: 'Somewhat certain',
-						weight: 4
-					},
-					{
-						text: 'Certain',
-						weight: 5
-					}
-
-				]
-			},
-			{
-				kind:'slide', title: 'Nested Slide 2', content: 'How certain are you that you will achieve your goals you set?', template: 'orange',
-				options: [
-					{
-						text: 'Uncertain',
-						weight: 1
-					},
-					{
-						text: 'Somewhat uncertain',
-						weight: 2
-					},
-					{
-						text: 'Unsure',
-						weight: 3
-					},
-					{
-						text: 'Somewhat certain',
-						weight: 4
-					},
-					{
-						text: 'Certain',
-						weight: 5
-					}
-				]
-			}
-		],
-
-
-
-		nodes: [
-			{
-				kind: 'external', title: 'Onboarding', contents: [
-					{
-						kind:'slide', title: 'Welcome', content: 'Foo', template: 'green', readonly: true
-					},
-					{
-						kind:'slide', title: 'Instructions', content: 'Fluf', template: 'orange', readonly: true
-					}
-				]
-			},
-			{
-				kind:'slide', title: 'Slide 1', content: 'Foo', template: 'green', options: [
-					{text: 'Yes', correct: true},
-					{text: 'No', correct: false}
-				]
-			},
-			{
-				kind:'slide', title: 'Slide 2', content: 'Fluf', template: 'orange'
-			},
-			{
-				kind: 'folder', title: 'Smoking', contents: [
-					{
-						kind:'slide', title: 'Nested Slide 1', content: 'Foo', template: 'green'
-					},
-					{
-						kind:'slide', title: 'Nested Slide 2', content: 'Fluf', template: 'orange'
-					}
-				]
-			}
-		]
-
-
-	};
-	$scope.selected = $scope.survey.nodes[1];
+	//$scope.selected = $scope.survey.nodes[1];
 	$scope.schemas = $schemas.schemas;
 
 	$scope.maximized = false;
@@ -249,13 +163,30 @@ angular.module('alpacaEditor').controller('demoController', [
 	$scope.fn = {
 		tags: {
 			search: function(query){
-				console.log('query', query);
+				//console.log('query', query);
 				var ret = [];
 				angular.forEach($scope.config.tags, function(el){
 					if (el.text.includes(query))
 						ret.push(el.text);
 				})
 				return ret;
+			}
+		},
+		file: {
+			fileSuccess: function($file, $flow, slide, field, model){
+				
+				var file = $flow.files[$flow.files.length - 1].file;
+				console.log(file);
+
+				var storageRef = firebase.storage().ref("slides").child(slide.$id).child(field.key);
+    		$scope.storage = $firebaseStorage(storageRef);
+
+    		var uploadTask = $scope.storage.$put(file);
+    		uploadTask.$complete(function(snapshot) {
+  				console.log(snapshot.downloadURL);
+  				model = snapshot.downloadURL;
+  				console.log('model', model);
+				});
 			}
 		}
 	};
@@ -302,24 +233,68 @@ angular.module('alpacaEditor').controller('demoController', [
 		},
 		add: function(){
 			var collection = {
-				name: 'Untitled Collection',
+				title: 'Untitled Collection',
 				user_id: $scope.currentUser.id,
 			}
 
-			$scope.collections.$add(collection);
-			$scope.setTab($scope.tabs[1]);
+			$scope.collections.$add(collection).then(function(ref) {
+			  //collectionid = ref.key;
+			  //console.log("added record with id " + id);
+			  //list.$indexFor(id);
+			  $scope.currentCollection = $scope.collections[$scope.collections.$indexFor(ref.key)];
+			});
 		},
-		remove: function(collection){
-			$scope.collections.$remove(collection);
+		remove: function(collection, index){
+			$scope.collections.$remove(index);
+			
+			$scope.collection.index = null;
+			$scope.currentCollection = null;
+			
+			var storageRef = firebase.storage().ref("collection")
+				.child(collection.$id)
+				.child('image');
+			$scope.storage = $firebaseStorage(storageRef);
+			$scope.storage.$delete().then(function(){
+				//lol
+			});
 		},
-		setCurrent: function(collection){
+		setCurrent: function(collection, index){
 			$scope.currentCollection = collection;
+			$scope.collection.index = index;
+		},
+		setImage: function($flow, collection){
+			var file = $flow.files[$flow.files.length - 1].file;
+			console.log(file);
+
+			var storageRef = firebase.storage().ref("collection")
+				.child(collection.$id)
+				.child('image');
+  		$scope.storage = $firebaseStorage(storageRef);
+
+  		var uploadTask = $scope.storage.$put(file);
+  		uploadTask.$complete(function(snapshot) {
+				console.log(snapshot.downloadURL);
+				collection.img_url = snapshot.downloadURL;
+				console.log('collection', model);
+			});
+		},
+		removeImage: function(collection){
+			var storageRef = firebase.storage().ref("collection")
+				.child(collection.$id)
+				.child('image');
+			$scope.storage = $firebaseStorage(storageRef);
+			$scope.storage.$delete().then(function(){
+				collection.img_url = null;
+			});
 		}
 	} //collection
 
 	$scope.$watch('currentCollection', function(){
 		$scope.slide.load($scope.currentCollection);
-	})
+		$scope.collections.$save($scope.collection.index);
+		if (!$scope.currentCollection)
+			$scope.collectionSettings = false;
+	}, true);
 
 	//$scope.currentUser = {};
 	$scope.user = {
@@ -374,14 +349,14 @@ angular.module('alpacaEditor').controller('demoController', [
 			$scope.slides.$loaded()
 				.then(function(x){
 					$scope.$watch('selected', function(new_val, old_val, scope){
-						$scope.slides.$save(scope.index);
+						$scope.slides.$save(scope.slide.index);
 					}, true);
 					$scope.loading = false;
 				});
 		},
 		setCurrent: function(slide, index){
 			$scope.selected = slide;
-			$scope.index = index;
+			$scope.slide.index = index;
 		}
 	} //slide
 

@@ -212,10 +212,23 @@ nav{
 
 #slide-nav{
 
-	.selected{
-		background: $secondary-color;
-		color: white;
-	}
+  .slide-card{
+
+    //opacity: 0.7;
+
+    &:hover{
+     // border-left: 3px solid $secondary-color;
+     opacity: 0.7;
+    }
+
+    &.selected{
+    //background: $secondary-color;
+    //color: white;
+      border-left: 6px solid $secondary-color;
+      //opacity: 1;
+    }
+  }
+	
 }
 
 
@@ -582,4 +595,16 @@ alpaca-slides{
 
 #form-resizable-section{
   overflow-y: auto;
+}
+
+.slide-card{
+  height: 200px;
+
+  alpaca-slide{
+    zoom: 0.2;
+  }
+
+  &.current-slide{
+    border-left: 4px solid $secondary-color;
+  }
 }

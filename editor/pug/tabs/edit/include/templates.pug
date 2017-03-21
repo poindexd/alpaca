@@ -9,8 +9,10 @@ script(type='text/ng-template' id='list.html')
 			)
 			
 script(type='text/ng-template' id='slide.html')
-	.node.waves-effect.waves-light(ng-click='slide.setCurrent(node, $index)' ng-class='{selected: selected==node}' ) {{node.title}}
+	//.node.waves-effect.waves-light(ng-click='slide.setCurrent(node, $index)' ng-class='{selected: selected==node}' ) {{node.title}}
 				i.material-icons.left crop_landscape
+	.slide-card.card-panel.waves-effect.waves-light(ng-click='slide.setCurrent(node, $index)' ng-class='{selected: selected==node}' )
+		alpaca-slide(slide='node')
 
 script(type='text/ng-template' id='folder.html')
 	.node.waves-effect.waves-light(ng-click='node.visible = !node.visible') {{node.title}}

@@ -7799,9 +7799,11 @@ nav {
     color: white;
     background: #444; }
 
-#slide-nav .selected {
-  background: #00bcd4;
-  color: white; }
+#slide-nav .slide-card:hover {
+  opacity: 0.7; }
+
+#slide-nav .slide-card.selected {
+  border-left: 6px solid #00bcd4; }
 
 .resizable-wrapper .resizable-section {
   transition: all 0.3s ease-in-out; }
@@ -7987,3 +7989,10 @@ alpaca-slides {
 
 #form-resizable-section {
   overflow-y: auto; }
+
+.slide-card {
+  height: 200px; }
+  .slide-card alpaca-slide {
+    zoom: 0.2; }
+  .slide-card.current-slide {
+    border-left: 4px solid #00bcd4; }

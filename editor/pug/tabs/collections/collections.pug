@@ -14,10 +14,10 @@ div(ng-controller='collectionsController')
 			.row
 				.col.s12.l4(dir-paginate="_collection in collections | filter:searchValue | itemsPerPage: 6") 
 					//a(class='card small' href="#" style='box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.7);')
-					.card.small(ng-click='collection.setCurrent(_collection)')
+					.card.small(ng-click='collection.setCurrent(_collection, $index)')
 						a(href='' alt='#')
 							.card-image 
-								img(src ='{{_collection.img_url}}')
+								img(ng-src='{{_collection.img_url || "/img/placeholder2x1.svg"}}')
 								//span.card-title 
 								//h5 {{_collection.title}}
 							.card-content

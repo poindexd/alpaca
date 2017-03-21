@@ -23,7 +23,11 @@ ul#version-dropdown.dropdown-content
 nav(style='position:relative;z-index:100;flex-basis:64px;flex-grow:0;flex-shrink:0;'): .nav-wrapper
 
 	ul.left(ng-show='!searching')
-		a.breadcrumb General Wellness Survey
+		a(ng-click='collection.setCurrent(null, null)'): i.material-icons chevron_left
+
+	ul.left(ng-show='!searching')
+
+		a.breadcrumb {{currentCollection.title}}
 		a.breadcrumb.dropdown-button(href='#' data-activates='language-dropdown') en
 		a.breadcrumb.dropdown-button(href='#' data-activates='version-dropdown') v2
 
@@ -51,6 +55,9 @@ nav(style='position:relative;z-index:100;flex-basis:64px;flex-grow:0;flex-shrink
 		li
 			a.dropdown-button(href='#!' data-activates='device-dropdown' style='min-width:300px !important;padding: 0px 50px') {{device.name || 'Device Preview'}}
 				i.material-icons.right arrow_drop_down
+		li
+			a.waves-effect.waves-light(ng-click='collectionSettings = true')
+				i.material-icons settings
 
 	form(ng-show='searching')
 		.input-field

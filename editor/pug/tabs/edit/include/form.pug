@@ -5,6 +5,9 @@ div(style='margin-bottom: 100px')
 		p This slide belongs to a shared folder.
 		p It cannot be edited here.
 
+	.center(ng-show='!selected' style='padding: 50px;')
+		i.material-icons.orange-text.large crop_landscape
+		p Add a slide to get started.
 
 	nav: ul
 		li: a(href='#') All
@@ -13,5 +16,5 @@ div(style='margin-bottom: 100px')
 	.divider
 
 	div(style='width:100%; padding:50px')
-		div(ng-show='!selected.readonly' ng-repeat='field in schemas["index"].concat(schemas[selected.template])')
+		div(ng-show='selected && !selected.readonly' ng-repeat='field in schemas["index"].concat(schemas[selected.template])')
 			alpaca-field(model='selected[field.key]' type='field.type' field='field' fn='fn[field.type]' templates='templates' slide='selected')
