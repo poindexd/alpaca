@@ -12,7 +12,8 @@ angular.module('alpacaEditor', [
 	'alpacaViewer', 
 	'alpacaSchemas', 
 	'alpacaTypes',
-  'ui.router'
+  'ui.router',
+  'angular-content-editable'
 ]);
 
 angular.module('alpacaEditor').filter('toArray', function () {

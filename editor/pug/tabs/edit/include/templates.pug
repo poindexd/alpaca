@@ -1,22 +1,36 @@
 script(type='text/ng-template' id='list.html')
-	ul(dnd-list='list')
+	ul(
+		dnd-list='list' 
+		dnd-drop="dropCallback(index, item, external, type, list)"
+	)
 		li(
-				ng-repeat='node in list' 
+				ng-repeat='node in list | orderBy:"index"' 
 				dnd-draggable='node' 
 				dnd-effect-allowed='move' 
-				dnd-moved='list.splice($index, 1)'
 				ng-include='node.kind + ".html"'
 			)
 			
 script(type='text/ng-template' id='slide.html')
 	//.node.waves-effect.waves-light(ng-click='slide.setCurrent(node, $index)' ng-class='{selected: selected==node}' ) {{node.title}}
 				i.material-icons.left crop_landscape
-	.slide-card.card-panel.waves-effect.waves-light(ng-click='slide.setCurrent(node, $index)' ng-class='{selected: selected==node}' )
-		alpaca-slide(slide='node')
+	.slide-card.card-panel.waves-effect.waves-light(ng-click='slide.setCurrent(node, list)' ng-class='{selected: selected==node}' )
+		alpaca-slide(slide='node' single='true')
+		i.material-icons(style='position:absolute; top: 10px; right: 10px;' ng-click='slide.remove(node, list);$event.stopPropagation();') close
 
 script(type='text/ng-template' id='folder.html')
-	.node.waves-effect.waves-light(ng-click='node.visible = !node.visible') {{node.title}}
+	.node.waves-effect.waves-light(ng-click='node.visible = !node.visible' style='position: relative')
 		i.material-icons.left folder
+		div(
+			content-editable 
+			single-line='true'
+			ng-click='$event.stopPropagation();'
+			edit-callback='slide.save(node, list)'
+			ng-model='node.title'
+			style='cursor: text'
+		)
+		
+		i.material-icons(style='position:absolute; top: 10px; right: 10px;' ng-click='slide.remove(node, list);$event.stopPropagation();') close
+
 	div(style='margin-left: 10px' ng-repeat='list in [node.contents]' ng-show='node.visible' ng-include='"list.html"')
 	.clearfix(style='min-height:6px')
 

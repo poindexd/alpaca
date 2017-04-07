@@ -1,0 +1,30 @@
+div(style='position:relative;width: 100%')
+	a(href='#' style='position:absolute; top: 10px; right: 10px;' ng-click='collectionSettings = false')
+		i.material-icons.large.grey-text close
+	.container: .row: .col.s12
+		ul.collection: li.collection-item(flow-init flow-files-submitted='collection.setImage($flow, currentCollection)')
+			.row
+				.col.s12.l6
+
+					label Image
+					div(ng-show='!currentCollection.img_url')
+						img.responsive-img(ng-src='/img/placeholder2x1.svg')
+						.btn.waves-effect.waves-light(flow-btn) Upload
+					div(ng-show='currentCollection.img_url')
+						img.responsive-img(ng-src='{{currentCollection.img_url}}')
+						.btn.red.waves-effect.waves-light(ng-click='collection.removeImage(currentCollection)') Remove Image
+
+
+				.col.s12.l6
+					label Title
+					input(ng-model='currentCollection.title')
+
+					.btn.red.waves-effect.waves-light(data-target='collection-delete') Delete
+	#collection-delete.modal
+		.modal-content
+			p Are you sure you want to delete {{currentCollection.title}}?
+		.modal-footer
+			.btn-flat.waves-effect.waves-light.modal-close(ng-click='collection.remove(currentCollection, collection.index)') Yes
+			.btn-flat.waves-effect.waves-light.modal-close No
+
+				//label {{currentCollection.img_url}}

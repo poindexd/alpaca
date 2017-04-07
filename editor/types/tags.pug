@@ -1,3 +1,9 @@
 label {{field.label}}
-tags-input(ng-model='model' replace-spaces-with-dashes='false')
+tags-input(
+	ng-model='model' 
+	replace-spaces-with-dashes='false'
+)
+	//on-tag-added='fn.on-tag-added($tag)'
+	//on-tag-removed='fn.on-tag-removed($tag)'
+	//)
 	auto-complete(source='fn.search($query);')
