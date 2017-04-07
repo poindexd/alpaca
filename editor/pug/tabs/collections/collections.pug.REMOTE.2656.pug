@@ -25,12 +25,12 @@ div(ng-controller='collectionsController')
 								label Organization: {{_collection.organization}}
 								label Date: {{_collection.date}}
 
-	.fixed-action-btn
-		a.btn-floating.btn-large.orange(href='#' ng-click='collection.add()')
-			i.material-icons add			
-	div(ng-controller='authCtrl')
-		a(href = '#' ng-click="signOut()") Sign Out 
-		br
-		a(href = '#' ng-click='homePageRoute()') Home
-	//- footer
-	dir-pagination-controls(template-url="/pagination.html" style='position:absolute; left:48%; bottom:10px;')
+		.fixed-action-btn
+			a.btn-floating.btn-large.orange(href='#' ng-click='collection.add()')
+				i.material-icons add			
+		div(ng-controller='authCtrl')
+			a(href = '#' ng-click="signOut()") Sign Out 
+			br
+			a(href = '#' ng-click='indexPageRoute()') Home
+		//- footer
+		dir-pagination-controls(template-url="/pagination.html")

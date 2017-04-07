@@ -1,7 +1,7 @@
 label {{field.label}}
 .collection
-	.collection-item(style='position: relative' ng-repeat='_model in model')
-		div(ng-repeat='_field in field.fields')
+	.collection-item(style='position: relative' ng-repeat='_model in model track by $index')
+		div(ng-repeat='_field in field.fields track by $index')
 			alpaca-field(model='_model[_field.key]' type='_field.type' field='_field' fn='fn[_field.type]' slide='selected')
 		a(href='#!' style='position: absolute; right: 10px; top:10px' ng-click='model.splice($index, 1);')
 			i.material-icons close

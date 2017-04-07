@@ -5,6 +5,10 @@ angular.module('alpacaEditor').directive('alpacaField', [
 
 		var link = function ($scope, element, attrs) {
 			//console.log($scope.type)
+			if (!$scope.type){
+				console.error('undefined type', $scope);
+				return false;
+			}
 			$templateRequest('alpaca-type-' + $scope.type).then(function(tpl){
 				var template = angular.element(tpl);
 				element.html(template);

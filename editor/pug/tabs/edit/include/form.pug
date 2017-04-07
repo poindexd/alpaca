@@ -7,13 +7,14 @@ div(style='margin-bottom: 100px')
 
 	.center(ng-show='!selected' style='padding: 50px;')
 		i.material-icons.orange-text.large crop_landscape
-		p Add a slide to get started.
+		p No slide selected
 
-	nav: ul
-		li: a(href='#') All
-		li: a(href='#') Content
-		li: a(href='#') Metadata
-	.divider
+	//div(ng-show='selected')
+		nav: ul
+			li: a(href='#') All
+			li: a(href='#') Content
+			li: a(href='#') Metadata
+		.divider
 
 	div(style='width:100%; padding:50px')
 		div(ng-show='selected && !selected.readonly' ng-repeat='field in schemas["index"].concat(schemas[selected.template])')

@@ -6,22 +6,23 @@ angular.module('alpacaViewer').directive('alpacaSlides', [
 			var template = {};
 
 			if (Array.isArray($scope.slides)){
-				template = angular.element("<div swiper-repeat='slide in survey.slides' swiper-repeat-selected='selected'><alpaca-slide slide='slide'/></div>");
-				console.log('array');
+				template = angular.element("<div swiper-repeat='slide in slides' swiper-repeat-selected='selected' disable-touch='true'><alpaca-slide slide='slide'/></div>");
+				element.append(template);
+				//alert('hi');
 			} else {
-				template = angular.element("<div style='width:100%'><alpaca-slide slide='selected'/></div>");
+				template = angular.element("<div style='width:100%'><alpaca-slide slide='selected' single='true'/></div>");
+				element.html(template);
+				//alert('bye');
 			}
 
-			element.html(template);
 			$compile(template)($scope);
-
 		}
 
 		return {
 			restrict: 'E',
-			//replace: true,
-			//template: "<div swiper-repeat='slide in survey.slides' swiper-repeat-selected='selected'><alpaca-slide slide='slide'/></div>"
-			template: "<div style='width:100%'><alpaca-slide slide='selected'/></div>"
-			//link: link
+			replace: true,
+			//template: "<div swiper-repeat='slide in slides' swiper-repeat-selected='selected'><alpaca-slide slide='slide'/></div>"
+			//template: "<div style='width:100%'><alpaca-slide slide='selected'/></div>"
+			link: link
 		};
 }]);

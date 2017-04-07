@@ -31,35 +31,11 @@ div(style='display:flex;flex-direction:column;height: 100%;')
 		.container(style='height:100%;display:flex;align-items:center;justify-content:center')
 			p.flow-text(ng-show='!loading && !searchtext || searchtext == ""') Search for slides by tag. Results will appear here.
 
-	.grey.lighten-3(ng-show='collectionSettings' style='position:absolute;top:64;left:75;right:0;bottom:0;z-index:200;')
-		div(style='position:relative;width: 100%')
-			a(href='#' style='position:absolute; top: 10px; right: 10px;' ng-click='collectionSettings = false')
-				i.material-icons.large.grey-text close
-			.container: .row: .col.s12
-				ul.collection: li.collection-item(flow-init flow-files-submitted='collection.setImage($flow, currentCollection)')
-					.row
-						.col.s12.l6
+			.row(ng-show='searchSlides.length > 0' style='width:100%')
+				.col.l3.s12(ng-repeat='slide in searchSlides')
+					.slide-card.card-panel.waves-effect.waves-light
+						alpaca-slide(slide='slide' single='true')
 
-							label Image
-							div(ng-show='!currentCollection.img_url')
-								img.responsive-img(ng-src='/img/placeholder2x1.svg')
-								.btn.waves-effect.waves-light(flow-btn) Upload
-							div(ng-show='currentCollection.img_url')
-								img.responsive-img(ng-src='{{currentCollection.img_url}}')
-								.btn.red.waves-effect.waves-light(ng-click='collection.removeImage(currentCollection)') Remove Image
-
-
-						.col.s12.l6
-							label Title
-							input(ng-model='currentCollection.title')
-
-							.btn.red.waves-effect.waves-light(data-target='collection-delete') Delete
-			#collection-delete.modal
-				.modal-content
-					p Are you sure you want to delete {{currentCollection.title}}?
-				.modal-footer
-					.btn-flat.waves-effect.waves-light.modal-close(ng-click='collection.remove(currentCollection, collection.index)') Yes
-					.btn-flat.waves-effect.waves-light.modal-close No
-
-						//label {{currentCollection.img_url}}
+	.grey.lighten-3(ng-show='collectionSettings' style='position:absolute;top:64;left:75;right:0;bottom:0;z-index:99;')
+		include include/settings.pug
 						

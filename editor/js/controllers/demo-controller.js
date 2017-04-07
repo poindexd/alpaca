@@ -155,9 +155,8 @@ angular.module('alpacaEditor').controller('demoController', [
 	}
 
 	$scope.$on('device-ready', function(){
-		$scope.setDevice($scope.devices[0]);
+		$scope.setDevice($scope.devices[2]);
 		$scope.loading = false;
-		
 	});
 
 	$scope.fn = {
@@ -170,6 +169,14 @@ angular.module('alpacaEditor').controller('demoController', [
 						ret.push(el.text);
 				})
 				return ret;
+			},
+			onTagAdded: function(tag){
+				//firebase.database().ref('tags/').child(tag);
+				//fire
+				console.log('tag added', tag);
+			},
+			onTagRemoved: function(tag){
+				console.log('tag removed', tag);
 			}
 		},
 		file: {
@@ -245,7 +252,7 @@ angular.module('alpacaEditor').controller('demoController', [
 			});
 		},
 		remove: function(collection, index){
-			$scope.collections.$remove(index);
+			$scope.collections.$remove(collection);
 			
 			$scope.collection.index = null;
 			$scope.currentCollection = null;
@@ -264,7 +271,7 @@ angular.module('alpacaEditor').controller('demoController', [
 		},
 		setImage: function($flow, collection){
 			var file = $flow.files[$flow.files.length - 1].file;
-			console.log(file);
+			//console.log(file);
 
 			var storageRef = firebase.storage().ref("collection")
 				.child(collection.$id)
@@ -273,9 +280,9 @@ angular.module('alpacaEditor').controller('demoController', [
 
   		var uploadTask = $scope.storage.$put(file);
   		uploadTask.$complete(function(snapshot) {
-				console.log(snapshot.downloadURL);
+				//console.log(snapshot.downloadURL);
 				collection.img_url = snapshot.downloadURL;
-				console.log('collection', model);
+				//console.log('collection', model);
 			});
 		},
 		removeImage: function(collection){
@@ -292,8 +299,10 @@ angular.module('alpacaEditor').controller('demoController', [
 	$scope.$watch('currentCollection', function(){
 		$scope.slide.load($scope.currentCollection);
 		$scope.collections.$save($scope.collection.index);
-		if (!$scope.currentCollection)
+		if (!$scope.currentCollection){
 			$scope.collectionSettings = false;
+			$scope.slide.setCurrent(null, null);
+		}
 	}, true);
 
 	//$scope.currentUser = {};
@@ -325,19 +334,47 @@ angular.module('alpacaEditor').controller('demoController', [
 	} //user
 */
 	$scope.slides = [];
+	$scope.searchSlides = [];
 	$scope.slide = {
 		add: function(kind){
 
 			//TODO: Add Switch
 
+			var to = $scope.slide.index ? $scope.slide.index + 1 : $scope.slide.list.length;
+
 			var slide = {
 				collectionId: $scope.currentCollection.$id,
 				kind: kind,
-				title: 'untitled'
+				title: 'untitled',
+				index: to
 			}
 
-			$scope.slides.$add(slide);
+			$scope.updateIndexes(
+				$scope.slide.list, 
+				null,
+				$scope.slide.list.length,
+				to, 
+				function(){
+					$scope.slide.list.$add(slide);
+				}
+			);
 			
+		},
+		remove: function(node, list){
+			console.log('Remove', node, list);
+			$scope.updateIndexes(
+				list, 
+				node, 
+				node.index, 
+				list.length,
+				function(){
+					list.$remove(node);
+				}
+			);
+		},
+		save: function(node, list){
+			//console.log('Saving node', node);
+			list.$save(node);
 		},
 		load: function(collection){
 			if (!collection)
@@ -348,17 +385,78 @@ angular.module('alpacaEditor').controller('demoController', [
 			$scope.slides = $firebaseArray(ref);
 			$scope.slides.$loaded()
 				.then(function(x){
-					$scope.$watch('selected', function(new_val, old_val, scope){
-						$scope.slides.$save(scope.slide.index);
+					console.log('slides loaded', $scope.slides);
+					$scope.$watch('selected', function(){
+						if ($scope.slide.list){
+							$scope.slide.list.$save(
+								$scope.selected
+							);
+						}
 					}, true);
+					$scope.slide.setCurrent($scope.slides[0], $scope.slides);
 					$scope.loading = false;
 				});
 		},
-		setCurrent: function(slide, index){
+		get: function(id){
+
+		},
+		search: function(){
+			/*console.log('searching', $scope.searchtext);
+			var ref = firebase.database().ref('/slides').orderByChild('tags/' + $scope.searchtext).equalTo(true);
+			$scope.searchSlides = $firebaseArray(ref);
+			$scope.searchSlides.$loaded()
+				.then(function(x){
+					console.log('searchSlides', $scope.searchSlides);
+				});
+				*/
+				$scope.searchSlides = null;
+
+				if (!$scope.searchtext || $scope.searchtext.length < 3)
+					return;
+
+			var ref = firebase.database().ref('search');
+			var query = {
+				index: 'firebase',
+				type: 'slide',
+				q: $scope.searchtext + '*'
+			};
+
+			var key = ref.child('request').push(query).key;
+
+			console.log('search', key, query);
+		
+			ref.child('response').child(key).on('value', function(snapshot){
+				console.log('snapshot', snapshot.val());
+				if (!snapshot.val())
+					return;
+				var hits = snapshot.val().hits;
+				if (hits && hits.hits && hits.hits.length > 0){
+					$scope.$apply(function(){
+						$scope.searchSlides = hits.hits.map(function(hit){
+							return hit._source;
+						});
+					});
+				}
+			});
+		},
+		setCurrent: function(slide, list){
+
+			$scope.slide.index = slide ? slide.index : null;
 			$scope.selected = slide;
-			$scope.slide.index = index;
+			$scope.slide.list = list;
+
 		}
 	} //slide
+
+	$scope.$watch('searchtext', function(){
+		console.log('searchtext', $scope.searchtext);
+		$scope.slide.search($scope.searchtext);
+	})
+
+	// $scope.$watch('selected', function(){
+	// 	$scope.slide.get($scope.selected.$id);
+
+	// })
 
 	$scope.frame = {
 		update: function(){
@@ -375,5 +473,41 @@ angular.module('alpacaEditor').controller('demoController', [
 	}
 	
 	$scope.init();
+
+	$scope.dropCallback = function(index, item, external, type, list){
+		console.log('index', index, 'item', item, 
+			'external', external, 'type', type, 'list', list)
+		
+		var _from = item.index;
+		var _to = (index > item.index) ? index - 1 : index;
+		//console.log(_from + " ----> " + _to);
+
+		$scope.updateIndexes(list, item, _from, _to);
+
+		//Prevent client side array from changing
+		return false;
+	}
+
+	//Manually update indexes
+	$scope.updateIndexes = function(list, item, _from, _to, callback){
+		for(var i=0; i < list.length; i++){
+			var el = list[i];
+
+			console.log(_from + " ----> " + _to);
+
+			if(item && el.$id == item.$id)
+				el.index = _to;
+			else if(el.index > _from && el.index <= _to)
+				el.index = el.index - 1;
+			else if(el.index < _from && el.index >= _to)
+				el.index = el.index + 1;
+		}
+
+		for(var i=0; i < list.length; i++){
+			list.$save(i);
+		}
+		if (callback)
+			callback();
+	}
 
 }]);

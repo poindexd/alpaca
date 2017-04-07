@@ -1,0 +1,22 @@
+::-webkit-scrollbar {
+  margin-left: -4px;
+  width: 8px; }
+
+/* .dropdown-content {
+  margin-left: -20px;
+  margin-top: 65px;
+  width: 200px !important; } */
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px transparent;
+  -webkit-border-radius: 10px;
+  border-radius: 10px; }
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #ccc; }
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #cccccc; }

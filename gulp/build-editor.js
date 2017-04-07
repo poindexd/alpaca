@@ -20,6 +20,7 @@ gulp.task('build-editor', function(){
 		'editor/js/ng/cm-jsonata.js',
 		'editor/js/ng/dirPagination.js',
 		'editor/js/ng/validation-match.js',
+		'editor/js/ng/ng-content-editable.js',
 		'editor/js/alpaca-editor.js',
 		'editor/js/config.js',
 		'editor/js/directives/alpaca-field.js',
@@ -33,7 +34,9 @@ gulp.task('build-editor', function(){
 	.pipe(concat('alpaca-editor.js'))
 	.pipe(gulp.dest('dist/js'))
 	.pipe(rename('alpaca-editor.min.js'))
-	.pipe(uglify().on('error', console.error.bind(console)))
+	.pipe(uglify({
+		showStack: true
+	}).on('error', console.error.bind(console)))
 	.pipe(sourcemaps.write('./'))
 	.pipe(gulp.dest('dist/js'))
 	.pipe(connect.reload());

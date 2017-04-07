@@ -9,10 +9,10 @@ div(ng-controller='collectionsController')
 					label(class='label-icon' for='search')
 						i(class='material-icons' style = 'color:black;') search
 
-	div(id='container-survey' style=' overflow-y: auto; height:100%; padding-bottom: 150px;')
+	div(id='container-survey')
 		.container
 			.row
-				.col.s12.m6.l4(dir-paginate="_collection in collections | filter:searchValue | itemsPerPage: 6") 
+				.col.s12.l4(dir-paginate="_collection in collections | filter:searchValue | itemsPerPage: 6") 
 					//a(class='card small' href="#" style='box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.7);')
 					.card.small(ng-click='collection.setCurrent(_collection, $index)')
 						a(href='' alt='#')
