@@ -1,22 +1,47 @@
-<html><head><!--base(href="/editor")--><link rel="stylesheet" href="./css/index.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/><style>html,body {
-	height: 100%;
-}
-html {
-	display: table;
-	margin: auto;
+<html><head><!--base(href="/editor")--><link rel="stylesheet" href="./css/index.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/><style>html {
+	//- display: table;
+	//- margin: auto;
 }
 body {
-		display: table-cell;
-		vertical-align: middle;
-		background: #4ECDC4;
+	background: linear-gradient(90deg, #faf0cd, #fab397);
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+	font-family: "Raleway", sans-serif;	
+	//- display: table-cell;
+	//- vertical-align: middle;
+	//- background: #4ECDC4;
+}
+h1 {
+font-size: 42px;
+background:-webkit-linear-gradient(#f6d365 0%, #fda085 51%, #f6d365 100%);
+//padding-bottom: 10px;
+text-align:center;
+-webkit-background-clip: text;
+-webkit-text-fill-color:transparent;
 }
 #login-page {
 	 width: 500px;
-}</style></head><body ng-app="alpacaEditor" ng-controller="authCtrl"><div class="row" id="login-page"><div class="col s12 z-depth-6 card-panel"><form class="login-form"><div class="row"></div><div class="row"><div class="input-field col s12"><i class="material-icons prefix">mail_outline</i><input class="validate" id="email" type="email" ng-model="email"/><label for="email" data-error="wrong" data-success="right">Email</label></div></div><div class="row"><div class="input-field col s12"><i class="material-icons prefix">lock_outline</i><input id="password" type="password" ng-model="password"/><label for="password">Password</label></div></div><div class="row"><div class="input-field col s12 m12 l12 login-text"><label for="remember-me">Remember me <input type="checkbox" id="remember-me"/></label></div></div><div class="row">       </div><div class="row"><div class="input-field col s12"><a class="btn waves-effect waves-light col s12" href="#" ng-click="signIn()">Login</a></div></div><div class="row"><div class="input-field col s6 m6 l6"><p class="margin medium-small"><a href="#" ng-click="signUp()">Register Now!   </a></p></div><div class="input-field col s6 m6 l6"><p class="margin right-align medium-small"><a href="#" ng-click="resetPassword()">Forgot Password</a></p></div></div></form></div><script src="https://code.jquery.com/jquery-2.2.4.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js"></script><script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script><script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script><script>var config = {
+	 margin-top:50px;
+}</style></head><body ng-app="alpacaEditor" ng-controller="authCtrl"><header><nav class="white"><div class="nav-wrapper" style="padding: 0 40px;"><a class="brand-logo" href="#" ng-click="indexPageRoute()"><img src="img/hotpath_logo_small.svg" height="100%" style="padding: 10px; margin-left:-5;"/></a><a class="button-collapse orange-text" href="#" data-activates="side-nav"><i class="material-icons">menu</i></a><ul class="right hide-on-med-and-down"><li class="no"><a class="orange-text" href="#" ng-click="signUpRoute()">Sign Up</a></li></ul><ul class="side-nav" id="side-nav"><li class="no"><a class="orange-text" href="#" ng-click="signUpRoute()">Sign Up</a></li></ul></div></nav></header><div class="row" id="login-page"><!--img(src='img/hotpath_logo.svg' height='100px' style='padding: 10px; margin-left:19%;')--><div class="col s12 z-depth-6 card-panel"><form class="login-form"><h1>Sign In </h1><div class="row"></div><div class="row"></div><div class="row"><div class="input-field col s12"><i class="material-icons prefix">mail_outline</i><input class="validate" id="email" type="email" ng-model="email"/><label for="email">Email</label></div></div><div class="row"><div class="input-field col s12"><i class="material-icons prefix">lock_outline</i><input id="password" type="password" ng-model="password"/><label for="password">Password</label></div></div><div class="row"><div class="input-field col s6 m6 l6"><p><a href="#modal1">Reset Password</a></p></div></div><div class="row"><div class="input-field col s12"><a class="btn waves-effect btn col s12" href="#" style="background:linear-gradient(#f6d365 0%, #fda085 51%, #f6d365 100%);" ng-click="signIn()">Sign In</a></div></div><div class="row"></div></form></div><div class="modal" id="modal1"><a class="modal-action modal-close" href="#!" style="float:right; color:black;"><i class="material-icons">clear</i></a><div class="modal-content"><h1 style="text-align:center; font-size:40px;">Reset Password</h1><p>A password message will be sent to your email address. Please click the link in that message to reset your password</p><div class="input-field col s12"><i class="material-icons prefix">mail_outline</i><input class="validate" id="email" type="email" ng-model="email"/><label for="email">Email</label></div></div><div class="modal-footer"><a class="btn waves-effect btn modal-trigger" href="#!" style="background:linear-gradient(#f6d365 0%, #fda085 51%, #f6d365 100%);" ng-click="resetPassword()">Reset Password</a></div></div><script src="https://code.jquery.com/jquery-2.2.4.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js"></script><script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script><script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script><script>var config = {
 	apiKey: "AIzaSyBCAJtmUVpWjFUIw4yLUuPhbCJWNufA_gU",
 	authDomain: "hotpath-f9c54.firebaseapp.com",
 	databaseURL: "https://hotpath-f9c54.firebaseio.com",
 	storageBucket: "hotpath-f9c54.appspot.com",
 	messagingSenderId: "340378037531"
 };
-firebase.initializeApp(config);</script><script src="./js/alpaca-templates.js"></script><script src="./js/alpaca-schemas.js"></script><script src="./js/alpaca-types.js"></script><script src="./js/alpaca-viewer.min.js"></script><script src="./js/alpaca-editor.min.js"></script></div></body></html>
+firebase.initializeApp(config);</script><script src="./js/alpaca-templates.js"></script><script src="./js/alpaca-schemas.js"></script><script src="./js/alpaca-types.js"></script><script src="./js/alpaca-viewer.min.js"></script><script src="./js/alpaca-editor.min.js"></script><script>$(document).ready(function(){
+	$('.modal').modal({
+		  dismissible: true, // Modal can be dismissed by clicking outside of the modal
+		  opacity: .5, // Opacity of modal background
+		  inDuration: 300, // Transition in duration
+		  outDuration: 200, // Transition out duration
+		  startingTop: '4%', // Starting top style attribute
+		  endingTop: '10%', // Ending top style attribute
+		 //-  ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+			//- //alert("Ready");
+			//- console.log(modal, trigger);
+		 //-  },
+		 //-  complete: function() { alert('Closed'); } // Callback for Modal close
+		});
+	});	</script></div></body></html>

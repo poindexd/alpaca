@@ -46,44 +46,60 @@ html
 					font-size: 1.2rem;
 			}
 	body.grey.lighten-5(ng-app='alpacaEditor' ng-controller='authCtrl')
-		mixin links
-			li.no: a(href='#' ng-click="signInPageRoute()").orange-text Sign In
-			li.no: a(href='#' ng-click="editorPageRoute()").orange-text Editor
+		span(ng-show='isLoggedIn')
+			include include/header.pug
+		span(ng-show='!isLoggedIn')
+			mixin links
+				li.no: a(href='#' ng-click="signInPageRoute()").orange-text Sign In
+				li.no: a(href='#' ng-click="signUpRoute()").orange-text Sign Up
 
-		header
-			nav.white: .nav-wrapper(style='padding: 0 40px')
-				a(href='index.html').brand-logo: img(src='img/hotpath_logo.svg' height='100%' style='padding: 10px')
-				a.button-collapse.orange-text(href='#' data-activates='side-nav')
-					i.material-icons menu
+			header
+				nav.white: .nav-wrapper(style='padding: 0 40px')
+					a(href='#' ng-click='indexPageRoute()').brand-logo: img(src='img/hotpath_logo_small.svg' height='100%' style='padding: 10px; margin-left:-5;')
+					a.button-collapse.orange-text(href='#' data-activates='side-nav')
+						i.material-icons menu
 
-				ul.right.hide-on-med-and-down
-					+links
-				ul#side-nav.side-nav
-					+links
+					ul.right.hide-on-med-and-down
+						+links
+					ul#side-nav.side-nav
+						+links
 
 		main
+
 			.row.parallax-container(style='width:100%; background-image:url(); background-repeat: no-repeat; background-size: cover;background-position: 50% 20%')
 				.parallax
 					image(src='img/parallax.jpg')
 				.col.l8.valign-wrapper(style='height:100%; padding: 40px')
 					h3.white-text.valign(style='font-weight: 300')
 						| Open Source Content and Tools for Collecting and Analyzing Patient Reported Outcomes
-				.col.l4(style='padding: 40px')
-					.card-panel
-						h4 Sign Up
-						.input-field
-							i(class='material-icons prefix') mail_outline
-							input(class='validate' id='email' type='email' ng-model='email')
-							label(for='email' data-error='wrong' data-success='right') Email
-						.input-field
-							i(class='material-icons prefix') lock_outline
-							input(id='password' type='password' ng-model='password')
-							label(for='password') Password
-						//- .input-field
-						//- 	input(type='text' id='organization')
-						//- 	label Organization
-						a.btn.green(ng-click= 'signUp()') Submit
-							i.material-icons.left send
+				//- span(ng-show='!isLoggedIn')
+				//- 	.col.l4(style='padding: 10px')
+				//- 		.card-panel
+				//- 			h4 Sign Up
+				//- 			.input-field
+				//- 				i(class='material-icons prefix') mail_outline
+				//- 				input(id='firstName' type='text' ng-model='firstName' required)
+				//- 				label(for='firstName') First Name
+				//- 			.input-field
+				//- 				i(class='material-icons prefix') mail_outline
+				//- 				input(id='lastName' type='text' ng-model='lastName' required)
+				//- 				label(for='lastName') Last Name
+				//- 			.input-field
+				//- 				i(class='material-icons prefix') mail_outline
+				//- 				input(class='validate' id='email' type='email' ng-model='email')
+				//- 				label(for='email' data-error='wrong' data-success='right') Email
+				//- 			.input-field
+				//- 				i(class='material-icons prefix') lock_outline
+				//- 				input(id='password' type='password' ng-model='password' data-ng-class="{'ng-invalid':myForm.confirmPassword.$error.match}")
+				//- 				label(for='password') Password
+				//- 			.input-field
+				//- 				i(class='material-icons prefix') lock_outline
+				//- 				input(id='confirm' type='password' data-match="password")
+				//- 				label(for='confirm') Confirm Password
+				//- 				div(data-ng-show='myForm.confirmPassword.$error.match') Passwords do not match!
+	
+				//- 			a.btn.green(ng-click= 'signUp(firstName, lastName, email, password)') Submit
+								i.material-icons.left send
 			#partners.row.grey(style='width:100%;padding: 10px 0px 20px 0px')
 				.container.center
 					a: img(src='img/logo.png' height='60')
@@ -106,11 +122,7 @@ html
 
 				a.center.btn.green Learn more
 
-		footer.page-footer
-			.footer-copyright
-				.container
-					| &copy; Wellopp 2016
-					.right Terms		
+		include include/footer.pug		
 		script(src='https://code.jquery.com/jquery-2.2.4.min.js')
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js")
 		script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
@@ -133,7 +145,16 @@ html
 		script(src='./js/alpaca-editor.min.js')
 		script.
 			$(document).ready(function(){
-
+				$('#dropdown-button').dropdown({
+			      inDuration: 300,
+			      outDuration: 225,
+			      constrainWidth: true, // Does not change width of dropdown to that of the activator
+			      hover: false, // Activate on hover
+			      gutter: 0, // Spacing from edge
+			      belowOrigin: true, // Displays dropdown below the button
+			      alignment: 'left', // Displays dropdown with edge aligned to the left of button
+			      stopPropagation: false // Stops event propagation
+			    });
 				$(".button-collapse").sideNav();
 				$('.parallax').parallax();
 				$(".button-collapse").sideNav();

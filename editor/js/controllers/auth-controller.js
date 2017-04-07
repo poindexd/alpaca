@@ -1,28 +1,3 @@
-
-// angular.module('alpacaEditor')
-// .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
-  
-//   //$locationProvider.html5Mode(true);
-//   // $urlRouterProvider.rule(function ($injector, $location) {
-  
-//   //   console.log($location.path());
-//   //   if ($location.path() == 'login.html#') {
-//   //      $location.path('editor.html').replace();
-//   //      console.log(path);
-//   //   }
-//   // });
-
-//   //$urlRouterProvider.otherwise('/');
-//   $stateProvider
-//     .state('home', {
-//       url:'^/editor',
-//       templateUrl: 'editor.html',
-//       controller: 'authCtrl'
-//     }); 
-
-
-// }]);
-
 angular.module('alpacaEditor')
 	.controller("authCtrl", [
     "$scope", 
@@ -31,46 +6,73 @@ angular.module('alpacaEditor')
     "$state",
     "$location",
     "$window",
+    "$firebaseObject",
+    "$firebaseStorage",
 
- function($scope, $rootScope, $firebaseAuth, $state, $location, $window) {
-		    
+ function($scope,
+  $rootScope,
+  $firebaseAuth, 
+  $state, 
+  $location, 
+  $window,
+  $firebaseObject,
+  $firebaseStorage) {
+
     $scope.signIn = function () {
       $rootScope.auth.$signInWithEmailAndPassword(
         $scope.email,  $scope.password
       ).then(function(user) {
         console.log(user);
-      $state.go('editor');
-      $window.location.reload();
-      //$state.forceReload();
-      //   $state.transitionTo('home', {}, {
-      //     reload: true,
-      //     inherit: false,
-      //     notify: true
-      // });
-
-      }, function(error) {
-        if (error = 'INVALID_EMAIL') {
+        $rootScope.currentUser = user;
+        $state.go('editor');
+        $window.location.reload();
+      }, 
+      function(error) {
+        // switch(error) {
+        //   case 'INVALID_EMAIL':
+        //     console.log('email invalid or not signed up');
+        //     alert('Invalid email!');
+        //   case 'INVALID_PASSWORD':
+        //     console.log('wrong password');
+        //     alert('wrong password');
+        //   default:
+        //     console.log(error);    
+        // }
+        if (error.code = 'INVALID_EMAIL') {
           console.log('email invalid or not signed up — trying to sign you up!');
+          alert('Invalid email or password!'); //FIXME ONLY GOES IN THIS CONDITION
           //$scope.signUp();
-        } else if (error = 'INVALID_PASSWORD') {
+        } else if (error.code = 'INVALID_PASSWORD') {
           console.log('wrong password!');
+          alert('Wrong password!');
         } else {
           console.log(error);
         }
       });
     };
 
-    $scope.signUp = function() {
+    $scope.signUp = function(firstName, 
+      lastName, 
+      email, 
+      password) {
       $rootScope.auth.$createUserWithEmailAndPassword(
         $scope.email, $scope.password
       ).then(function(firebaseUser) {
+          firebase.database().ref('users').child(firebaseUser.uid).set({
+            firstName: firstName,
+            lastName: lastName,
+            email: email
+          }).then(function() {
+            $state.go('editor').then(function(){
+              $window.location.reload(); //this doesn't work
+              console.log('routing to editor');
+            });
+          })
           console.log('user' + firebaseUser.uid + 'created successfully!');
-          $state.go('home');
-          $window.location.reload();
+          console.log(firstName , lastName, email);
 
       }).catch(function(error) {
         console.error('Error', error);
-      
       });
     };
 
@@ -85,13 +87,16 @@ angular.module('alpacaEditor')
       }); 
     };
 
-    $scope.signOut = function() {
-      $scope.auth.$signOut();
-      $state.go('home');
-      $window.location.reload();
-      
-    };
 
+    $scope.signOut = function() {
+      $scope.auth.$signOut().then(function() {
+        $state.go('index');
+        $window.location.reload();
+        console.log('signed out');
+      }).catch(function(error) {
+          console.error("Error: ", error);
+      });
+    };
 
 
     $scope.signInPageRoute = function()  {
@@ -106,18 +111,39 @@ angular.module('alpacaEditor')
         console.log("Signed in as:", firebaseUser.uid);
         $state.go('editor');
         $window.location.reload();
-
       } else {
         console.log("Please sign in");
         $state.go('login');
         $window.location.reload();
       }
-
     };
 
     $scope.indexPageRoute = function()  {
+      var firebaseUser = $rootScope.auth.$getAuth();
+      $state.go('index');
+      $window.location.reload();
+      
+    };
+
+    $scope.signUpRoute = function()  {
       console.log("route to a new page");
-      $state.go('home');
+      $state.go('signup');
+      $window.location.reload();
+    };
+    $scope.settingsPageRoute = function()  {
+      console.log("route to a new page");
+      $state.go('settings');
+      $window.location.reload();
+    };
+
+    $scope.collectionsPageRoute = function()  {
+      console.log("route to a new page");
+      $state.go('collections');
+      $window.location.reload();
+    };
+    $scope.organizationPageRoute = function() {
+      console.log("route to a new page");
+      $state.go('organization');
       $window.location.reload();
     };
 
@@ -125,16 +151,34 @@ angular.module('alpacaEditor')
 
 		$scope.init = function(){
 			$rootScope.auth = $firebaseAuth();
-//       firebase.auth().onAuthStateChanged(function(user) {
-//         if (user) {
-//         // User is signed in.
-//           $state.go('editor');
+      firebase.auth().onAuthStateChanged(function(firebaseUser) {
+        $rootScope.currentUser = firebaseUser;
+        //editme
+        //$scope.userEmail = firebaseUser.email;
 
-//         } else {
-//           // No user is signed in.
-//           $state.go('login');
-//         }
-// });
+
+
+        if($rootScope.currentUser) {
+          var ref = firebase.database().ref('users').child($rootScope.currentUser.uid);
+          $scope.user = $firebaseObject(ref);
+          $scope.user.$bindTo($scope, 'user');
+          $scope.isLoggedIn = true;
+          //console.log('user is logged in');
+          //$scope.userName = $rootScope.currentUser.firstName;
+          //$scope.userName = user.firstName;
+          // console.log($scope.userName); //undefined
+          // console.log($rootScope.currentUser);
+          // console.log($scope.user); 
+          // console.log(firebaseUser.email); //haemin@wellopp.com
+          // console.log($scope.user.email); //undefined
+
+        } else {
+          $scope.isLoggedIn = false;
+        }
+
+      
+      
+      });
 
 		}
 

@@ -19,6 +19,7 @@ gulp.task('build-editor', function(){
 		'editor/js/ng/ui-codemirror.js',
 		'editor/js/ng/cm-jsonata.js',
 		'editor/js/ng/dirPagination.js',
+		'editor/js/ng/validation-match.js',
 		'editor/js/ng/ng-content-editable.js',
 		'editor/js/alpaca-editor.js',
 		'editor/js/config.js',

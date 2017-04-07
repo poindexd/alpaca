@@ -24969,211 +24969,14 @@ CodeMirror.defineMode("jsonata", function(config, parserConfig) {
     }
 })();
 
-angular.module('angular-content-editable', []);
-
-angular.module('angular-content-editable')
-
-.directive('contentEditable', ['$log', '$sce', '$compile', '$window', 'contentEditable', function ($log,$sce,$compile,$window,contentEditable) {
-
-    var directive = {
-        restrict: 'A',
-        require: '?ngModel',
-        scope: { editCallback: '=', ngModel: '=' },
-        link: _link
-    }
-
-    return directive;
-
-    function _link(scope, elem, attrs, ngModel) {
-
-        // return if ng model not specified
-        if(!ngModel) {
-            $log.warn('Error: ngModel is required in elem: ', elem);
-            return;
-        }
-
-        var noEscape = true;
-        var originalElement = elem[0];
-        // get default usage options
-        var options = angular.copy(contentEditable);
-        // update options with attributes
-        angular.forEach(options, function (val, key) {
-            if( key in attrs && typeof attrs[key] !== 'undefined' ) { options[key] = attrs[key]; }
-        })
-
-        // if model is invalid or null
-        // fill his value with elem html content
-        if( !scope.ngModel ) {
-            ngModel.$setViewValue( elem.html() );
-        }
-
-        // add editable class
-        attrs.$addClass(options.editableClass);
-
-        // render always with model value
-        ngModel.$render = function() {
-            elem.html( ngModel.$modelValue || '' );
-        }
-
-        // handle click on element
-        function onClick(e){
-            e.preventDefault();
-            attrs.$set('contenteditable', 'true');
-            return originalElement.focus();
-        }
-
-        // check some option extra
-        // conditions during focus
-        function onFocus(e) {
-            // turn on the flag
-            noEscape = true;
-            // select all on focus
-            if( options.focusSelect ) {
-                var range = $window.document.createRange();
-                range.selectNodeContents( originalElement );
-                $window.getSelection().addRange(range);
-            }
-            // if render-html is enabled convert
-            // all text content to plaintext
-            // in order to modify html tags
-            if( options.renderHtml ) {
-                originalElement.textContent = elem.html();
-            }
-        }
-
-        function onBlur(e) {
-
-            // the text
-            var html;
-
-            // disable editability
-            attrs.$set('contenteditable', 'false');
-
-            // if text needs to be rendered as html
-            if( options.renderHtml && noEscape ) {
-                // get plain text html (with html tags)
-                // replace all blank spaces
-                html = originalElement.textContent.replace(/\u00a0/g, " ");
-                // update elem html value
-                elem.html(html);
-
-            } else {
-                // get element content replacing html tag
-                html = elem.html().replace(/&nbsp;/g, ' ');
-            }
-
-            // if element value is
-            // different from model value
-            if( html != ngModel.$modelValue ) {
-
-                /**
-                * This method should be called
-                * when a controller wants to
-                * change the view value
-                */
-                ngModel.$setViewValue(html)
-                // if user passed a variable
-                // and is a function
-                if( scope.editCallback && angular.isFunction(scope.editCallback) ) {
-                    // apply the callback
-                    // with arguments: current text and element
-                    return scope.$apply( scope.editCallback(html, elem) );
-                }
-
-            }
-
-        }
-
-        function onKeyDown(e) {
-
-            // on tab key blur and
-            // TODO: focus to next
-            if( e.which == 9 ) {
-                originalElement.blur();
-                return;
-            }
-
-            // on esc key roll back value and blur
-            if( e.which == 27 ) {
-                ngModel.$rollbackViewValue();
-                noEscape = false;
-                return originalElement.blur();
-            }
-
-            // if single line or ctrl key is
-            // pressed trigger the blur event
-            if( e.which == 13 && (options.singleLine || e.ctrlKey) ) {
-                return originalElement.blur();
-            }
-
-        }
-
-        /**
-        * On click turn the element
-        * to editable and focus it
-        */
-        elem.bind('click', onClick);
-
-        /**
-        * On element focus
-        */
-        elem.bind('focus', onFocus);
-
-        /**
-        * On element blur turn off
-        * editable mode, if HTML, render
-        * update model value and run callback
-        * if specified
-        */
-        elem.bind('blur', onBlur);
-
-        /**
-        * Bind the keydown event for many functions
-        * TODO: more to come
-        */
-        elem.bind('keydown', onKeyDown);
-
-        /**
-        * On element destroy, remove all event
-        * listeners related to the directive
-        * (helps to prevent memory leaks)
-        */
-        scope.$on('$destroy', function () {
-            elem.unbind(onClick);
-            elem.unbind(onFocus);
-            elem.unbind(onBlur);
-        })
-
-    }
-
-}])
-
-angular.module('angular-content-editable')
-
-/**
- * Provider to setup the default
- * module options for the directive
+/*!
+ * angular-validation-match
+ * Checks if one input matches another
+ * @version v1.9.0
+ * @link https://github.com/TheSharpieOne/angular-validation-match
+ * @license MIT License, http://www.opensource.org/licenses/MIT
  */
-.provider('contentEditable', function () {
-
-  var defaults = {
-    editableClass: 'editable',
-    keyBindings: true, // default true for key shortcuts
-    singleLine: false,
-    focusSelect: true, // default on focus select all text inside
-    renderHtml: false,
-    editCallback: false
-  }
-
-  this.configure = function (options) {
-    return angular.extend(defaults, options);
-  }
-
-  this.$get = function () {
-    return defaults;
-  }
-
-});
+!function(t,a,e){"use strict";function n(t){return{require:"?ngModel",restrict:"A",link:function(e,n,i,r){function c(){var t=o(e);return a.isObject(t)&&t.hasOwnProperty("$viewValue")&&(t=t.$viewValue),t}if(r&&i.match){var o=t(i.match),u=t(i.matchCaseless),l=t(i.notMatch),s=t(i.matchIgnoreEmpty);e.$watch(c,function(){r.$$parseAndValidate()}),r.$validators.match=function(t,n){var i,r=t||n,o=c(),d=l(e);return s(e)&&!n?!0:(i=u(e)?a.lowercase(r)===a.lowercase(o):r===o,i^=d,!!i)}}}}}n.$inject=["$parse"],a.module("validation.match",[]),a.module("validation.match").directive("match",n)}(window,window.angular);
 angular.module('alpacaEditor', [
 	'firebase',					//Authentication, DB, Storage
 	'rzModule', 				//**Range Slider 
@@ -25184,12 +24987,12 @@ angular.module('alpacaEditor', [
 	'flow',							//File upload
 	'angularResizable',	//Make elements user-resizable
   'ui.codemirror',    //Code editor, for writing jsonata
-	'angularUtils.directives.dirPagination', //pagination 	
+	'angularUtils.directives.dirPagination', //pagination 
+  'validation.match',	
 	'alpacaViewer', 
 	'alpacaSchemas', 
 	'alpacaTypes',
-  'ui.router',
-  'angular-content-editable'
+  'ui.router'
 ]);
 
 angular.module('alpacaEditor').filter('toArray', function () {
@@ -25239,44 +25042,29 @@ angular.module('alpacaEditor')
  $stateProvider
     .state('login', {
       url:'/login.html',
-      //templateUrl: 'login.html',
       controller: 'authCtrl'
-      // resolve: {
-      //   // controller will not be loaded until $requireSignIn resolves
-      //   // Auth refers to our $firebaseAuth wrapper in the factory below
-      //   "currentAuth": ["firebaseAuth", function(auth) {
-      //     // $requireSignIn returns a promise so the resolve waits for it to complete
-      //     // If the promise is rejected, it will throw a $stateChangeError (see above)
-      //     return firebaseAuth.$requireSignIn();
-      //   }]
-      // }
     })
     .state('editor', {
       url: '/editor.html',
-      //templateUrl:'editor.html',
       controller: 'authCtrl'
-      // resolve: {
-      //   // controller will not be loaded until $waitForSignIn resolves
-      //   // Auth refers to our $firebaseAuth wrapper in the factory below
-      //   "currentAuth": ["Auth", function(Auth) {
-      //     // $waitForSignIn returns a promise so the resolve waits for it to complete
-      //     return Auth.$waitForSignIn();
-      //   }]
-      // }
-
     })
-    .state('home', {
+    .state('index', {
       url: '/index.html',
       controller: 'authCtrl'
-      //  resolve: {
-      //   // controller will not be loaded until $waitForSignIn resolves
-      //   // Auth refers to our $firebaseAuth wrapper in the factory below
-      //   "currentAuth": ["firebaseAuth", function(auth) {
-      //     // $waitForSignIn returns a promise so the resolve waits for it to complete
-      //     return firebaseAuth.$waitForSignIn();
-      //   }]
-      // }
-    });
+    })
+    .state('signup', {
+      url: '/signup.html',
+      controller: 'authCtrl'
+    })
+    .state('settings', {
+      url: '/settings.html',
+      controller: 'authCtrl'
+    })
+    .state('organization', {
+      url: '/organization.html',
+      controller: 'authCtrl'
+    })
+    ;
    
 
   $urlRouterProvider.otherwise('/');  
@@ -25289,10 +25077,6 @@ angular.module('alpacaEditor').directive('alpacaField', [
 
 		var link = function ($scope, element, attrs) {
 			//console.log($scope.type)
-			if (!$scope.type){
-				console.error('undefined type', $scope);
-				return false;
-			}
 			$templateRequest('alpaca-type-' + $scope.type).then(function(tpl){
 				var template = angular.element(tpl);
 				element.html(template);
@@ -25365,38 +25149,94 @@ angular.module('alpacaEditor')
 
 	}]);
 
+// angular.module('alpacaEditor')
+//     .factory('person', function (fbURL, $firebase) {
+//         return $firebase(new Firebase(fbURL)).$asArray();
+//       })
+// angular.module('alpacaEditor')    
+//      .value('fbURL', 'https://hotpath-f9c54.firebaseio.com/')
+
 angular.module('alpacaEditor')
-    .controller("settingsController", ['$scope', function($scope) {
-        $scope.firstName = "Haemin";
-        $scope.lastName = "Park";
-        $scope.email = 'haemin@wellopp.com';
-        $scope.profilePic = 'http://danpoindexter.com/img/danpoindexter.png';
-        $scope.orgPic = './img/logo_butterfly_only.svg';
+    .controller("settingsController", [
+        '$scope', 
+        '$firebaseAuth',
+        '$firebaseObject',
+        '$firebaseStorage',
+        '$window',
+        '$rootScope',
+
+        function($scope, 
+            $firebaseAuth, 
+            $firebaseObject, 
+            $firebaseStorage, 
+            $window, 
+            $rootScope) {
+
+            //Watch for rootScope.currentUser
+            $rootScope.$watch('currentUser', function() {
+                if($rootScope.currentUser) {
+                    var ref = firebase.database().ref('users').child($rootScope.currentUser.uid);
+                    $scope.user = $firebaseObject(ref);
+                    $scope.user.$bindTo($scope, 'user');
+                }
+               
+            });
+            $scope.setImage = function($flow){
+                var file = $flow.files[$flow.files.length - 1].file;
+                console.log(file);
+
+                var storageRef = firebase.storage().ref("users")
+                    .child($rootScope.currentUser.uid)
+                    .child('profilePic');
+            $scope.storage = $firebaseStorage(storageRef);
+
+            var uploadTask = $scope.storage.$put(file);
+            uploadTask.$complete(function(snapshot) {
+                    console.log(snapshot.downloadURL);
+                    $scope.user.profilePic = snapshot.downloadURL;
+                    //console.log('users', model);
+                });
+            }
+
+            $scope.removeImage = function(){
+            var storageRef = firebase.storage().ref("users")
+                .child($rootScope.currentUser.uid)
+                .child('profilePic');
+            $scope.storage = $firebaseStorage(storageRef);
+            $scope.storage.$delete().then(function(){
+                $scope.user.profilePic = null;
+            });
+            } 
+
+            $scope.changeEmail = function(email) {
+                $scope.auth.$updateEmail(email).then(function() {
+                    console.log('email changed successfully');
+                }).catch(function(error) {
+                    console.log('error', error);
+                })
+            }
+
+         // $scope.auth.$changeEmail({
+         //      oldEmail: $rootScope.currentUser.email,
+         //      newEmail: $scope.email
+         //    }).then(function() {
+         //      console.log('Email changed successfully');
+         //    }).catch(function(error) {
+         //      console.log('Error', error);
+         //    });
+
+         // $scope.UpdateEmailAsync(email){
+         //    $scope.email = email;
+         // }
+            
+
+        // $scope.firstName = "Haemin";
+        // $scope.lastName = "Park";
+        // $scope.email = 'haemin@wellopp.com';
+        // $scope.profilePic = 'http://danpoindexter.com/img/danpoindexter.png';
+        // $scope.orgPic = './img/logo_butterfly_only.svg';
 
         $scope.editorEnabled = false;
-
-        // $scope.enableEditor = function() {
-        //     $scope.editorEnabled = true;
-        //     $scope.editableFirstName = $scope.firstName;
-        //     $scope.editableLastName = $scope.lastName;
-        //     $scope.editableEmail = $scope.email;
-        //     $scope.editableProfilePic = $scope.profilePic;
-        //    // $scope.editableOrgPic = $scope.orgPic;
-        // }
-
-        // $scope.disableEditor = function() {
-        //     $scope.editorEnabled = false;
-        // }
-
-        // $scope.save = function() {
-        //     $scope.firstName = $scope.editableFirstName;
-        //     $scope.lastName = $scope.editableLastName;
-        //     $scope.email = $scope.editableEmail;
-        //     $scope.profilePic = $scope.editableProfilePic;
-        //    // $scope.orgPic = $scope.editableOrgPic;
-        //     $scope.disableEditor();
-        // }
-
 
 }]);  
 angular.module('alpacaEditor').controller('demoController', [
@@ -25556,8 +25396,9 @@ angular.module('alpacaEditor').controller('demoController', [
 	}
 
 	$scope.$on('device-ready', function(){
-		$scope.setDevice($scope.devices[2]);
+		$scope.setDevice($scope.devices[0]);
 		$scope.loading = false;
+		
 	});
 
 	$scope.fn = {
@@ -25570,14 +25411,6 @@ angular.module('alpacaEditor').controller('demoController', [
 						ret.push(el.text);
 				})
 				return ret;
-			},
-			onTagAdded: function(tag){
-				//firebase.database().ref('tags/').child(tag);
-				//fire
-				console.log('tag added', tag);
-			},
-			onTagRemoved: function(tag){
-				console.log('tag removed', tag);
 			}
 		},
 		file: {
@@ -25653,7 +25486,7 @@ angular.module('alpacaEditor').controller('demoController', [
 			});
 		},
 		remove: function(collection, index){
-			$scope.collections.$remove(collection);
+			$scope.collections.$remove(index);
 			
 			$scope.collection.index = null;
 			$scope.currentCollection = null;
@@ -25672,7 +25505,7 @@ angular.module('alpacaEditor').controller('demoController', [
 		},
 		setImage: function($flow, collection){
 			var file = $flow.files[$flow.files.length - 1].file;
-			//console.log(file);
+			console.log(file);
 
 			var storageRef = firebase.storage().ref("collection")
 				.child(collection.$id)
@@ -25681,9 +25514,9 @@ angular.module('alpacaEditor').controller('demoController', [
 
   		var uploadTask = $scope.storage.$put(file);
   		uploadTask.$complete(function(snapshot) {
-				//console.log(snapshot.downloadURL);
+				console.log(snapshot.downloadURL);
 				collection.img_url = snapshot.downloadURL;
-				//console.log('collection', model);
+				console.log('collection', model);
 			});
 		},
 		removeImage: function(collection){
@@ -25700,14 +25533,12 @@ angular.module('alpacaEditor').controller('demoController', [
 	$scope.$watch('currentCollection', function(){
 		$scope.slide.load($scope.currentCollection);
 		$scope.collections.$save($scope.collection.index);
-		if (!$scope.currentCollection){
+		if (!$scope.currentCollection)
 			$scope.collectionSettings = false;
-			$scope.slide.setCurrent(null, null);
-		}
 	}, true);
 
 	//$scope.currentUser = {};
-	$scope.user = {
+	/*$scope.user = {
 		signin: function() {
 			$firebaseAuth().$signInWithEmailAndPassword(
 
@@ -25733,49 +25564,21 @@ angular.module('alpacaEditor').controller('demoController', [
 				})
 		}
 	} //user
-
+*/
 	$scope.slides = [];
-	$scope.searchSlides = [];
 	$scope.slide = {
 		add: function(kind){
 
 			//TODO: Add Switch
 
-			var to = $scope.slide.index ? $scope.slide.index + 1 : $scope.slide.list.length;
-
 			var slide = {
 				collectionId: $scope.currentCollection.$id,
 				kind: kind,
-				title: 'untitled',
-				index: to
+				title: 'untitled'
 			}
 
-			$scope.updateIndexes(
-				$scope.slide.list, 
-				null,
-				$scope.slide.list.length,
-				to, 
-				function(){
-					$scope.slide.list.$add(slide);
-				}
-			);
+			$scope.slides.$add(slide);
 			
-		},
-		remove: function(node, list){
-			console.log('Remove', node, list);
-			$scope.updateIndexes(
-				list, 
-				node, 
-				node.index, 
-				list.length,
-				function(){
-					list.$remove(node);
-				}
-			);
-		},
-		save: function(node, list){
-			//console.log('Saving node', node);
-			list.$save(node);
 		},
 		load: function(collection){
 			if (!collection)
@@ -25786,78 +25589,17 @@ angular.module('alpacaEditor').controller('demoController', [
 			$scope.slides = $firebaseArray(ref);
 			$scope.slides.$loaded()
 				.then(function(x){
-					console.log('slides loaded', $scope.slides);
-					$scope.$watch('selected', function(){
-						if ($scope.slide.list){
-							$scope.slide.list.$save(
-								$scope.selected
-							);
-						}
+					$scope.$watch('selected', function(new_val, old_val, scope){
+						$scope.slides.$save(scope.slide.index);
 					}, true);
-					$scope.slide.setCurrent($scope.slides[0], $scope.slides);
 					$scope.loading = false;
 				});
 		},
-		get: function(id){
-
-		},
-		search: function(){
-			/*console.log('searching', $scope.searchtext);
-			var ref = firebase.database().ref('/slides').orderByChild('tags/' + $scope.searchtext).equalTo(true);
-			$scope.searchSlides = $firebaseArray(ref);
-			$scope.searchSlides.$loaded()
-				.then(function(x){
-					console.log('searchSlides', $scope.searchSlides);
-				});
-				*/
-				$scope.searchSlides = null;
-
-				if (!$scope.searchtext || $scope.searchtext.length < 3)
-					return;
-
-			var ref = firebase.database().ref('search');
-			var query = {
-				index: 'firebase',
-				type: 'slide',
-				q: $scope.searchtext + '*'
-			};
-
-			var key = ref.child('request').push(query).key;
-
-			console.log('search', key, query);
-		
-			ref.child('response').child(key).on('value', function(snapshot){
-				console.log('snapshot', snapshot.val());
-				if (!snapshot.val())
-					return;
-				var hits = snapshot.val().hits;
-				if (hits && hits.hits && hits.hits.length > 0){
-					$scope.$apply(function(){
-						$scope.searchSlides = hits.hits.map(function(hit){
-							return hit._source;
-						});
-					});
-				}
-			});
-		},
-		setCurrent: function(slide, list){
-
-			$scope.slide.index = slide ? slide.index : null;
+		setCurrent: function(slide, index){
 			$scope.selected = slide;
-			$scope.slide.list = list;
-
+			$scope.slide.index = index;
 		}
 	} //slide
-
-	$scope.$watch('searchtext', function(){
-		console.log('searchtext', $scope.searchtext);
-		$scope.slide.search($scope.searchtext);
-	})
-
-	// $scope.$watch('selected', function(){
-	// 	$scope.slide.get($scope.selected.$id);
-
-	// })
 
 	$scope.frame = {
 		update: function(){
@@ -25875,68 +25617,7 @@ angular.module('alpacaEditor').controller('demoController', [
 	
 	$scope.init();
 
-	$scope.dropCallback = function(index, item, external, type, list){
-		console.log('index', index, 'item', item, 
-			'external', external, 'type', type, 'list', list)
-		
-		var _from = item.index;
-		var _to = (index > item.index) ? index - 1 : index;
-		//console.log(_from + " ----> " + _to);
-
-		$scope.updateIndexes(list, item, _from, _to);
-
-		//Prevent client side array from changing
-		return false;
-	}
-
-	//Manually update indexes
-	$scope.updateIndexes = function(list, item, _from, _to, callback){
-		for(var i=0; i < list.length; i++){
-			var el = list[i];
-
-			console.log(_from + " ----> " + _to);
-
-			if(item && el.$id == item.$id)
-				el.index = _to;
-			else if(el.index > _from && el.index <= _to)
-				el.index = el.index - 1;
-			else if(el.index < _from && el.index >= _to)
-				el.index = el.index + 1;
-		}
-
-		for(var i=0; i < list.length; i++){
-			list.$save(i);
-		}
-		if (callback)
-			callback();
-	}
-
 }]);
-
-// angular.module('alpacaEditor')
-// .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
-  
-//   //$locationProvider.html5Mode(true);
-//   // $urlRouterProvider.rule(function ($injector, $location) {
-  
-//   //   console.log($location.path());
-//   //   if ($location.path() == 'login.html#') {
-//   //      $location.path('editor.html').replace();
-//   //      console.log(path);
-//   //   }
-//   // });
-
-//   //$urlRouterProvider.otherwise('/');
-//   $stateProvider
-//     .state('home', {
-//       url:'^/editor',
-//       templateUrl: 'editor.html',
-//       controller: 'authCtrl'
-//     }); 
-
-
-// }]);
-
 angular.module('alpacaEditor')
 	.controller("authCtrl", [
     "$scope", 
@@ -25945,46 +25626,73 @@ angular.module('alpacaEditor')
     "$state",
     "$location",
     "$window",
+    "$firebaseObject",
+    "$firebaseStorage",
 
- function($scope, $rootScope, $firebaseAuth, $state, $location, $window) {
-		    
+ function($scope,
+  $rootScope,
+  $firebaseAuth, 
+  $state, 
+  $location, 
+  $window,
+  $firebaseObject,
+  $firebaseStorage) {
+
     $scope.signIn = function () {
       $rootScope.auth.$signInWithEmailAndPassword(
         $scope.email,  $scope.password
       ).then(function(user) {
         console.log(user);
-      $state.go('editor');
-      $window.location.reload();
-      //$state.forceReload();
-      //   $state.transitionTo('home', {}, {
-      //     reload: true,
-      //     inherit: false,
-      //     notify: true
-      // });
-
-      }, function(error) {
-        if (error = 'INVALID_EMAIL') {
+        $rootScope.currentUser = user;
+        $state.go('editor');
+        $window.location.reload();
+      }, 
+      function(error) {
+        // switch(error) {
+        //   case 'INVALID_EMAIL':
+        //     console.log('email invalid or not signed up');
+        //     alert('Invalid email!');
+        //   case 'INVALID_PASSWORD':
+        //     console.log('wrong password');
+        //     alert('wrong password');
+        //   default:
+        //     console.log(error);    
+        // }
+        if (error.code = 'INVALID_EMAIL') {
           console.log('email invalid or not signed up — trying to sign you up!');
+          alert('Invalid email or password!'); //FIXME ONLY GOES IN THIS CONDITION
           //$scope.signUp();
-        } else if (error = 'INVALID_PASSWORD') {
+        } else if (error.code = 'INVALID_PASSWORD') {
           console.log('wrong password!');
+          alert('Wrong password!');
         } else {
           console.log(error);
         }
       });
     };
 
-    $scope.signUp = function() {
+    $scope.signUp = function(firstName, 
+      lastName, 
+      email, 
+      password) {
       $rootScope.auth.$createUserWithEmailAndPassword(
         $scope.email, $scope.password
       ).then(function(firebaseUser) {
+          firebase.database().ref('users').child(firebaseUser.uid).set({
+            firstName: firstName,
+            lastName: lastName,
+            email: email
+          }).then(function() {
+            $state.go('editor').then(function(){
+              $window.location.reload(); //this doesn't work
+              console.log('routing to editor');
+            });
+          })
           console.log('user' + firebaseUser.uid + 'created successfully!');
-          $state.go('home');
-          $window.location.reload();
+          console.log(firstName , lastName, email);
 
       }).catch(function(error) {
         console.error('Error', error);
-      
       });
     };
 
@@ -25999,13 +25707,16 @@ angular.module('alpacaEditor')
       }); 
     };
 
-    $scope.signOut = function() {
-      $scope.auth.$signOut();
-      $state.go('home');
-      $window.location.reload();
-      
-    };
 
+    $scope.signOut = function() {
+      $scope.auth.$signOut().then(function() {
+        $state.go('index');
+        $window.location.reload();
+        console.log('signed out');
+      }).catch(function(error) {
+          console.error("Error: ", error);
+      });
+    };
 
 
     $scope.signInPageRoute = function()  {
@@ -26020,18 +25731,39 @@ angular.module('alpacaEditor')
         console.log("Signed in as:", firebaseUser.uid);
         $state.go('editor');
         $window.location.reload();
-
       } else {
         console.log("Please sign in");
         $state.go('login');
         $window.location.reload();
       }
-
     };
 
     $scope.indexPageRoute = function()  {
+      var firebaseUser = $rootScope.auth.$getAuth();
+      $state.go('index');
+      $window.location.reload();
+      
+    };
+
+    $scope.signUpRoute = function()  {
       console.log("route to a new page");
-      $state.go('home');
+      $state.go('signup');
+      $window.location.reload();
+    };
+    $scope.settingsPageRoute = function()  {
+      console.log("route to a new page");
+      $state.go('settings');
+      $window.location.reload();
+    };
+
+    $scope.collectionsPageRoute = function()  {
+      console.log("route to a new page");
+      $state.go('collections');
+      $window.location.reload();
+    };
+    $scope.organizationPageRoute = function() {
+      console.log("route to a new page");
+      $state.go('organization');
       $window.location.reload();
     };
 
@@ -26039,16 +25771,34 @@ angular.module('alpacaEditor')
 
 		$scope.init = function(){
 			$rootScope.auth = $firebaseAuth();
-//       firebase.auth().onAuthStateChanged(function(user) {
-//         if (user) {
-//         // User is signed in.
-//           $state.go('editor');
+      firebase.auth().onAuthStateChanged(function(firebaseUser) {
+        $rootScope.currentUser = firebaseUser;
+        //editme
+        //$scope.userEmail = firebaseUser.email;
 
-//         } else {
-//           // No user is signed in.
-//           $state.go('login');
-//         }
-// });
+
+
+        if($rootScope.currentUser) {
+          var ref = firebase.database().ref('users').child($rootScope.currentUser.uid);
+          $scope.user = $firebaseObject(ref);
+          $scope.user.$bindTo($scope, 'user');
+          $scope.isLoggedIn = true;
+          //console.log('user is logged in');
+          //$scope.userName = $rootScope.currentUser.firstName;
+          //$scope.userName = user.firstName;
+          // console.log($scope.userName); //undefined
+          // console.log($rootScope.currentUser);
+          // console.log($scope.user); 
+          // console.log(firebaseUser.email); //haemin@wellopp.com
+          // console.log($scope.user.email); //undefined
+
+        } else {
+          $scope.isLoggedIn = false;
+        }
+
+      
+      
+      });
 
 		}
 
