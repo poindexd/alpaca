@@ -1,0 +1,28 @@
+<html><head><!--base(href="/")--><link rel="stylesheet" href="./css/index.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/><style>//- .container {
+//-     width: 100%;
+//-     height: 100%;
+//-     margin-top: -40px;
+//-     margin-left: 50px;
+//-     margin-right: 50px;
+//- }
+.collection {
+    //width: 80%;
+}</style></head><body class="grey lighten-3" ng-app="alpacaEditor"><div ng-app="alpacaEditor" ng-controller="authCtrl"><header><nav class="white"><div class="nav-wrapper" style="padding: 0 40px;"><a class="brand-logo" href="#" ng-click="editorPageRoute()"><img src="img/hotpath_logo.svg" height="100%" style="padding: 10px;"/></a><a class="button-collapse orange-text" href="#" data-activates="side-nav"><i class="material-icons">menu</i></a><ul class="right hide-on-med-and-down"><li class="no"><a class="orange-text" id="dropdown-button" href="#" data-activates="dropdown1"><img class="circle white z-depth-1" ng-src="{{user.profilePic || &quot;/img/user.svg&quot;}}" style="height: 40px;width: 40px; margin-top:12px;"/><span style="position:relative; bottom:15px; left: 10px;">{{user.firstName}}</span><i class="material-icons right" style="position:relative; top:3px;">keyboard_arrow_down</i></a><ul class="dropdown-content" id="dropdown1"><li><a href="#!" ng-click="settingsPageRoute()">Profile</a></li><li><a href="#!" ng-click="signOut()">Sign Out</a></li><li><a href="#!" ng-click="organizationPageRoute()">Organization</a></li></ul></li></ul><ul class="side-nav" id="side-nav"><li class="no"><a class="orange-text" id="dropdown-button" href="#" data-activates="dropdown1"><img class="circle white z-depth-1" ng-src="{{user.profilePic || &quot;/img/user.svg&quot;}}" style="height: 40px;width: 40px; margin-top:12px;"/><span style="position:relative; bottom:15px; left: 10px;">{{user.firstName}}</span><i class="material-icons right" style="position:relative; top:3px;">keyboard_arrow_down</i></a><ul class="dropdown-content" id="dropdown1"><li><a href="#!" ng-click="settingsPageRoute()">Profile</a></li><li><a href="#!" ng-click="signOut()">Sign Out</a></li><li><a href="#!" ng-click="organizationPageRoute()">Organization</a></li></ul></li></ul></div></nav></header></div><div ng-controller="settingsController" flow-init="flow-init" flow-files-submitted="setImage($flow)"><div class="container"><h3>Edit Profile</h3><div class="row"><div class="col s12 m4 l4"><img class="circle white z-depth-1" ng-src="{{user.profilePic || &quot;/img/user.svg&quot;}}" style="height: 250px;width: 250px;"/><br/><br/><div class="btn" flow-btn="flow-btn" style="margin-left:35px;">Upload Image</div><!--a(href='#' ng-click='removeImage()' style='margin-top:30px; margin-bottom:15px; width: 30%;') Remove image--></div><div class="col s12 m8 l8"><label for="firstname">First Name</label><input id="firstname" ng-model="user.firstName"/><label for="lastname">Last Name</label><input id="lastname" ng-model="user.lastName"/><label for="email" data-error="wrong" data-success="right">Email    </label><input class="validate" id="email" type="email" ng-model="user.email"/><div class="btn" href="#" ng-click="changeEmail(user.email)">Update Email</div></div></div></div></div></body><script src="https://code.jquery.com/jquery-2.2.4.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js"></script><script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script><script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script><script>var config = {
+    apiKey: "AIzaSyBCAJtmUVpWjFUIw4yLUuPhbCJWNufA_gU",
+    authDomain: "hotpath-f9c54.firebaseapp.com",
+    databaseURL: "https://hotpath-f9c54.firebaseio.com",
+    storageBucket: "hotpath-f9c54.appspot.com",
+    messagingSenderId: "340378037531"
+};
+firebase.initializeApp(config);</script><script src="./js/alpaca-templates.js"></script><script src="./js/alpaca-schemas.js"></script><script src="./js/alpaca-types.js"></script><script src="./js/alpaca-viewer.min.js"></script><script src="./js/alpaca-editor.min.js"></script><script>$(document).ready(function(){
+    $('#dropdown-button').dropdown({
+          inDuration: 300,
+          outDuration: 225,
+          constrainWidth: true, // Does not change width of dropdown to that of the activator
+          hover: false, // Activate on hover
+          gutter: 0, // Spacing from edge
+          belowOrigin: true, // Displays dropdown below the button
+          alignment: 'left', // Displays dropdown with edge aligned to the left of button
+          stopPropagation: false // Stops event propagation
+    });  
+});                  </script></html>

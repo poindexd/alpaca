@@ -27,44 +27,29 @@ angular.module('alpacaEditor')
  $stateProvider
     .state('login', {
       url:'/login.html',
-      //templateUrl: 'login.html',
       controller: 'authCtrl'
-      // resolve: {
-      //   // controller will not be loaded until $requireSignIn resolves
-      //   // Auth refers to our $firebaseAuth wrapper in the factory below
-      //   "currentAuth": ["firebaseAuth", function(auth) {
-      //     // $requireSignIn returns a promise so the resolve waits for it to complete
-      //     // If the promise is rejected, it will throw a $stateChangeError (see above)
-      //     return firebaseAuth.$requireSignIn();
-      //   }]
-      // }
     })
     .state('editor', {
       url: '/editor.html',
-      //templateUrl:'editor.html',
       controller: 'authCtrl'
-      // resolve: {
-      //   // controller will not be loaded until $waitForSignIn resolves
-      //   // Auth refers to our $firebaseAuth wrapper in the factory below
-      //   "currentAuth": ["Auth", function(Auth) {
-      //     // $waitForSignIn returns a promise so the resolve waits for it to complete
-      //     return Auth.$waitForSignIn();
-      //   }]
-      // }
-
     })
-    .state('home', {
+    .state('index', {
       url: '/index.html',
       controller: 'authCtrl'
-      //  resolve: {
-      //   // controller will not be loaded until $waitForSignIn resolves
-      //   // Auth refers to our $firebaseAuth wrapper in the factory below
-      //   "currentAuth": ["firebaseAuth", function(auth) {
-      //     // $waitForSignIn returns a promise so the resolve waits for it to complete
-      //     return firebaseAuth.$waitForSignIn();
-      //   }]
-      // }
-    });
+    })
+    .state('signup', {
+      url: '/signup.html',
+      controller: 'authCtrl'
+    })
+    .state('settings', {
+      url: '/settings.html',
+      controller: 'authCtrl'
+    })
+    .state('organization', {
+      url: '/organization.html',
+      controller: 'authCtrl'
+    })
+    ;
    
 
   $urlRouterProvider.otherwise('/');  

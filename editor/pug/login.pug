@@ -4,22 +4,35 @@ html
 		link(rel='stylesheet' href='./css/index.css')
 		link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
 		style.
-						html,body {
-							height: 100%;
-						}
-						html {
-							display: table;
-							margin: auto;
-						}
-						body {
-								display: table-cell;
-								vertical-align: middle;
-								background: #4ECDC4;
-						}
-						#login-page {
-							 width: 500px;
-						}
+			html {
+				//- display: table;
+				//- margin: auto;
+			}
+			body {
+				display: flex;
+				min-height: 100vh;
+				flex-direction: column;
+				font-family: "Raleway", sans-serif;	
+				//- display: table-cell;
+				//- vertical-align: middle;
+				//- background: #4ECDC4;
+			}
+			#login-page {
+				 width: 500px;
+			}
 	body(ng-app='alpacaEditor' ng-controller='authCtrl')
+		mixin links
+				li.no: a(href='#' ng-click="signUpRoute()").orange-text Sign Up
+		header
+			nav.white: .nav-wrapper(style='padding: 0 40px')
+				a(href='#' ng-click='indexPageRoute()').brand-logo: img(src='img/hotpath_logo.svg' height='100%' style='padding: 10px')
+				a.button-collapse.orange-text(href='#' data-activates='side-nav')
+					i.material-icons menu
+
+				ul.right.hide-on-med-and-down
+					+links
+				ul#side-nav.side-nav
+					+links
 		div(id='login-page' class='row')
 			div(class='col s12 z-depth-6 card-panel')
 				form(class='login-form')
@@ -38,17 +51,19 @@ html
 						div(class='input-field col s12 m12 l12 login-text')
 							label(for='remember-me') Remember me 
 								input(type='checkbox' id='remember-me')
-					div(class='row')        
+					div(class='row')
+						div(class='input-field col s6 m6 l6')
+							p: a(href='#' ng-click='resetPassword()') Forgot Password
 					div(class='row')
 						div(class='input-field col s12')
-							a(href='#' class='btn waves-effect waves-light col s12' ng-click="signIn()") Login
+							a(href='#' class='btn waves-effect waves-light col s12' ng-click="signIn()") Sign In
 					div(class='row')
-						div(class='input-field col s6 m6 l6')
-							p(class="margin medium-small")
-								a(href="#" ng-click= 'signUp()') Register Now!   
-						div(class='input-field col s6 m6 l6')
-							p(class='margin right-align medium-small')
-								a(href='#' ng-click='resetPassword()') Forgot Password
+						//- div(class='input-field col s6 m6 l6')
+						//- 	p(class="margin medium-small")
+						//- 		a(href="#" ng-click= 'signUp()') Register Now! 
+						//- div(class='input-field col s6 m6 l6')
+						//- 	p
+						//- 		a(href='#' ng-click='resetPassword()') Forgot Password
 			script(src='https://code.jquery.com/jquery-2.2.4.min.js')
 			script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js')
 			script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')

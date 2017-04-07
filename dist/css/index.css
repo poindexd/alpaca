@@ -7685,8 +7685,7 @@ body {
   /* 	display: flex;
 	min-height: 100vh;
 	flex-direction: column; */
-  font-family: "Raleway", sans-serif;
-  overflow: hidden; }
+  font-family: "Raleway", sans-serif; }
 
 .content-wrapper {
   height: 100vh;
@@ -7701,8 +7700,7 @@ main {
 
 header, footer {
   display: flex;
-  height: 100px;
-  background-color: #00bcd4; }
+  height: 100px; }
 
 sup {
   font-size: 0.5em !important;
@@ -7964,8 +7962,15 @@ tags-input:focus, div:focus {
 .nga-fade .card {
   box-shadow: none; }
 
+.input-field {
+  width: 50%;
+  margin-left: 20%;
+  margin-top: -1%; }
+
 #container-survey {
-  margin-top: 2%; }
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: -75px; }
   #container-survey .card-content {
     color: black;
     margin-bottom: 0px; }
@@ -7973,7 +7978,7 @@ tags-input:focus, div:focus {
     height: 300px; }
 
 .pagination li.active {
-  background-color: #f57c00; }
+  background-color: #faae60; }
 
 #collections-tab nav ul li {
   clear: left; }

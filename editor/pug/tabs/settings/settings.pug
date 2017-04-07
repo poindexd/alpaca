@@ -1,18 +1,17 @@
-div(ng-controller= 'settingsController' flow-init="{target: '/upload'}" flow-files-submitted="$flow.upload()" flow-file-success="$file.msg = $message"): .container(style='width:100%; padding-left:30%; padding-top:60px;')
+div(ng-controller= 'settingsController' flow-init flow-files-submitted='setImage($flow)'): .container(style='width:100%; padding-left:30%; padding-top:60px;')
     .row
         .col.s12.l6
             //.butterfly
                 include include/butterfly.html  
             ul.collection.with-header(style='margin-top: 48px border-top: solid; border-top-color: #f57c00; border-top-width: 8px;')
                 li.collection-header.center(ng-hide='editorEnabled')
-                    img.circle.white.z-depth-1(flow-img="$flow.files[$flow.files.length-1]" style='height: 110px;width: 110px; margin-top:20px;')
-                    //img.circle.white.z-depth-1(ng-src='{{profilePic}}' style='height: 110px;width: 110px;')
-                    h4 {{firstName}} {{lastName}}
+                    img.circle.white.z-depth-1(ng-src = '{{user.profilePic || "/img/placeholder2x1.svg"}}' style='height: 110px;width: 110px; margin-top:20px;')
+                    h4 {{user.firstName}} {{user.lastName}}
                 li.collection-item(ng-hide='editorEnabled' style='height:80px;')
                     label Email
                     p
                     i.material-icons.grey-text.left mail
-                    | {{email}}
+                    | {{user.email}}
                 li.collection-item(ng-hide='editorEnabled')
                     label Organizations
                     br
@@ -21,14 +20,17 @@ div(ng-controller= 'settingsController' flow-init="{target: '/upload'}" flow-fil
                     img.circle.white.z-depth-1(src='./img/hotpath_logo_small.svg' style='height: 60px;width: 60px;')
                     a(href='#' ng-click='editorEnabled = true' class='waves-effect btn' style='margin-top:30px; margin-bottom:15px; width: 30%;') Edit
                 li.collection-item(ng-show='editorEnabled')
-                    input(ng-model='firstName' ng-show='editorEnabled' placeholder='First Name')
-                    label First Name
-                    input(ng-model='lastName' ng-show='editorEnabled' placeholder='Last Name')
-                    label Last Name
-                    input(ng-model='email' ng-show='editorEnabled' placeholder='Email')
-                    label Email
+                    img.circle.white.z-depth-1(ng-src = '{{user.profilePic || "/img/placeholder2x1.svg"}}' style='height: 110px;width: 110px; margin-top:20px;')
+                    input(ng-show='editorEnabled' type='file' flow-btn style='margin-top:10px;')
+                    a(href='#' ng-click='removeImage()' style='margin-top:30px; margin-bottom:15px; width: 30%;') Remove image
+                    input(id='firstname' ng-model='user.firstName' ng-show='editorEnabled')
+                    label(for='firstname') First Name
+                    input(id='lastname' ng-model='user.lastName' ng-show='editorEnabled')
+                    label(for='lastname') Last Name
+                    input(class='validate' id='email' type='email' ng-model='user.email' ng-show='editorEnabled')
+                    label(for='email' data-error='wrong' data-success='right') Email
+                    a(href='#' ng-click = 'changeEmail(user.email)') Update Email
                     //div(flow-init="{target: '/upload'}" flow-files-submitted="$flow.upload()" flow-file-success="$file.msg = $message")
-                    input(ng-model='editableProfilePic' ng-show='editorEnabled' type='file' flow-btn style='margin-top:10px;')
-                    a(href='#' ng-click='editorEnabled = false' class='waves-effect btn' style='margin-top:30px; margin-bottom:15px; width: 30%;') Save
+                    a(href='#' ng-click='editorEnabled = false'  class='waves-effect btn' style='margin-top:30px; margin-bottom:15px; width: 30%;' value='save') Save
                     //or
                     //a(href='#' ng-click='disableEditor()') Cancel

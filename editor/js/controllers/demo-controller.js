@@ -297,7 +297,7 @@ angular.module('alpacaEditor').controller('demoController', [
 	}, true);
 
 	//$scope.currentUser = {};
-	$scope.user = {
+	/*$scope.user = {
 		signin: function() {
 			$firebaseAuth().$signInWithEmailAndPassword(
 
@@ -323,7 +323,7 @@ angular.module('alpacaEditor').controller('demoController', [
 				})
 		}
 	} //user
-
+*/
 	$scope.slides = [];
 	$scope.slide = {
 		add: function(kind){

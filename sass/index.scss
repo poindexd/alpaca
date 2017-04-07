@@ -40,7 +40,7 @@ body {
 	flex-direction: column; */
 	font-family: "Raleway", sans-serif;
 	//background: #fbfbfb;
-	overflow: hidden;
+	//overflow: hidden;
 }
 
 .content-wrapper{
@@ -60,7 +60,7 @@ main {
 header, footer{
 	display: flex;
   height: 100px;
-  background-color: #00bcd4;
+ //  background-color: #00bcd4;
 }
 
 a, p, span, input {
@@ -532,27 +532,49 @@ $bg-color--ebfblue: rgb(0, 120, 191);
     box-shadow: none;
   }
 }
-
+.input-field {
+  width:50%;
+  margin-left:20%;
+  margin-top: -1%;
+}
 #container-survey {
-  margin-top: 2%;
+
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+  //overflow: scroll;
+  // margin-top: 2%;
+  margin-left: -75px;
+  //height:100%;
 
   .card-content {
     color: black;
-    margin-bottom:0px;
+      margin-bottom:0px;
 
-    // text-overflow: ellipsis;
-    // white-space: nowrap; 
-    // overflow: hidden;
-
-
-}
-  .card.small {
-    height:300px;
   }
+    .card.small {
+      height:300px;
+    }
 }
+// #container-survey {
+//   margin-top: 2%;
+
+//   .card-content {
+//     color: black;
+//     margin-bottom:0px;
+
+//     // text-overflow: ellipsis;
+//     // white-space: nowrap; 
+//     // overflow: hidden;
+
+
+// }
+//   .card.small {
+//     height:300px;
+//   }
+// }
 
   .pagination li.active {
-    background-color: #f57c00; 
+    background-color: #faae60; 
   }
 
 // .survey-container {

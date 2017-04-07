@@ -8,7 +8,8 @@ angular.module('alpacaEditor', [
 	'flow',							//File upload
 	'angularResizable',	//Make elements user-resizable
   'ui.codemirror',    //Code editor, for writing jsonata
-	'angularUtils.directives.dirPagination', //pagination 	
+	'angularUtils.directives.dirPagination', //pagination 
+  'validation.match',	
 	'alpacaViewer', 
 	'alpacaSchemas', 
 	'alpacaTypes',

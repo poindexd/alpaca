@@ -1,0 +1,185 @@
+//- html
+//-     head
+//-         //base(href="/")
+//-         link(rel='stylesheet' href='./css/index.css')
+//-         link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
+//-         style.
+//-             .container {
+//-                 width: 100%;
+//-             }
+//-             .collection {
+//-                 //width: 80%;
+//-             }
+//-     body.grey.lighten-3(ng-app='alpacaEditor')
+//-         include include/header.pug
+//-         div(ng-controller= 'settingsController' flow-init flow-files-submitted='setImage($flow)'): .container
+//-             .row
+//-                 .col.s12
+//-                     ul.collection.with-header
+//-                         li.collection-header.center(ng-hide='editorEnabled')
+//-                             img.circle.white.z-depth-1(ng-src = '{{user.profilePic || "/img/user.svg"}}' style='height: 250px;width: 250px; margin-top:20px; float:left')
+//-                             h4 {{user.firstName}} {{user.lastName}}
+//-                         li.collection-item(ng-hide='editorEnabled' style='height:80px;')
+//-                             label Email
+//-                             p
+//-                             i.material-icons.grey-text.left mail
+//-                             | {{user.email}}
+//-                         li.collection-item(ng-hide='editorEnabled')
+//-                             label Organizations
+//-                             br
+//-                             //img(flow-img="$flow.files[0]")
+//-                             img.circle.white.z-depth-1(ng-src='{{orgPic}}' style='height: 60px;width: 60px; margin-right: 20px;')
+//-                             img.circle.white.z-depth-1(src='./img/hotpath_logo_small.svg' style='height: 60px;width: 60px;')
+//-                             a(href='#' ng-click='editorEnabled = true' class='waves-effect btn' style='margin-top:30px; margin-bottom:15px; width: 30%;') Edit
+//-                         li.collection-item(ng-show='editorEnabled')
+//-                             img.circle.white.z-depth-1(ng-src = '{{user.profilePic || "/img/user.svg"}}' style='height: 110px;width: 110px; margin-top:20px;')
+//-                             input(ng-show='editorEnabled' type='file' flow-btn style='margin-top:10px;')
+//-                             a(href='#' ng-click='removeImage()' style='margin-top:30px; margin-bottom:15px; width: 30%;') Remove image
+//-                             input(id='firstname' ng-model='user.firstName' ng-show='editorEnabled')
+//-                             label(for='firstname') First Name
+//-                             input(id='lastname' ng-model='user.lastName' ng-show='editorEnabled')
+//-                             label(for='lastname') Last Name
+//-                             input(class='validate' id='email' type='email' ng-model='user.email' ng-show='editorEnabled')
+//-                             label(for='email' data-error='wrong' data-success='right') Email
+//-                             a(href='#' ng-click = 'changeEmail(user.email)') Update Email
+//-                             //div(flow-init="{target: '/upload'}" flow-files-submitted="$flow.upload()" flow-file-success="$file.msg = $message")
+//-                             a(href='#' ng-click='editorEnabled = false'  class='waves-effect btn' style='margin-top:30px; margin-bottom:15px; width: 30%;' value='save') Save
+//-                             a(href='#' class='waves-effect btn' style='margin-top:15px; width: 30%;' value='cancel') Cancel
+//-     script(src='https://code.jquery.com/jquery-2.2.4.min.js')
+//-     script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js")
+//-     script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+//-     script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js')
+//-     script(src='https://www.gstatic.com/firebasejs/3.6.6/firebase.js')
+//-     script(src='https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js')
+//-     script.
+//-         var config = {
+//-             apiKey: "AIzaSyBCAJtmUVpWjFUIw4yLUuPhbCJWNufA_gU",
+//-             authDomain: "hotpath-f9c54.firebaseapp.com",
+//-             databaseURL: "https://hotpath-f9c54.firebaseio.com",
+//-             storageBucket: "hotpath-f9c54.appspot.com",
+//-             messagingSenderId: "340378037531"
+//-         };
+//-         firebase.initializeApp(config);
+//-     script(src='./js/alpaca-templates.js')
+//-     script(src='./js/alpaca-schemas.js')
+//-     script(src='./js/alpaca-types.js')
+//-     script(src='./js/alpaca-viewer.min.js')
+//-     script(src='./js/alpaca-editor.min.js')
+//-     script.
+//-         $(document).ready(function(){
+//-             $('#dropdown-button').dropdown({
+//-                   inDuration: 300,
+//-                   outDuration: 225,
+//-                   constrainWidth: true, // Does not change width of dropdown to that of the activator
+//-                   hover: false, // Activate on hover
+//-                   gutter: 0, // Spacing from edge
+//-                   belowOrigin: true, // Displays dropdown below the button
+//-                   alignment: 'left', // Displays dropdown with edge aligned to the left of button
+//-                   stopPropagation: false // Stops event propagation
+//-             });  
+//-         });                  
+html
+    head
+        //base(href="/")
+        link(rel='stylesheet' href='./css/index.css')
+        link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
+        style.
+            //- .container {
+            //-     width: 100%;
+            //-     height: 100%;
+            //-     margin-top: -40px;
+            //-     margin-left: 50px;
+            //-     margin-right: 50px;
+            //- }
+            .collection {
+                //width: 80%;
+            }
+    body.grey.lighten-3(ng-app='alpacaEditor')
+        include include/header.pug
+        div(ng-controller= 'settingsController' flow-init flow-files-submitted='setImage($flow)')
+            .container
+                h3 Edit Profile
+                .row
+                    .col.s12.m4.l4
+                        img.circle.white.z-depth-1(ng-src = '{{user.profilePic || "/img/user.svg"}}' style='height: 250px;width: 250px;')
+                        br
+                        br
+                        .btn(flow-btn style='margin-left:35px;') Upload Image
+                        //a(href='#' ng-click='removeImage()' style='margin-top:30px; margin-bottom:15px; width: 30%;') Remove image
+                    .col.s12.m8.l8
+                        label(for='firstname') First Name
+                        input(id='firstname' ng-model='user.firstName')
+                        label(for='lastname') Last Name
+                        input(id='lastname' ng-model='user.lastName')
+                        label(for='email' data-error='wrong' data-success='right') Email    
+                        input(class='validate' id='email' type='email' ng-model='user.email')
+                        .btn(href='#' ng-click = 'changeEmail(user.email)') Update Email
+                        //- a(href='#' ng-click='editorEnabled = false'  class='waves-effect btn' style='margin-top:30px; margin-bottom:15px; width: 30%;' value='save') Save
+
+            //- .col-md-9
+            //-     h4 {{user.firstName}} {{user.lastName}}
+
+
+            //- div(collection.with-header)
+            //-     collection-header.center(ng-hide='editorEnabled')
+            //-         img.circle.white.z-depth-1(ng-src = '{{user.profilePic || "/img/user.svg"}}' style='height: 250px;width: 250px; margin-top:20px; float:left')
+            //-         h4 {{user.firstName}} {{user.lastName}}
+            //-     li.collection-item(ng-hide='editorEnabled' style='height:80px;')
+            //-         label Email
+            //-         p
+            //-         i.material-icons.grey-text.left mail
+            //-         | {{user.email}}
+            //-     li.collection-item(ng-hide='editorEnabled')
+            //-         label Organizations
+            //-         br
+            //-         //img(flow-img="$flow.files[0]")
+            //-         img.circle.white.z-depth-1(ng-src='{{orgPic}}' style='height: 60px;width: 60px; margin-right: 20px;')
+            //-         img.circle.white.z-depth-1(src='./img/hotpath_logo_small.svg' style='height: 60px;width: 60px;')
+            //-         a(href='#' ng-click='editorEnabled = true' class='waves-effect btn' style='margin-top:30px; margin-bottom:15px; width: 30%;') Edit
+            //-     li.collection-item(ng-show='editorEnabled')
+            //-         img.circle.white.z-depth-1(ng-src = '{{user.profilePic || "/img/user.svg"}}' style='height: 110px;width: 110px; margin-top:20px;')
+            //-         input(ng-show='editorEnabled' type='file' flow-btn style='margin-top:10px;')
+            //-         a(href='#' ng-click='removeImage()' style='margin-top:30px; margin-bottom:15px; width: 30%;') Remove image
+            //-         input(id='firstname' ng-model='user.firstName' ng-show='editorEnabled')
+            //-         label(for='firstname') First Name
+            //-         input(id='lastname' ng-model='user.lastName' ng-show='editorEnabled')
+            //-         label(for='lastname') Last Name
+            //-         input(class='validate' id='email' type='email' ng-model='user.email' ng-show='editorEnabled')
+            //-         label(for='email' data-error='wrong' data-success='right') Email
+            //-         a(href='#' ng-click = 'changeEmail(user.email)') Update Email
+            //-         //div(flow-init="{target: '/upload'}" flow-files-submitted="$flow.upload()" flow-file-success="$file.msg = $message")
+            //-         a(href='#' ng-click='editorEnabled = false'  class='waves-effect btn' style='margin-top:30px; margin-bottom:15px; width: 30%;' value='save') Save
+            //-         a(href='#' class='waves-effect btn' style='margin-top:15px; width: 30%;' value='cancel') Cancel
+    script(src='https://code.jquery.com/jquery-2.2.4.min.js')
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js")
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js')
+    script(src='https://www.gstatic.com/firebasejs/3.6.6/firebase.js')
+    script(src='https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js')
+    script.
+        var config = {
+            apiKey: "AIzaSyBCAJtmUVpWjFUIw4yLUuPhbCJWNufA_gU",
+            authDomain: "hotpath-f9c54.firebaseapp.com",
+            databaseURL: "https://hotpath-f9c54.firebaseio.com",
+            storageBucket: "hotpath-f9c54.appspot.com",
+            messagingSenderId: "340378037531"
+        };
+        firebase.initializeApp(config);
+    script(src='./js/alpaca-templates.js')
+    script(src='./js/alpaca-schemas.js')
+    script(src='./js/alpaca-types.js')
+    script(src='./js/alpaca-viewer.min.js')
+    script(src='./js/alpaca-editor.min.js')
+    script.
+        $(document).ready(function(){
+            $('#dropdown-button').dropdown({
+                  inDuration: 300,
+                  outDuration: 225,
+                  constrainWidth: true, // Does not change width of dropdown to that of the activator
+                  hover: false, // Activate on hover
+                  gutter: 0, // Spacing from edge
+                  belowOrigin: true, // Displays dropdown below the button
+                  alignment: 'left', // Displays dropdown with edge aligned to the left of button
+                  stopPropagation: false // Stops event propagation
+            });  
+        });                  

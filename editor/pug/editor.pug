@@ -5,8 +5,13 @@ html
 		link(rel='stylesheet' href='./css/index.css')
 		link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
 		style.
+			footer {
+				display: inherit;
+				
+			}
 			html,body{
 				height: 100%;
+				
 			}
 			iframe{
 				margin: 0;
@@ -39,27 +44,29 @@ html
 				display: block;
 			}
 	
-	body.grey.lighten-3(ng-app='alpacaEditor' ng-controller='demoController' flow-init flow-prevent-drop)
+	body.grey.lighten-3(ng-app='alpacaEditor')
 
-		div(ng-hide='!loading')
-			include include/loading.pug
+		include include/header.pug
+		div(ng-controller='demoController' flow-init flow-prevent-drop)
 
-		div(ng-show='loading == false' ng-cloak)
-			include include/side-nav.pug
+			div(ng-hide='!loading')
+				include include/loading.pug
 
-			div(style='margin-left:75px;max-height:100%')
-				
-				.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "collections" && currentCollection')
-					include tabs/edit/edit.pug
-				.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "settings"')
-					include tabs/settings/settings.pug
-				.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "collections" && !currentCollection')
-					include tabs/collections/collections.pug
-				.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "metadata"')
-					include tabs/metadata/metadata.pug
-				.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "organization"')
-					include tabs/organization/organization.pug
+			div(ng-show='loading == false' ng-cloak)
+				//include include/side-nav.pug
 
+				div(style='margin-left:75px;max-height:100%')
+					
+					.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "collections" && currentCollection' style='margin-top:-35px; margin-left:-75px;')
+						include tabs/edit/edit.pug
+					//- .nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "settings"')
+					//- 	include tabs/settings/settings.pug
+					.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "collections" && !currentCollection')
+						include collections.pug
+					.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "metadata"')
+						include tabs/metadata/metadata.pug
+					.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "organization"')
+						include tabs/organization/organization.pug	
 	//TODO: REMOVE
 	script(src='https://code.jquery.com/jquery-2.2.4.min.js')
 	script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js')
@@ -99,7 +106,14 @@ html
 					$('body').removeClass('modal-open');
 				}
 			});
-		})
-
-
-		
+			$('#dropdown-button').dropdown({
+			      inDuration: 300,
+			      outDuration: 225,
+			      constrainWidth: true, // Does not change width of dropdown to that of the activator
+			      hover: false, // Activate on hover
+			      gutter: 0, // Spacing from edge
+			      belowOrigin: true, // Displays dropdown below the button
+			      alignment: 'left', // Displays dropdown with edge aligned to the left of button
+			      stopPropagation: false // Stops event propagation
+			    });
+		});

@@ -1,0 +1,64 @@
+div(ng-controller='collectionsController')
+	//- nav
+	//- 	div(class='nav-wrapper')
+	div(class='input-field')
+		i(class='material-icons prefix') search
+		input(id='search' type='text' ng-model='searchValue')
+		label(for='search') Search
+		//- .wrap
+		//- 	div(class='mat-div')
+		//- 		label(for ='search' class='mat-label')
+		//- 			i(class='material-icons') search
+		//- 		input(type='search' ng-model='searchValue' class='mat-input' id='search')
+				//- input(id='search' type='search' ng-model='searchValue' style='margin-bottom: 5%')
+				//- label(class='label-icon' for='search')
+				//- 	i(class='material-icons' style = 'color:black;') search
+
+	div(id='container-survey')
+		.container
+			.row
+				.col.s12.l4(dir-paginate="_collection in collections | filter:searchValue | itemsPerPage: 6") 
+					//a(class='card small' href="#" style='box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.7);')
+					.card.small(ng-click='collection.setCurrent(_collection, $index)')
+						a(href='' alt='#')
+							.card-image 
+								img(ng-src='{{_collection.img_url || "/img/placeholder2x1.svg"}}')
+								//span.card-title 
+								//h5 {{_collection.title}}
+							.card-content
+								p {{_collection.title}}
+								label Organization: {{_collection.organization}}
+								label Date: {{_collection.date}}
+
+		.fixed-action-btn
+			a.btn-floating.btn-large.orange(href='#' ng-click='collection.add()')
+				i.material-icons add
+		//- footer
+
+		.row.center
+			dir-pagination-controls(template-url="/pagination.html")
+			//include include/footer.pug
+		//fix me		
+		//- footer(style='height:0px; display:inherit;')
+		//- 	include include/footer.pug		
+	//- script(src='https://code.jquery.com/jquery-2.2.4.min.js')
+	//- script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js")
+	//- script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+	//- script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js')
+	//- script(src='https://www.gstatic.com/firebasejs/3.6.6/firebase.js')
+	//- script(src='https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js')
+	//- script.
+	//- 	var config = {
+	//- 		apiKey: "AIzaSyBCAJtmUVpWjFUIw4yLUuPhbCJWNufA_gU",
+	//- 		authDomain: "hotpath-f9c54.firebaseapp.com",
+	//- 		databaseURL: "https://hotpath-f9c54.firebaseio.com",
+	//- 		storageBucket: "hotpath-f9c54.appspot.com",
+	//- 		messagingSenderId: "340378037531"
+	//- 	};
+	//- 	firebase.initializeApp(config);
+	//- script(src='./js/alpaca-templates.js')
+	//- script(src='./js/alpaca-schemas.js')
+	//- script(src='./js/alpaca-types.js')
+	//- script(src='./js/alpaca-viewer.min.js')
+	//- script(src='./js/alpaca-editor.min.js')
+

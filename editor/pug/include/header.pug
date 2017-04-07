@@ -1,0 +1,36 @@
+div(ng-app='alpacaEditor' ng-controller='authCtrl')
+	mixin links
+		li.no
+			a(id='dropdown-button' href='#' data-activates='dropdown1').orange-text
+				img.circle.white.z-depth-1(ng-src = '{{user.profilePic || "/img/user.svg"}}' style='height: 40px;width: 40px; margin-top:12px;')
+				span(style='position:relative; bottom:15px; left: 10px;') {{user.firstName}}
+				i(class='material-icons right' style='position:relative; top:3px;') keyboard_arrow_down
+			ul.dropdown-content(id='dropdown1')
+				li: a(href='#!' ng-click='settingsPageRoute()') Profile
+				li: a(href='#!' ng-click="signOut()") Sign Out
+				li: a(href='#!' ng-click='organizationPageRoute()') Organization
+
+
+	header
+		nav.white: .nav-wrapper(style='padding: 0 40px')
+			a(href='#' ng-click='editorPageRoute()').brand-logo: img(src='img/hotpath_logo.svg' height='100%' style='padding: 10px')
+			a.button-collapse.orange-text(href='#' data-activates='side-nav')
+				i.material-icons menu
+
+			ul.right.hide-on-med-and-down
+				+links
+			ul#side-nav.side-nav
+				+links
+	//- script.
+	//- 	$(document).ready(function(){
+	//- 		$('#dropdown-button').dropdown({
+	//- 	      inDuration: 300,
+	//- 	      outDuration: 225,
+	//- 	      constrainWidth: true, // Does not change width of dropdown to that of the activator
+	//- 	      hover: false, // Activate on hover
+	//- 	      gutter: 0, // Spacing from edge
+	//- 	      belowOrigin: true, // Displays dropdown below the button
+	//- 	      alignment: 'left', // Displays dropdown with edge aligned to the left of button
+	//- 	      stopPropagation: false // Stops event propagation
+	//- 	    });	
+	//- 	});		
