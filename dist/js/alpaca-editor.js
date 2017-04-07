@@ -25648,11 +25648,23 @@ angular.module('alpacaEditor')
         $window.location.reload();
       }, 
       function(error) {
-        if (error = 'INVALID_EMAIL') {
+        // switch(error) {
+        //   case 'INVALID_EMAIL':
+        //     console.log('email invalid or not signed up');
+        //     alert('Invalid email!');
+        //   case 'INVALID_PASSWORD':
+        //     console.log('wrong password');
+        //     alert('wrong password');
+        //   default:
+        //     console.log(error);    
+        // }
+        if (error.code = 'INVALID_EMAIL') {
           console.log('email invalid or not signed up — trying to sign you up!');
+          alert('Invalid email or password!'); //FIXME ONLY GOES IN THIS CONDITION
           //$scope.signUp();
-        } else if (error = 'INVALID_PASSWORD') {
+        } else if (error.code = 'INVALID_PASSWORD') {
           console.log('wrong password!');
+          alert('Wrong password!');
         } else {
           console.log(error);
         }
@@ -25753,7 +25765,8 @@ angular.module('alpacaEditor')
       console.log("route to a new page");
       $state.go('organization');
       $window.location.reload();
-    }
+    };
+
 
 
 		$scope.init = function(){

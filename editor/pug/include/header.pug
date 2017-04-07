@@ -7,13 +7,13 @@ div(ng-app='alpacaEditor' ng-controller='authCtrl')
 				i(class='material-icons right' style='position:relative; top:3px;') keyboard_arrow_down
 			ul.dropdown-content(id='dropdown1')
 				li: a(href='#!' ng-click='settingsPageRoute()') Profile
-				li: a(href='#!' ng-click="signOut()") Sign Out
 				li: a(href='#!' ng-click='organizationPageRoute()') Organization
+				li: a(href='#!' ng-click="signOut()") Sign Out
 
 
 	header
 		nav.white: .nav-wrapper(style='padding: 0 40px')
-			a(href='#' ng-click='editorPageRoute()').brand-logo: img(src='img/hotpath_logo.svg' height='100%' style='padding: 10px')
+			a(href='#' ng-click='editorPageRoute()').brand-logo: img(src='img/hotpath_logo_small.svg' height='100%' style='padding: 10px; margin-left:-5;')
 			a.button-collapse.orange-text(href='#' data-activates='side-nav')
 				i.material-icons menu
 
