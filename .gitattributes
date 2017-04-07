@@ -1,0 +1,8 @@
+dist/js/alpaca-editor.js merge=ours
+dist/js/alpaca-types.js merge=ours
+dist/js/alpaca-editor.min.js merge=ours
+dist/js/alpaca-editor.min.js.map merge=ours
+dist/index.html merge=ours
+dist/editor.html merge=ours
+dist/viewer.html merge=ours
+dist/css/index.css merge=ours

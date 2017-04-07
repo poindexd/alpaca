@@ -1,0 +1,48 @@
+<html><head><!--base(href="/")--><link rel="stylesheet" href="./css/index.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/></head><body class="grey lighten-3" ng-app="alpacaEditor"><div ng-app="alpacaEditor" ng-controller="authCtrl"><header><nav class="white"><div class="nav-wrapper" style="padding: 0 40px;"><a class="brand-logo" href="#" ng-click="editorPageRoute()"><img src="img/hotpath_logo_small.svg" height="100%" style="padding: 10px; margin-left:-5;"/></a><a class="button-collapse orange-text" href="#" data-activates="side-nav"><i class="material-icons">menu</i></a><ul class="right hide-on-med-and-down"><li class="no"><a class="orange-text" id="dropdown-button" href="#" data-activates="dropdown1"><img class="circle white z-depth-1" ng-src="{{user.profilePic || &quot;/img/user.svg&quot;}}" style="height: 40px;width: 40px; margin-top:12px;"/><span style="position:relative; bottom:15px; left: 10px;">{{user.firstName}}</span><i class="material-icons right" style="position:relative; top:3px;">keyboard_arrow_down</i></a><ul class="dropdown-content" id="dropdown1"><li><a href="#!" ng-click="settingsPageRoute()">Profile</a></li><li><a href="#!" ng-click="organizationPageRoute()">Organization</a></li><li><a href="#!" ng-click="signOut()">Sign Out</a></li></ul></li></ul><ul class="side-nav" id="side-nav"><li class="no"><a class="orange-text" id="dropdown-button" href="#" data-activates="dropdown1"><img class="circle white z-depth-1" ng-src="{{user.profilePic || &quot;/img/user.svg&quot;}}" style="height: 40px;width: 40px; margin-top:12px;"/><span style="position:relative; bottom:15px; left: 10px;">{{user.firstName}}</span><i class="material-icons right" style="position:relative; top:3px;">keyboard_arrow_down</i></a><ul class="dropdown-content" id="dropdown1"><li><a href="#!" ng-click="settingsPageRoute()">Profile</a></li><li><a href="#!" ng-click="organizationPageRoute()">Organization</a></li><li><a href="#!" ng-click="signOut()">Sign Out</a></li></ul></li></ul></div></nav></header></div><div ng-controller="demoController" style="position:relative;overflow-y:auto;height:100%;padding:50px;"><div class="row" style="width:100%;"><div class="col s2 offset-s1"><label>Organizations</label><ul class="table-of-contents"><li><a href="#">Wellopp</a></li></ul><a class="btn" href="#" ng-click="organization.add()">New</a><br/><label>Settings</label><ul class="table-of-contents"><li ng-repeat="tab in organization.settings.tabs"><a href="#" ng-click="organization.settings.selectedTab = tab" ng-class="{active: organization.settings.selectedTab == tab}">{{tab}}</a></li></ul></div><div class="col s6"><div ng-show="organization.settings.selectedTab == &quot;Users&quot;"><!--h5 Users--><div class="collection"><table><thead><tr class="collection-item"><td style="padding-left:20px;">User</td><td>View</td><td>Edit</td><td>Admin</td><td></td></tr></thead><tbody><tr class="collection-item" ng-repeat="user in users"><td style="padding-left: 10px;"><img class="circle" ng-src="{{user.img}}" height="60" width="60" style="vertical-align:middle;"/><div style="display:inline-block;padding: 10px;vertical-align:middle;"><span>{{user.name}}</span><label>{{user.email}}</label></div></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><a href="#!" ng-click="devices.remove(device);"><i class="material-icons">close</i></a></td></tr></tbody></table><div class="collection-item center" style="border-top: 1px solid #e0e0e0;display:flex;align-items:center;"><input type="text" placeholder="Email" style="flex:1;"/><button class="btn waves-effect waves-light" style="margin-left:10px;">Add</button></div><!--.collection-item.center(style='border-top: 1px solid #e0e0e0;')a(href='#')
+	i.material-icons add
+--></div></div><div ng-show="organization.settings.selectedTab == &quot;Devices&quot;"><!--h5 Default Devices--><div class="collection"><table><thead><tr class="collection-item"><td style="padding-left: 15px;">Name</td><td>Width</td><td>Height</td><td></td></tr></thead><tbody><tr class="collection-item" ng-repeat="device in devices"><td style="padding-left: 15px;"><input ng-model="device.name"/></td><td><input ng-model="device.width"/></td><td><input ng-model="device.height"/></td><td class="center"><a href="#" ng-click="devices.splice($index, 1)"><i class="material-icons">close</i></a></td></tr><tr class="collection-item"><td style="padding-left: 15px;"><input ng-model="newDevice.name"/></td><td><input ng-model="newDevice.width"/></td><td><input ng-model="newDevice.height"/></td><td><button class="btn waves-effect waves-light" ng-click="addDevice()">Add</button></td></tr></tbody></table></div><!--ul.collectionli.collection-item.avatar(ng-repeat='device in devices')
+	i.material-icons.circle {{device.material_icon}}
+	p {{device.name}} 
+	label {{device.width}} x {{device.height}}
+	a.secondary-content(href='#!' ng-click='devices.remove(device);'): i.material-icons close
+li.collection-item
+	.row
+		.co.s4
+//li.collection-item.avatar
+	i.material-icons.circle person
+	input()
+--></div><div ng-show="organization.settings.selectedTab == &quot;Tags&quot;"><!--h5 Default Tags--><ul class="collection"><div class="collection-item"><tags-input ng-model="config.tags" replace-spaces-with-dashes="false"></tags-input></div></ul></div><div ng-show="organization.settings.selectedTab == &quot;Endpoints&quot;"><!--h5 Default Endpoints--><ul class="collection"><li class="collection-item"><div><label>Name</label><input type="text"/></div><div><label>URL</label><input type="text"/></div><div><label>Expression</label><br/><ui-codemirror ui-codemirror-opts="codemirrorOpts"></ui-codemirror></div></li><li class="collection-item center"><a href="#"><i class="material-icons">add</i></a></li></ul></div><div ng-show="organization.settings.selectedTab == &quot;Endpoints&quot;"><ul class="collection"><li class="collection-item"><div><label>Organization Name</label><input type="text" ng-model="newOrganization.name"/></div><div><label>Organization Email</label><input type="text" ng-model="newOrganization.email"/></div></li><li class="collection-item"><a class="btn" href="#" ng-click="organization.add()">Save</a></li></ul></div></div></div></div></body><script src="https://code.jquery.com/jquery-2.2.4.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js"></script><script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script><script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script><script>var config = {
+	apiKey: "AIzaSyBCAJtmUVpWjFUIw4yLUuPhbCJWNufA_gU",
+	authDomain: "hotpath-f9c54.firebaseapp.com",
+	databaseURL: "https://hotpath-f9c54.firebaseio.com",
+	storageBucket: "hotpath-f9c54.appspot.com",
+	messagingSenderId: "340378037531"
+};
+firebase.initializeApp(config);</script><script src="./js/alpaca-templates.js"></script><script src="./js/alpaca-schemas.js"></script><script src="./js/alpaca-types.js"></script><script src="./js/alpaca-viewer.min.js"></script><script src="./js/alpaca-editor.min.js"></script><script>$(document).ready(function(){
+	//- $('#device-dropdown').dropdown();
+	//- $('select').material_select();
+	//- $('.button-collapse').sideNav({
+	//- 	menuWidth: 75, // Default is 300
+	//- 	//edge: 'right', // Choose the horizontal origin
+	//- 	//closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+	//- 	draggable: true // Choose whether you can drag to open on touch screens
+	//- });
+	//- $('.modal').modal({
+	//- 	ready: function(){
+	//- 		$('body').addClass('modal-open');
+	//- 	},
+	//- 	complete: function(){
+	//- 		$('body').removeClass('modal-open');
+	//- 	}
+	//- });
+	$('#dropdown-button').dropdown({
+		  inDuration: 300,
+		  outDuration: 225,
+		  constrainWidth: true, // Does not change width of dropdown to that of the activator
+		  hover: false, // Activate on hover
+		  gutter: 0, // Spacing from edge
+		  belowOrigin: true, // Displays dropdown below the button
+		  alignment: 'left', // Displays dropdown with edge aligned to the left of button
+		  stopPropagation: false // Stops event propagation
+	});  
+});					</script></html>

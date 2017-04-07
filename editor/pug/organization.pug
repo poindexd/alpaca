@@ -1,0 +1,178 @@
+html
+	head
+		//base(href="/")
+		link(rel='stylesheet' href='./css/index.css')
+		link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
+	body.grey.lighten-3(ng-app='alpacaEditor')
+		include include/header.pug
+		div(ng-controller='demoController' style='position:relative;overflow-y:auto;height:100%;padding:50px')
+			.row(style='width:100%')
+				.col.s2.offset-s1
+					label Organizations
+					ul.table-of-contents
+						li
+							a(href='#') Wellopp
+				
+					a.btn(href='#' ng-click='organization.add()') New
+
+					br
+					label Settings
+					ul.table-of-contents
+						li(ng-repeat='tab in organization.settings.tabs')
+							a(href='#' ng-click='organization.settings.selectedTab = tab' ng-class='{active: organization.settings.selectedTab == tab}') {{tab}}
+
+				.col.s6
+					div(ng-show='organization.settings.selectedTab == "Users"')
+						//h5 Users
+						.collection
+							table
+								thead
+									tr.collection-item
+										td(style='padding-left:20px') User
+										td View
+										td Edit
+										td Admin
+										td
+								tbody
+									tr.collection-item(ng-repeat='user in users')
+										td(style='padding-left: 10px')
+											img.circle(ng-src='{{user.img}}' height='60' width='60' style='vertical-align:middle')
+											div(style='display:inline-block;padding: 10px;vertical-align:middle')
+												span {{user.name}}
+												label {{user.email}}
+										td
+											input(type='checkbox')
+										td
+											input(type='checkbox')
+										td
+											input(type='checkbox')
+										td
+											a(href='#!' ng-click='devices.remove(device);')
+												i.material-icons close
+
+							.collection-item.center(style='border-top: 1px solid #e0e0e0;display:flex;align-items:center')
+								input(type='text' placeholder='Email' style='flex:1')
+								button.btn.waves-effect.waves-light(style='margin-left:10px') Add
+							//.collection-item.center(style='border-top: 1px solid #e0e0e0;')
+								a(href='#')
+									i.material-icons add
+
+					div(ng-show='organization.settings.selectedTab == "Devices"')
+						//h5 Default Devices
+						.collection
+							table
+								thead
+									tr.collection-item
+										td(style='padding-left: 15px') Name
+										td Width
+										td Height
+										td
+								tbody
+									tr.collection-item(ng-repeat='device in devices')
+										td(style='padding-left: 15px'): input(ng-model='device.name')
+										td: input(ng-model='device.width')
+										td: input(ng-model='device.height')
+										td.center: a(href='#' ng-click='devices.splice($index, 1)'): i.material-icons close
+									tr.collection-item
+										td(style='padding-left: 15px'): input(ng-model='newDevice.name')
+										td: input(ng-model='newDevice.width')
+										td: input(ng-model='newDevice.height')
+										td: button.btn.waves-effect.waves-light(ng-click='addDevice()') Add
+
+						//ul.collection
+							li.collection-item.avatar(ng-repeat='device in devices')
+								i.material-icons.circle {{device.material_icon}}
+								p {{device.name}} 
+								label {{device.width}} x {{device.height}}
+								a.secondary-content(href='#!' ng-click='devices.remove(device);'): i.material-icons close
+							li.collection-item
+								.row
+									.co.s4
+							//li.collection-item.avatar
+								i.material-icons.circle person
+								input()
+
+					div(ng-show='organization.settings.selectedTab == "Tags"')
+						//h5 Default Tags
+						ul.collection: .collection-item
+							tags-input(ng-model='config.tags' replace-spaces-with-dashes='false')
+
+					div(ng-show='organization.settings.selectedTab == "Endpoints"')
+						//h5 Default Endpoints
+						ul.collection
+							li.collection-item
+								div
+									label Name
+									input(type='text')
+								div
+									label URL
+									input(type='text')
+								div
+									label Expression
+									br
+									ui-codemirror(ui-codemirror-opts='codemirrorOpts')
+							li.collection-item.center
+								a(href='#')
+									i.material-icons add
+
+					div(ng-show='organization.settings.selectedTab == "Endpoints"')
+						ul.collection
+							li.collection-item
+								div
+									label Organization Name
+									input(type='text' ng-model='newOrganization.name')
+								div
+									label Organization Email
+									input(type='text' ng-model='newOrganization.email')
+
+							li.collection-item
+								a.btn(href='#' ng-click='organization.add()') Save
+	script(src='https://code.jquery.com/jquery-2.2.4.min.js')
+	script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js")
+	script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+	script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js')
+	script(src='https://www.gstatic.com/firebasejs/3.6.6/firebase.js')
+	script(src='https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js')
+	script.
+		var config = {
+			apiKey: "AIzaSyBCAJtmUVpWjFUIw4yLUuPhbCJWNufA_gU",
+			authDomain: "hotpath-f9c54.firebaseapp.com",
+			databaseURL: "https://hotpath-f9c54.firebaseio.com",
+			storageBucket: "hotpath-f9c54.appspot.com",
+			messagingSenderId: "340378037531"
+		};
+		firebase.initializeApp(config);
+	script(src='./js/alpaca-templates.js')
+	script(src='./js/alpaca-schemas.js')
+	script(src='./js/alpaca-types.js')
+	script(src='./js/alpaca-viewer.min.js')
+	script(src='./js/alpaca-editor.min.js')
+	script.
+		$(document).ready(function(){
+			//- $('#device-dropdown').dropdown();
+			//- $('select').material_select();
+			//- $('.button-collapse').sideNav({
+			//- 	menuWidth: 75, // Default is 300
+			//- 	//edge: 'right', // Choose the horizontal origin
+			//- 	//closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+			//- 	draggable: true // Choose whether you can drag to open on touch screens
+			//- });
+			//- $('.modal').modal({
+			//- 	ready: function(){
+			//- 		$('body').addClass('modal-open');
+			//- 	},
+			//- 	complete: function(){
+			//- 		$('body').removeClass('modal-open');
+			//- 	}
+			//- });
+			$('#dropdown-button').dropdown({
+				  inDuration: 300,
+				  outDuration: 225,
+				  constrainWidth: true, // Does not change width of dropdown to that of the activator
+				  hover: false, // Activate on hover
+				  gutter: 0, // Spacing from edge
+				  belowOrigin: true, // Displays dropdown below the button
+				  alignment: 'left', // Displays dropdown with edge aligned to the left of button
+				  stopPropagation: false // Stops event propagation
+			});  
+		});					

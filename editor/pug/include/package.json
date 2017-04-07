@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "angular-validation-match": "^1.9.0"
+  }
+}
