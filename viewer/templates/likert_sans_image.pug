@@ -13,6 +13,6 @@
 	//Likert/MULTIPLE CHOICE
 	.radioset.radioset-sans-image(): ul
 		li(ng-repeat='option in slide.options')
-			input(type='radio', name='radio[]', id='radio-{{$index}}' ng-click='$timeout(advanceSlide, 400)')
-			label(for='radio-{{$index}}')
+			input(type='radio', name='radio-{{slide.id}}[]', id='radio-{{slide.id}}-{{$index}}' ng-click='$timeout(advanceSlide, 400)')
+			label(for='radio-{{slide.id}}-{{$index}}')
 	.text-labels: .text-label(ng-repeat='option in slide.options') {{option.text}}

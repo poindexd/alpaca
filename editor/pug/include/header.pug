@@ -1,15 +1,4 @@
 div(ng-app='alpacaEditor' ng-controller='authCtrl')
-	mixin links
-		li.no
-			a(id='dropdown-button' href='#' data-activates='dropdown1').orange-text
-				img.circle.white.z-depth-1(ng-src = '{{user.profilePic || "/img/user.svg"}}' style='height: 40px;width: 40px; margin-top:12px;')
-				span(style='position:relative; bottom:15px; left: 10px;') {{user.firstName}}
-				i(class='material-icons right' style='position:relative; top:3px;') keyboard_arrow_down
-			ul.dropdown-content(id='dropdown1')
-				li: a(href='#!' ng-click='settingsPageRoute()') Profile
-				li: a(href='#!' ng-click='organizationPageRoute()') Organization
-				li: a(href='#!' ng-click="signOut()") Sign Out
-
 
 	header
 		nav.white: .nav-wrapper(style='padding: 0 40px')
@@ -17,10 +6,25 @@ div(ng-app='alpacaEditor' ng-controller='authCtrl')
 			a.button-collapse.orange-text(href='#' data-activates='side-nav')
 				i.material-icons menu
 
-			ul.right.hide-on-med-and-down
-				+links
+			ul.right.hide-on-med-and-down(ng-cloak)
+				li
+					a(id='dropdown-button' href='#' data-activates='dropdown1' style='height:64px').orange-text
+						img.circle.white.z-depth-1(ng-src = '{{user.profilePic || "/img/user.svg"}}' style='height: 40px;width: 40px; margin-top:12px;')
+						span(style='position:relative; bottom:15px; left: 10px;') {{user.firstName}}
+						i(class='material-icons right' style='position:relative; top:3px;') keyboard_arrow_down
+					ul.dropdown-content(id='dropdown1')
+						li: a(href='#!' ng-click='settingsPageRoute()') Profile
+						li: a(href='#!' ng-click='organizationPageRoute()') Organization
+						li: a(href='#!' ng-click="signOut()") Sign Out
+			
 			ul#side-nav.side-nav
-				+links
+				//li
+					a
+						img.circle.white.z-depth-1(ng-src = '{{user.profilePic || "/img/user.svg"}}' style='height: 40px;width: 40px; margin-top:12px;')
+						span(style='position:relative; bottom:15px; left: 10px;') {{user.firstName}}
+				li: a(href='#!' ng-click='settingsPageRoute()') Profile
+						li: a(href='#!' ng-click='organizationPageRoute()') Organization
+						li: a(href='#!' ng-click="signOut()") Sign Out
 	//- script.
 	//- 	$(document).ready(function(){
 	//- 		$('#dropdown-button').dropdown({
