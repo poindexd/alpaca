@@ -21,22 +21,12 @@ li.collection-item
 	messagingSenderId: "340378037531"
 };
 firebase.initializeApp(config);</script><script src="./js/alpaca-templates.js"></script><script src="./js/alpaca-schemas.js"></script><script src="./js/alpaca-types.js"></script><script src="./js/alpaca-viewer.min.js"></script><script src="./js/alpaca-editor.min.js"></script><script>$(document).ready(function(){
-	//- $('#device-dropdown').dropdown();
-	//- $('select').material_select();
-	//- $('.button-collapse').sideNav({
-	//- 	menuWidth: 75, // Default is 300
-	//- 	//edge: 'right', // Choose the horizontal origin
-	//- 	//closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-	//- 	draggable: true // Choose whether you can drag to open on touch screens
-	//- });
-	//- $('.modal').modal({
-	//- 	ready: function(){
-	//- 		$('body').addClass('modal-open');
-	//- 	},
-	//- 	complete: function(){
-	//- 		$('body').removeClass('modal-open');
-	//- 	}
-	//- });
+	$('.button-collapse').sideNav({
+		menuWidth: 300, // Default is 300
+		//edge: 'right', // Choose the horizontal origin
+		//closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+		draggable: true // Choose whether you can drag to open on touch screens
+	});
 	$('#dropdown-button').dropdown({
 		  inDuration: 300,
 		  outDuration: 225,

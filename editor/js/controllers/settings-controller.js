@@ -64,27 +64,7 @@ angular.module('alpacaEditor')
                     console.log('error', error);
                 })
             }
-
-         // $scope.auth.$changeEmail({
-         //      oldEmail: $rootScope.currentUser.email,
-         //      newEmail: $scope.email
-         //    }).then(function() {
-         //      console.log('Email changed successfully');
-         //    }).catch(function(error) {
-         //      console.log('Error', error);
-         //    });
-
-         // $scope.UpdateEmailAsync(email){
-         //    $scope.email = email;
-         // }
-            
-
-        // $scope.firstName = "Haemin";
-        // $scope.lastName = "Park";
-        // $scope.email = 'haemin@wellopp.com';
-        // $scope.profilePic = 'http://danpoindexter.com/img/danpoindexter.png';
-        // $scope.orgPic = './img/logo_butterfly_only.svg';
-
-        $scope.editorEnabled = false;
+            $scope.emailDisabled = true;
+            $scope.editorEnabled = false;
 
 }]);  
