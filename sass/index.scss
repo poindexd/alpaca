@@ -26,6 +26,11 @@
   margin-bottom: 200px;
 }
 
+.btn-flat:focus, .btn-flat:hover {
+    background-color: rgba(0,0,0,0.1);
+    box-shadow: none;
+}
+
 .card-content {
 
   max-width: 100%;

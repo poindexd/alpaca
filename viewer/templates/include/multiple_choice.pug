@@ -1,0 +1,5 @@
+.radioset.nobar: ul
+	li(ng-repeat='option in slide.options')
+		input(type='radio', name='radio-{{slide.id}}[]', id='radio-{{slide.id}}-{{$index}}')
+		label(for='radio-{{slide.id}}-{{$index}}')
+.text-labels: .text-label(ng-repeat='option in slide.options') {{option.text}}

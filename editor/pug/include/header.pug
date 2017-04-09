@@ -2,9 +2,19 @@ div(ng-app='alpacaEditor' ng-controller='authCtrl')
 
 	header
 		nav.white: .nav-wrapper(style='padding: 0 40px')
-			a(href='#' ng-click='editorPageRoute()').brand-logo: img(src='img/hotpath_logo_small.svg' height='100%' style='padding: 10px; margin-left:-5;')
-			a.button-collapse.orange-text(href='#' data-activates='side-nav')
-				i.material-icons menu
+
+
+			ul.left
+				a(href='#' ng-click='indexPageRoute()'): img(src='img/hotpath_logo_small.svg' height='100%' style='padding: 10px; margin-left:-5;')
+				a.button-collapse.orange-text(href='#' data-activates='side-nav')
+					i.material-icons menu
+
+			ul.left(ng-show='currentCollection' ng-cloak)
+				//a(ng-click='collection.setCurrent(null, null)'): i.material-icons chevron_left
+
+			ul.left(ng-cloak)
+				a.breadcrumb(ng-click='collection.setCurrent(null, null)') Collections
+				a(ng-show='currentCollection').breadcrumb {{currentCollection.title}}
 
 			ul.right.hide-on-med-and-down(ng-cloak)
 				li

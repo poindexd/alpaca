@@ -44,10 +44,10 @@ html
 				display: block;
 			}
 	
-	body.grey.lighten-3(ng-app='alpacaEditor')
+	body.grey.lighten-3(ng-app='alpacaEditor' ng-controller='demoController')
 
 		include include/header.pug
-		div(ng-controller='demoController' flow-init flow-prevent-drop)
+		div( flow-init flow-prevent-drop)
 
 			div(ng-hide='!loading')
 				include include/loading.pug

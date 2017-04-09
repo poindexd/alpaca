@@ -191,7 +191,7 @@ angular.module('alpacaEditor').controller('demoController', [
     		var uploadTask = $scope.storage.$put(file);
     		uploadTask.$complete(function(snapshot) {
   				console.log(snapshot.downloadURL);
-  				model = snapshot.downloadURL;
+  				slide[field.key] = snapshot.downloadURL;
   				console.log('model', model);
 				});
 			}

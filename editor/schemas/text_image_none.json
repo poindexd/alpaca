@@ -1,0 +1,8 @@
+[	
+	{
+		"key": "content",
+		"label": "Content",
+		"type": "textarea",
+		"placeholder": "content"
+	}
+]

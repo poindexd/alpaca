@@ -150,7 +150,8 @@ angular.module('alpacaEditor').directive("wrapInFrame", [
           
           var iframeBody = angular.element(iframe.contentWindow.document.body);
 
-          $("link[rel='stylesheet'], link[type='text/css'], link[href$='.css']").clone().appendTo($("iframe").contents().find("head"));
+          $("<link rel='stylesheet' href='./css/index.css'/>").appendTo($("iframe").contents().find("head"));
+          //$("link[rel='stylesheet'], link[type='text/css'], link[href$='.css']").clone().appendTo($("iframe").contents().find("head"));
           $('<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>').appendTo($("iframe").contents().find("head"));
 
           $compile($children)($scope.$parent, function(elem) {

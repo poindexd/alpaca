@@ -1,0 +1,13 @@
+[	
+	{
+		"key": "image",
+		"label": "Image",
+		"type": "file"
+	},
+	{
+		"key": "content",
+		"label": "Content",
+		"type": "textarea",
+		"placeholder": "content"
+	}
+]
