@@ -41,13 +41,13 @@ html
 					+links
 				ul#side-nav.side-nav
 					+links
-		.container(style='width:85%; height: 81%;')
-			div(class='col s4 z-depth-6 card-panel' style='width:40%; margin-left:55%; margin-top:20px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0)')
+		.container(style='width:85%; height: 82%;')
+			div(class='col s4 z-depth-6 card-panel' style='width:40%; margin-left:52%; margin-top:30px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0); padding:5px;')
 				form
 					div(style='clear:both; color:rgba(68, 68, 68, 1);')
 						h4(style='float:left;') Sign in
-						p(style='float:right') or 
-							span: a(href='#!' ng-click='signUpRoute()' style='color:rgb(255, 155, 0); font-weight:bold;') sign up 
+						p(style='float:right; color:rgba(68, 68, 68, 1);') or 
+							span: a(href='#!' ng-click='signUpRoute()' style='color:rgb(255, 155, 0); font-weight:bold; font-size:18px;') sign up 
 					div(class="row")
 					div(class='row')
 					div(class='row')
@@ -66,7 +66,7 @@ html
 					//- 			input(type='checkbox' id='remember-me')
 					div(class='row').center
 						btn(class='btn waves-effect btn' style='background:rgba(0, 188, 212, 0.7); width:75%' ng-click="signIn()") Sign In
-					p(style='font-weight:bold'): a(href="#modal1" style='color:rgb(255, 155, 0)') Forgot password
+					p: a(href="#modal1" style='color:rgb(255, 155, 0)') Forgot password
 			div(id="modal1" class="modal" style='overflow:hidden;')
 				a(href="#!" class="modal-action modal-close" style='float:right; color:black;')
 					i(class='material-icons') clear

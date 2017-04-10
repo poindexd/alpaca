@@ -11,24 +11,24 @@ body {
 
 header, footer{
 	display: flex;
-  height: 100px;
+  	height: 100px;
  //  background-color: #00bcd4;
 }
 
 main {
-	display: flex;
-	flex: 1 0;
-	align-content: center;
-	align-items: center;
+	// display: flex;
+	// flex: 1 0;
+	// align-content: center;
+	// align-items: center;
 
-	background: #fbfbfb;
+	//background: #fbfbfb;
 }
 
-header, footer{
-	display: flex;
-  height: 100px;
- //  background-color: #00bcd4;
+.container {
+	margin-top:5%;
+	margin-bottom:5%;
 }
+
 
 .content-wrapper{
 	height: 100vh;
@@ -36,6 +36,11 @@ header, footer{
 	flex-direction: column;
 	overflow: hidden;
 }
+
+.card {
+	box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.16), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
+}
+
 
 alpaca-slides{
   width: 100%;

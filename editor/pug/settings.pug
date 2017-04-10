@@ -15,6 +15,9 @@ html
             .green-text-hover:hover{
                 color: green;
             }
+            .blue-text-hover:hover {
+                color: #00bcd4;
+            }
             .btn-flat:focus, .btn-flat:hover {
 
                 background-color: rgba(0,0,0,0.1);
@@ -23,8 +26,8 @@ html
     body.grey.lighten-3(ng-app='alpacaEditor')
         include include/header.pug
         div(ng-controller= 'settingsController' flow-init flow-files-submitted='setImage($flow)')
-            .container
-                h3 Edit Profile
+            .container(style='margin-top: 5%;')
+                h3 &nbsp; Edit Profile
                 .row
                     .col.s12.m4.l4
                         img.circle.white.z-depth-1(ng-src = '{{user.profilePic || "/img/user.svg"}}' class='responsive-img' style='height: 250px;width: 250px;' )
@@ -34,18 +37,23 @@ html
                             i(class='material-icons').left insert_photo
                         //a(href='#' ng-click='removeImage()' style='margin-top:30px; margin-bottom:15px; width: 30%;') Remove image
                     .col.s12.m8.l8
-                        label(for='firstname') First Name
-                        input(id='firstname' ng-model='user.firstName')
-                        label(for='lastname') Last Name
-                        input(id='lastname' ng-model='user.lastName')
+                        .row
+                            label(for='firstname') First Name
+                            input(placeholder='First Name' id='firstname' type='text' ng-model='user.firstName')
+                        .row   
+                            label(for='lastname') Last Name  
+                            input(placeholder='Last Name' id='lastname' type='text' ng-model='user.lastName')
+                                
                         //div(ng-init='user.email')    
-                        div(ng-show='emailDisabled' style='position:relative;')
+                        .row(ng-show='emailDisabled' style='position:relative;')
+
                             label(for='email' data-error='wrong' data-success='right') Email  
                             input(ng-disabled='true' class='validate' id='email' type='email' ng-model='currentUser.email')
-                            a.btn-flat(style='position:absolute; right:2px; top: 25px;' ng-click = 'emailDisabled = false;user.email=currentUser.email')
+                            a.blue-text-hover.btn-flat(style='position:absolute; right:2px; top: 25px;' ng-click = 'emailDisabled = false;user.email=currentUser.email')
                                 i(href='#' class='material-icons') edit
 
-                        div(ng-show='!emailDisabled' style='position:relative;')
+                        .row(ng-show='!emailDisabled' style='position:relative;')
+
                             label(for='email' data-error='wrong' data-success='right') Email  
                             input(class='validate' id='email' type='email' ng-model='user.email')
                             a.red-text-hover.btn-flat(style='position:absolute; right:2px; top: 25px;' ng-click = 'emailDisabled = true')
