@@ -194,6 +194,12 @@ angular.module('alpacaEditor').controller('demoController', [
   				slide[field.key] = snapshot.downloadURL;
   				console.log('model', model);
 				});
+			},
+			removeFile: function(slide, field, model){
+				var storageRef = firebase.storage().ref("slides").child(slide.$id).child(field.key);
+    		$scope.storage = $firebaseStorage(storageRef);
+    		$scope.storage.$delete();
+    		slide[field.key] = null;
 			}
 		}
 	};

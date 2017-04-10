@@ -28,7 +28,7 @@ angular.module('alpacaViewer').directive('alpacaSlide', [
 					if ($scope.single)
 						element.html(template);
 					else
-						element.after(template);
+						element.append(template);
 					$compile(template)($scope);
 				})
 				.catch(function(error){

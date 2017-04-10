@@ -186,9 +186,7 @@ html
 				display: block;
 			}
 			.pitch-wrap {
-				    
-				    margin-top: -35;
-				    margin-left:-75px;
+				    width: 100%;
 				    margin-bottom: 42px;
 				    text-align: center;
 				    background: linear-gradient(90deg, #fccf9b 30%, #00bcd4 100%);
@@ -207,8 +205,8 @@ html
 			div(ng-show='loading == false' ng-cloak)
 				//include include/side-nav.pug
 
-				div(style='max-height:100%')
-					.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "collections" && currentCollection' style='margin-top:-35px;')
+				div(style='max-height:calc(100% - 64px); overflow:hidden')
+					.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "collections" && currentCollection')
 						include tabs/edit/edit.pug
 					//- .nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "settings"')
 					//- 	include tabs/settings/settings.pug

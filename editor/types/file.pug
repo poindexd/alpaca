@@ -6,5 +6,8 @@ br
 			i.material-icons.left cloud_upload
 
 	.col.s12.center(ng-if='model')
-		p model
-		.btn {{$flow.files[0].name}}
+		.row
+			.col.s6.offset-s3
+				img.responsive-img(ng-src='{{model}}')
+		.btn(ng-click='fn.removeFile(slide, field, model)') Remove
+			i.material-icons.left close

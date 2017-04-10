@@ -681,7 +681,7 @@ angular.module('alpacaViewer').directive('alpacaSlide', [
 					if ($scope.single)
 						element.html(template);
 					else
-						element.after(template);
+						element.append(template);
 					$compile(template)($scope);
 				})
 				.catch(function(error){
@@ -708,7 +708,7 @@ angular.module('alpacaViewer').controller('alpacaViewerController', ['$scope', f
 
 		slides: [
 			{
-				id: 1, title: 'Slide 1', template: 'green'
+				id: 1, title: 'Slide 1', template: 'likert_image_left'
 			},
 			{
 				id: 2, title: 'Slide 2', template: 'orange'
@@ -737,6 +737,6 @@ angular.module('alpacaViewer').controller('alpacaViewerController', ['$scope', f
 
 	}
 
-	$scope.selected = $scope.survey.slides[4];
+	$scope.selected = $scope.survey.slides[0];
 
 }]);
