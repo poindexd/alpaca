@@ -8,6 +8,7 @@ angular.module('alpacaEditor')
     "$window",
     "$firebaseObject",
     "$firebaseStorage",
+    "$timeout",
 
  function($scope,
   $rootScope,
@@ -16,7 +17,8 @@ angular.module('alpacaEditor')
   $location, 
   $window,
   $firebaseObject,
-  $firebaseStorage) {
+  $firebaseStorage,
+  $timeout) {
 
     $scope.signIn = function () {
       $rootScope.auth.$signInWithEmailAndPassword(
@@ -24,7 +26,7 @@ angular.module('alpacaEditor')
       ).then(function(user) {
         console.log(user);
         $rootScope.currentUser = user;
-        $state.go('editor');
+        $state.go('index');
         $window.location.reload();
       }, 
       function(error) {
@@ -63,9 +65,9 @@ angular.module('alpacaEditor')
             lastName: lastName,
             email: email
           }).then(function() {
-            $state.go('editor').then(function(){
+            $state.go('index').then(function(){
               $window.location.reload(); //this doesn't work
-              console.log('routing to editor');
+              console.log('routing to index');
             });
           })
           console.log('user' + firebaseUser.uid + 'created successfully!');
@@ -89,6 +91,7 @@ angular.module('alpacaEditor')
 
 
     $scope.signOut = function() {
+      
       $scope.auth.$signOut().then(function() {
         $state.go('index');
         $window.location.reload();
@@ -105,18 +108,19 @@ angular.module('alpacaEditor')
       $window.location.reload();
     };
 
-    $scope.editorPageRoute = function()  {
-      var firebaseUser = $rootScope.auth.$getAuth();
-      if (firebaseUser) {
-        console.log("Signed in as:", firebaseUser.uid);
-        $state.go('editor');
-        $window.location.reload();
-      } else {
-        console.log("Please sign in");
-        $state.go('login');
-        $window.location.reload();
-      }
-    };
+
+    // $scope.editorPageRoute = function()  {
+    //   var firebaseUser = $rootScope.auth.$getAuth();
+    //   if (firebaseUser) {
+    //     console.log("Signed in as:", firebaseUser.uid);
+    //     $state.go('editor');
+    //     $window.location.reload();
+    //   } else {
+    //     console.log("Please sign in");
+    //     $state.go('login');
+    //     $window.location.reload();
+    //   }
+    // };
 
     $scope.indexPageRoute = function()  {
       var firebaseUser = $rootScope.auth.$getAuth();
@@ -157,23 +161,19 @@ angular.module('alpacaEditor')
         //$scope.userEmail = firebaseUser.email;
 
 
-
+        console.log('auth state changed');
         if($rootScope.currentUser) {
+          $scope.isLoggedIn = true;
           var ref = firebase.database().ref('users').child($rootScope.currentUser.uid);
           $scope.user = $firebaseObject(ref);
           $scope.user.$bindTo($scope, 'user');
-          $scope.isLoggedIn = true;
-          //console.log('user is logged in');
-          //$scope.userName = $rootScope.currentUser.firstName;
-          //$scope.userName = user.firstName;
-          // console.log($scope.userName); //undefined
-          // console.log($rootScope.currentUser);
-          // console.log($scope.user); 
-          // console.log(firebaseUser.email); //haemin@wellopp.com
-          // console.log($scope.user.email); //undefined
+          //$scope.isLoggedIn = true;
 
         } else {
-          $scope.isLoggedIn = false;
+          $timeout(function(){
+            $scope.isLoggedIn = false;
+          }, 100);
+          //$scope.isLoggedIn = false;
         }
 
       
@@ -183,6 +183,7 @@ angular.module('alpacaEditor')
 		}
 
 		$scope.init();
+    $scope.searchValue ='';
   }
 
 ]);

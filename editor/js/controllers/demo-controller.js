@@ -470,7 +470,8 @@ angular.module('alpacaEditor').controller('demoController', [
 	$scope.init = function(){
 		$scope.organization.init();
 		$scope.collection.init();
-	}
+		}
+
 	
 	$scope.init();
 

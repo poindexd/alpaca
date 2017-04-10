@@ -1,23 +1,24 @@
-div(ng-controller='collectionsController')
+div(ng-controller='authCtrl')
 	//- nav
 	//- 	div(class='nav-wrapper')
-	div(class='input-field')
+	div(class='pitch-wrap' ng-show='!isLoggedIn && isLoggedIn !== undefined')
+		.container
+			.row(style='')
+				.col.s12.l8
+					p.flow-text.white-text(style='font-size:30px;')
+						b Step up your data game with us
+				.col.s12.l4(style='margin-top:35px;')
+					.btn(style='background:rgba(68, 68, 68, 0.72);') Learn more
+					.btn(style='background:#ee6e73; margin-left:10px;' ng-click="signUpRoute()") Join Us	
+	div(class='input-field container' style='width:50%;')
 		i(class='material-icons prefix') search
 		input(id='search' type='text' ng-model='searchValue')
 		label(for='search') Search
-		//- .wrap
-		//- 	div(class='mat-div')
-		//- 		label(for ='search' class='mat-label')
-		//- 			i(class='material-icons') search
-		//- 		input(type='search' ng-model='searchValue' class='mat-input' id='search')
-				//- input(id='search' type='search' ng-model='searchValue' style='margin-bottom: 5%')
-				//- label(class='label-icon' for='search')
-				//- 	i(class='material-icons' style = 'color:black;') search
 
 	div(id='container-survey')
 		.container
 			.row
-				.col.s12.l4(dir-paginate="_collection in collections | filter:searchValue | itemsPerPage: 6") 
+				.col.s12.l4(dir-paginate="_collection in collections | filter:{title:searchValue} | itemsPerPage: 6") 
 					//a(class='card small' href="#" style='box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.7);')
 					.card.small(ng-click='collection.setCurrent(_collection, $index)')
 						a(href='' alt='#')
@@ -31,7 +32,7 @@ div(ng-controller='collectionsController')
 								label Date: {{_collection.date}}
 
 		.fixed-action-btn
-			a.btn-floating.btn-large.orange(href='#' ng-click='collection.add()')
+			a.btn-floating.btn-large(style='background:#fab109' href='#' ng-click='collection.add()')
 				i.material-icons add
 		//- footer
 

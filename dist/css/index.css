@@ -7805,11 +7805,6 @@ label {
 .nga-fade .card {
   box-shadow: none; }
 
-.input-field {
-  width: 50%;
-  margin-left: 20%;
-  margin-top: -1%; }
-
 #container-survey {
   padding-top: 20px; }
   #container-survey .card-content {
@@ -7819,7 +7814,7 @@ label {
     height: 300px; }
 
 .pagination li.active {
-  background-color: #faae60; }
+  background-color: #fab109; }
 
 #collections-tab nav ul li {
   clear: left; }
