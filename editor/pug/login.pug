@@ -18,21 +18,19 @@ html
 				//- vertical-align: middle;
 				//- background: #4ECDC4;
 			}
-			h1 {
-			font-size: 42px;
-			background:-webkit-linear-gradient(#f6d365 0%, #fda085 51%, #f6d365 100%);
-			//padding-bottom: 10px;
-			text-align:center;
-			-webkit-background-clip: text;
-			-webkit-text-fill-color:transparent;
+			.container {
+				background: white;
+
 			}
-			#login-page {
-				 width: 500px;
-				 margin-top:50px;
+			.row {
+				margin:5px 5px 5px 5px;
+			}
+			i {
+				color:rgba(68, 68, 68, 0.8);
 			}
 	body(ng-app='alpacaEditor' ng-controller='authCtrl')
 		mixin links
-				li.no: a(href='#' ng-click="signUpRoute()").orange-text Sign Up
+				//- li.no: a(href='#' ng-click="signUpRoute()").orange-text Sign Up
 		header
 			nav.white: .nav-wrapper(style='padding: 0 40px')
 				a(href='#' ng-click='indexPageRoute()').brand-logo: img(src='img/hotpath_logo_small.svg' height='100%' style='padding: 10px; margin-left:-5;')
@@ -43,12 +41,13 @@ html
 					+links
 				ul#side-nav.side-nav
 					+links
-		div(id='login-page' class='row')
-			//img(src='img/hotpath_logo.svg' height='100px' style='padding: 10px; margin-left:19%;')
-			
-			div(class='col s12 z-depth-6 card-panel')
-				form(class='login-form')
-					h1 Sign In 
+		.container(style='width:85%; height: 81%;')
+			div(class='col s4 z-depth-6 card-panel' style='width:40%; margin-left:55%; margin-top:20px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0)')
+				form
+					div(style='clear:both; color:rgba(68, 68, 68, 1);')
+						h4(style='float:left;') Sign in
+						p(style='float:right') or 
+							span: a(href='#!' ng-click='signUpRoute()' style='color:rgb(255, 155, 0); font-weight:bold;') sign up 
 					div(class="row")
 					div(class='row')
 					div(class='row')
@@ -65,25 +64,21 @@ html
 					//- 	div(class='input-field col s12 m12 l12 login-text')
 					//- 		label(for='remember-me') Remember me 
 					//- 			input(type='checkbox' id='remember-me')
-					div(class='row')
-						div(class='input-field col s6 m6 l6')
-							p: a(href="#modal1") Reset Password
-					div(class='row')
-						div(class='input-field col s12')
-							a(href='#' class='btn waves-effect btn col s12' style='background:#faae60' ng-click="signIn()") Sign In
-					div(class='row')
+					div(class='row').center
+						btn(class='btn waves-effect btn' style='background:rgba(0, 188, 212, 0.7); width:75%' ng-click="signIn()") Sign In
+					p(style='font-weight:bold'): a(href="#modal1" style='color:rgb(255, 155, 0)') Forgot password
 			div(id="modal1" class="modal" style='overflow:hidden;')
 				a(href="#!" class="modal-action modal-close" style='float:right; color:black;')
 					i(class='material-icons') clear
 				div(class="modal-content")
-					h1(style='text-align:center; font-size:40px;') Reset Password
+					h1(style='text-align:center; font-size:40px;') Reset password
 					p A password message will be sent to your email address. Please click the link in that message to reset your password
 					div(class='input-field col s12')
 							i(class='material-icons prefix') mail_outline
 							input(class='validate' id='email' type='email' ng-model='email')
 							label(for='email') Email
 				div(class="modal-footer")
-					a(href="#!" class='btn waves-effect btn modal-trigger' style='background:#faae60;' ng-click="resetPassword()") Reset Password
+					a(href="#!" class='btn waves-effect btn modal-trigger' style='background:rgba(0, 188, 212, 0.7);') Reset password
 
 					//- a(href="#!" class="btn waves-effect waves-light modal-action modal-close") Close
 					
