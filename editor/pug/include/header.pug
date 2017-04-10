@@ -5,7 +5,9 @@ div(ng-app='alpacaEditor' ng-controller='authCtrl')
 
 
 			ul.left
-				a(href='#' ng-click='indexPageRoute()'): img(src='img/hotpath_logo_small.svg' height='100%' style='padding: 10px; margin-left:-5;')
+				a(href='#' ng-click='indexPageRoute()')
+					img(src='img/hotpath_logo_small.svg' height='100%' style='padding: 10px; margin-left:-5;' ng-cloak)
+					img(src='img/hotpath_logo_text.png' height='100%' style='padding: 10px; margin-left:-5;' ng-show='!isLoggedIn && isLoggedIn !== undefined' ng-cloak)
 				a.button-collapse.orange-text(href='#' data-activates='side-nav')
 					i.material-icons menu
 
@@ -13,11 +15,11 @@ div(ng-app='alpacaEditor' ng-controller='authCtrl')
 				//a(ng-click='collection.setCurrent(null, null)'): i.material-icons chevron_left
 
 			ul.left(ng-cloak)
-				a.breadcrumb(ng-click='collection.setCurrent(null, null)') Collections
+				//- a.breadcrumb(ng-click='collection.setCurrent(null, null)') Collections
 				a(ng-show='currentCollection').breadcrumb {{currentCollection.title}}
 
 			ul.right.hide-on-med-and-down(ng-cloak)
-				li
+				li(ng-show='isLoggedIn')
 					a(id='dropdown-button' href='#' data-activates='dropdown1' style='height:64px').orange-text
 						img.circle.white.z-depth-1(ng-src = '{{user.profilePic || "/img/user.svg"}}' style='height: 40px;width: 40px; margin-top:12px;')
 						span(style='position:relative; bottom:15px; left: 10px;') {{user.firstName}}
@@ -26,15 +28,19 @@ div(ng-app='alpacaEditor' ng-controller='authCtrl')
 						li: a(href='#!' ng-click='settingsPageRoute()') Profile
 						li: a(href='#!' ng-click='organizationPageRoute()') Organization
 						li: a(href='#!' ng-click="signOut()") Sign Out
+				li(ng-cloak)
+					li(ng-show='!isLoggedIn && isLoggedIn !== undefined' ng-cloak): .btn(href='#' ng-click="signInPageRoute()" style='background:#444') Sign In
+					//li.no: a(href='#' ng-click="signUpRoute()").orange-text Sign Up	
 			
 			ul#side-nav.side-nav
 				//li
 					a
 						img.circle.white.z-depth-1(ng-src = '{{user.profilePic || "/img/user.svg"}}' style='height: 40px;width: 40px; margin-top:12px;')
 						span(style='position:relative; bottom:15px; left: 10px;') {{user.firstName}}
-				li: a(href='#!' ng-click='settingsPageRoute()') Profile
-						li: a(href='#!' ng-click='organizationPageRoute()') Organization
-						li: a(href='#!' ng-click="signOut()") Sign Out
+				li: a(ng-show='isLoggedIn' href='#!' ng-click='settingsPageRoute()') Profile
+				li: a(ng-show='isLoggedIn' href='#!' ng-click='organizationPageRoute()') Organization
+				li: a(ng-show='isLoggedIn' href='#!' ng-click="signOut()") Sign Out
+				li: a(ng-show='!isLoggedIn && isLoggedIn !== undefined' href='#!' ng-click='signInPageRoute()') Sign In	
 	//- script.
 	//- 	$(document).ready(function(){
 	//- 		$('#dropdown-button').dropdown({

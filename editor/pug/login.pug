@@ -70,9 +70,9 @@ html
 							p: a(href="#modal1") Reset Password
 					div(class='row')
 						div(class='input-field col s12')
-							a(href='#' class='btn waves-effect btn col s12' style='background:linear-gradient(#f6d365 0%, #fda085 51%, #f6d365 100%)' ng-click="signIn()") Sign In
+							a(href='#' class='btn waves-effect btn col s12' style='background:#faae60' ng-click="signIn()") Sign In
 					div(class='row')
-			div(id="modal1" class="modal")
+			div(id="modal1" class="modal" style='overflow:hidden;')
 				a(href="#!" class="modal-action modal-close" style='float:right; color:black;')
 					i(class='material-icons') clear
 				div(class="modal-content")
@@ -83,7 +83,7 @@ html
 							input(class='validate' id='email' type='email' ng-model='email')
 							label(for='email') Email
 				div(class="modal-footer")
-					a(href="#!" class='btn waves-effect btn modal-trigger' style='background:linear-gradient(#f6d365 0%, #fda085 51%, #f6d365 100%)' ng-click="resetPassword()") Reset Password
+					a(href="#!" class='btn waves-effect btn modal-trigger' style='background:#faae60;' ng-click="resetPassword()") Reset Password
 
 					//- a(href="#!" class="btn waves-effect waves-light modal-action modal-close") Close
 					
