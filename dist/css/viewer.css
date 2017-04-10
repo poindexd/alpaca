@@ -7719,10 +7719,6 @@ main {
   flex: 1 0;
   align-content: center; }
 
-header, footer {
-  display: flex;
-  height: 100px; }
-
 sup {
   font-size: 0.5em !important;
   vertical-align: super; }
@@ -7822,6 +7818,10 @@ body {
   min-height: 100vh;
   flex-direction: column;
   font-family: "Raleway", sans-serif; }
+
+header, footer {
+  display: flex;
+  height: 100px; }
 
 main {
   display: flex;

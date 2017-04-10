@@ -9,6 +9,12 @@ body {
 	//overflow: hidden;
 }
 
+header, footer{
+	display: flex;
+  height: 100px;
+ //  background-color: #00bcd4;
+}
+
 main {
 	display: flex;
 	flex: 1 0;

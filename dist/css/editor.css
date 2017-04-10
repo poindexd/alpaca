@@ -7719,10 +7719,6 @@ main {
   flex: 1 0;
   align-content: center; }
 
-header, footer {
-  display: flex;
-  height: 100px; }
-
 sup {
   font-size: 0.5em !important;
   vertical-align: super; }
@@ -7816,6 +7812,9 @@ label {
 
 .survey-image {
   height: 50px; }
+
+header {
+  height: 100px; }
 
 #slide-nav {
   height: 100%; }

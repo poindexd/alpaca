@@ -7719,10 +7719,6 @@ main {
   flex: 1 0;
   align-content: center; }
 
-header, footer {
-  display: flex;
-  height: 100px; }
-
 sup {
   font-size: 0.5em !important;
   vertical-align: super; }

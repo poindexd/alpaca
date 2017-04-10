@@ -6,3 +6,6 @@ dist/index.html merge=ours
 dist/editor.html merge=ours
 dist/viewer.html merge=ours
 dist/css/index.css merge=ours
+dist/signup.html merge=ours
+dist/login.html merge=ours
+dist/collections.html merge=ours

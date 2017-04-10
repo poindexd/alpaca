@@ -55,17 +55,17 @@ html
 			div(ng-show='loading == false' ng-cloak)
 				//include include/side-nav.pug
 
-				div(style='margin-left:75px;max-height:100%')
+				div(style='max-height:100%')
 					
-					.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "collections" && currentCollection' style='margin-top:-35px; margin-left:-75px;')
+					.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "collections" && currentCollection')
 						include tabs/edit/edit.pug
 					//- .nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "settings"')
 					//- 	include tabs/settings/settings.pug
-					.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "collections" && !currentCollection')
+					//-.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "collections" && !currentCollection')
 						include collections.pug
-					.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "metadata"')
+					//-.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "metadata"')
 						include tabs/metadata/metadata.pug
-					.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "organization"')
+					//-.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "organization"')
 						include tabs/organization/organization.pug	
 	//TODO: REMOVE
 	script(src='https://code.jquery.com/jquery-2.2.4.min.js')
