@@ -9,7 +9,9 @@ angular.module('alpacaViewer').directive('alpacaSlide', [
 				//return;
 			//$scope.linked = true;
 
+
 			if (!$scope.slide){
+
 				//$scope.slide = {};
 				//$scope.slide.template = $scope.template;
 				//angular.forEach($scope.schema, function(field){

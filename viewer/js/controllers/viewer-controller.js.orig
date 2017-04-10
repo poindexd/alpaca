@@ -7,10 +7,14 @@ angular.module('alpacaViewer').controller('alpacaViewerController', ['$scope', f
 			// }
 			// ,
 			{
+<<<<<<< HEAD
+				id: 1, title: 'Slide 1', template: 'likert_image_left'
+=======
 				id: 2, template: 'likert_image_left', 
 				image: 'https://dummyimage.com/600x400/ffffff/00bcd4.jpg&text=img.', 
 				content: "likert image left", 
 				options: [{text:'A'}, {text:'B'}, {text:'C'}, {text:'D'}, {text:'E'}]
+>>>>>>> 97f1ea247d700496c96b3c0ecd023b0c57cb9c8e
 			},
 			{
 				id:3, template: 'likert_image_none',

@@ -9,3 +9,6 @@ dist/css/index.css merge=ours
 dist/signup.html merge=ours
 dist/login.html merge=ours
 dist/collections.html merge=ours
+dist/js/alpaca-viewer.min.js.map merge=ours
+dist/js/alpaca-viewer.min.js merge=ours
+dist/js/alpaca-viewer.js merge=ours

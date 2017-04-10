@@ -24,7 +24,7 @@ html
 
 			}
 			.row {
-				margin:5px 5px 5px 5px;
+				margin:2px 2px 2px 2px;
 			}
 			i {
 				color:rgba(68, 68, 68, 0.8);
@@ -48,8 +48,8 @@ html
 					+links
 				ul#side-nav.side-nav
 					+links
-		.container(style='width:85%; height: 81%;')
-			div(class='col s4 z-depth-6 card-panel' style='width:40%; margin-left:55%; margin-top:20px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0)')
+		.container(style='width:85%; height: 82%;')
+			div(class='col s4 z-depth-6 card-panel' style='width:40%; margin-left:52%; margin-top:30px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0);padding:5px;')
 				form
 					h4(style='color:rgba(68, 68, 68, 1);') Sign up
 					div(class="row")
@@ -83,8 +83,8 @@ html
 					//- 		div(data-ng-show='myForm.confirmPassword.$error.match') Passwords do not match!
 					div(class='row' style='margin-bottom:-3px;').center
 						btn(class='btn waves-effect btn' ng-click="signUp(firstName, lastName, email, password)" style='background:rgba(0, 188, 212, 0.7);width:75%') Sign Up
-					p(style='color:rgba(68, 68, 68, 1); font-weight:bold;') Already have an account? &nbsp;&nbsp;
-						a(href='#' style='color:rgb(255, 155, 0)' ng-click='signInPageRoute()') Sign in
+					p(style='color:rgba(68, 68, 68, 1);') Already have an account? &nbsp;&nbsp;
+						a(href='#' style='color:rgb(255, 155, 0); font-weight:bold;font-size:18px;' ng-click='signInPageRoute()') Sign in
 		
 			script(src='https://code.jquery.com/jquery-2.2.4.min.js')
 			script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js')
