@@ -61,10 +61,6 @@ angular.module('alpacaViewer').controller('alpacaViewerController', ['$scope', f
 
 	}
 
-<<<<<<< HEAD
 	$scope.selected = $scope.survey.slides[0];
-=======
-	$scope.selected = $scope.survey.slides[2];
->>>>>>> 97f1ea247d700496c96b3c0ecd023b0c57cb9c8e
 
 }]);
