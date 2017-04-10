@@ -1,0 +1,36 @@
+@import "index";
+
+body {
+ 	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+	font-family: "Raleway", sans-serif;
+	
+	//overflow: hidden;
+}
+
+main {
+	display: flex;
+	flex: 1 0;
+	align-content: center;
+	align-items: center;
+
+	background: #fbfbfb;
+}
+
+header, footer{
+	display: flex;
+  height: 100px;
+ //  background-color: #00bcd4;
+}
+
+.content-wrapper{
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+alpaca-slides{
+  width: 100%;
+}
