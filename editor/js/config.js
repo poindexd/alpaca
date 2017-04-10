@@ -29,10 +29,10 @@ angular.module('alpacaEditor')
       url:'/login.html',
       controller: 'authCtrl'
     })
-    .state('editor', {
-      url: '/editor.html',
-      controller: 'authCtrl'
-    })
+    // .state('editor', {
+    //   url: '/editor.html',
+    //   controller: 'authCtrl'
+    // })
     .state('index', {
       url: '/index.html',
       controller: 'authCtrl'
