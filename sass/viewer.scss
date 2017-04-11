@@ -21,14 +21,12 @@ main {
 	// align-content: center;
 	// align-items: center;
 
-	//background: #fbfbfb;
+	background: #fbfbfb;
 }
 
-.container {
-	margin-top:5%;
-	margin-bottom:5%;
+.radioset{
+	margin-top:60px;
 }
-
 
 .content-wrapper{
 	height: 100vh;
@@ -37,11 +35,13 @@ main {
 	overflow: hidden;
 }
 
-.card {
-	box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.16), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
-}
-
-
 alpaca-slides{
   width: 100%;
+}
+
+alpaca-slide {
+	height: 100%;
+	//display: flex;
+	//flex-direction: column;
+	//align-content: center;
 }

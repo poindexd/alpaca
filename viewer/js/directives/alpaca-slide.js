@@ -27,10 +27,11 @@ angular.module('alpacaViewer').directive('alpacaSlide', [
 				$templateRequest('alpaca-template-' + $scope.slide.template)
 				.then(function(tpl){
 					var template = angular.element(tpl);
-					if ($scope.single)
+					if ($scope.single){
 						element.html(template);
-					else
+					}else{
 						element.append(template);
+					}
 					$compile(template)($scope);
 				})
 				.catch(function(error){
@@ -48,7 +49,8 @@ angular.module('alpacaViewer').directive('alpacaSlide', [
 				slide: '=?',
 				template: '=?',
 				schema: '=?',
-				single: '=?'
+				single: '=?',
+				fn: '='
 			}
 		};
 }]);

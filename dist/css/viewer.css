@@ -7823,9 +7823,11 @@ header, footer {
   display: flex;
   height: 100px; }
 
-.container {
-  margin-top: 5%;
-  margin-bottom: 5%; }
+main {
+  background: #fbfbfb; }
+
+.radioset {
+  margin-top: 60px; }
 
 .content-wrapper {
   height: 100vh;
@@ -7833,8 +7835,8 @@ header, footer {
   flex-direction: column;
   overflow: hidden; }
 
-.card {
-  box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.16), 0 0px 0px 0 rgba(0, 0, 0, 0.12); }
-
 alpaca-slides {
   width: 100%; }
+
+alpaca-slide {
+  height: 100%; }

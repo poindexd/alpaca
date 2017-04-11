@@ -6,7 +6,7 @@ angular.module('alpacaViewer').directive('alpacaSlides', [
 			var template = {};
 
 			if (Array.isArray($scope.slides)){
-				template = angular.element("<div swiper-repeat='slide in slides' swiper-repeat-selected='selected' disable-touch='true'><alpaca-slide slide='slide'/></div>");
+				template = angular.element("<div swiper-repeat='slide in slides' swiper-repeat-selected='selected'><alpaca-slide slide='slide' fn='fn'/></div>");
 				element.append(template);
 				//alert('hi');
 			} else {

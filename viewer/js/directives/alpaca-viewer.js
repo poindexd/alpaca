@@ -4,7 +4,8 @@ angular.module('alpacaViewer').directive('alpacaViewer', function() {
 		templateUrl: 'alpaca-template-index',
 		scope: {
 			slides: '=',
-			selected: '='
+			selected: '=',
+			fn: '='
 		}
 	};
 });
