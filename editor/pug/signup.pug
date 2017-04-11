@@ -10,7 +10,7 @@ html
 			}
 			body {
 				
-				background:linear-gradient(50deg, rgb(250, 174, 96) 25%, #ffffff);
+				background:linear-gradient(50deg, rgba(255, 173, 0, 0.68), rgba(255, 116, 0, 0.63));
 				display: flex;
 				min-height: 100vh;
 				flex-direction: column;
@@ -48,43 +48,41 @@ html
 					+links
 				ul#side-nav.side-nav
 					+links
-		.container(style='width:85%; height: 82%;')
-			div(class='col s4 z-depth-6 card-panel' style='width:40%; margin-left:52%; margin-top:30px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0);padding:5px;')
-				form
-					h4(style='color:rgba(68, 68, 68, 1);') Sign up
-					div(class="row")
-					div(class='row')
-					div(class='row')
-						div(class='input-field col s12')
-							i(class='material-icons prefix') perm_identity
-							input(id='firstName' type='text' ng-model='firstName' required)
-							label(for='firstName') First Name
-					div(class='row')
-						div(class='input-field col s12')
-							i(class='material-icons prefix') perm_identity
-							input(id='lastName' type='text' ng-model='lastName' required)
-							label(for='lastName') Last Name	
-					div(class='row')
-						div(class='input-field col s12')
-							i(class='material-icons prefix') mail_outline
-							input(class='validate' id='email' type='email' ng-model='email')
-							label(for='email' data-error='wrong' data-success='right') Email
-					div(class='row')
-						div(class='input-field col s12')
-							i(class='material-icons prefix') lock_outline
-							input(id='password' type='password' ng-model='password')
-							label(for='password') Password
+		div(style='min-height: 500px; height:calc(100% - 64px);padding:40px;position:relative;')
+			.container.white(style='width:85%; height: 100%;'): .row(style='height:100%')
+				.col.s12.l6.valign-wrapper.hide-on-med-and-down(style='height:100%; padding:60px;')
+					img.responsive-img.valign(src='/img/hamster.png')
+				.col.s12.l6.valign-wrapper(style='height:100%')
+					form.valign(style='padding:60px')
+						div(style='color:rgba(68, 68, 68, 1);')
+							h4(style='color:rgba(68, 68, 68, 1);') Sign up
+							div(class='input-field col s12')
+								i(class='material-icons prefix') perm_identity
+								input(id='firstName' type='text' ng-model='firstName' required)
+								label(for='firstName') First Name
+							div(class='input-field col s12')
+								i(class='material-icons prefix') perm_identity
+								input(id='lastName' type='text' ng-model='lastName' required)
+								label(for='lastName') Last Name	
+							div(class='input-field col s12')
+								i(class='material-icons prefix') mail_outline
+								input(class='validate' id='email' type='email' ng-model='email')
+								label(for='email' data-error='wrong' data-success='right') Email
+							div(class='input-field col s12')
+								i(class='material-icons prefix') lock_outline
+								input(id='password' type='password' ng-model='password')
+								label(for='password') Password
 							
-					//- div(class='row')
-					//- 	div(class='input-field col s12')
-					//- 		i(class='material-icons prefix') lock_outline
-					//- 		input(id='confirm' type='password' data-match="password" ng-model='passwordConfirm')
-					//- 		label(for='confirm') Confirm Password
-					//- 		div(data-ng-show='myForm.confirmPassword.$error.match') Passwords do not match!
-					div(class='row' style='margin-bottom:-3px;').center
-						btn(class='btn waves-effect btn' ng-click="signUp(firstName, lastName, email, password)" style='background:rgba(0, 188, 212, 0.7);width:75%') Sign Up
-					p(style='color:rgba(68, 68, 68, 1);') Already have an account? &nbsp;&nbsp;
-						a(href='#' style='color:rgb(255, 155, 0); font-weight:bold;font-size:18px;' ng-click='signInPageRoute()') Sign in
+							//- div(class='row')
+							//- 	div(class='input-field col s12')
+							//- 		i(class='material-icons prefix') lock_outline
+							//- 		input(id='confirm' type='password' data-match="password" ng-model='passwordConfirm')
+							//- 		label(for='confirm') Confirm Password
+							//- 		div(data-ng-show='myForm.confirmPassword.$error.match') Passwords do not match!
+							div(class='row').col.s12.center
+								btn(class='btn waves-effect btn' ng-click="signUp(firstName, lastName, email, password)" style='background:rgba(0, 188, 212, 0.7);width:50%; margin-bottom:20px;') Sign Up
+							p(style='font-weight:bold;color:rgba(68, 68, 68, 1);') Already have an account? &nbsp;&nbsp;
+								a(href='#' style='color:rgb(255, 155, 0); font-weight:bold;font-size:18px;' ng-click='signInPageRoute()') Sign in
 		
 			script(src='https://code.jquery.com/jquery-2.2.4.min.js')
 			script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js')
