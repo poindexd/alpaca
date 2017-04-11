@@ -9,7 +9,7 @@ html
 				//- margin: auto;
 			}
 			body {
-				background: linear-gradient(90deg, #faf0cd, #fab397);
+				background: linear-gradient(90deg, rgba(255, 173, 0, 0.68), rgba(255, 116, 0, 0.63));
 				display: flex;
 				min-height: 100vh;
 				flex-direction: column;
@@ -37,9 +37,10 @@ html
 					+links
 		div(style='min-height: 500px; height:calc(100% - 64px);padding: 40px;position:relative;')
 			.container.white(style='width:85%; height: 100%;'): .row(style='height:100%')
-				.col.s12.l8.hide-on-med-and-down(style='height:100%;background:url("/img/path.png");background-size:cover;')
-				.col.s12.l4.valign-wrapper(style='height:100%')
-					form.valign(style='padding:40px')
+				.col.s12.l6.valign-wrapper.hide-on-med-and-down(style='height:100%; padding:60px;')
+					img.responsive-img.valign(src='/img/hamster.png')
+				.col.s12.l6.valign-wrapper(style='height:100%')
+					form.valign(style='padding:60px')
 						div(style='color:rgba(68, 68, 68, 1);')
 							h4(style='float:left;') Sign in
 							p(style='float:right; color:rgba(68, 68, 68, 1);') or 
@@ -52,25 +53,22 @@ html
 								i(class='material-icons prefix') lock_outline
 								input(id='password' type='password' ng-model='password')
 								label(for='password') Password
-						//- div(class='row')
-						//- 	div(class='input-field col s12 m12 l12 login-text')
-						//- 		label(for='remember-me') Remember me 
-						//- 			input(type='checkbox' id='remember-me')
-						div(class='row').center
-							btn(class='btn waves-effect btn' style='background:rgba(0, 188, 212, 0.7); width:75%' ng-click="signIn()") Sign In
-						p: a(href="#modal1" style='color:rgb(255, 155, 0)') Forgot password
+						
+							div(class='row'): .col.s12.center
+								btn(class='btn waves-effect btn' style='background:rgba(0, 188, 212, 0.7); width:50%;' ng-click="signIn()") Sign In
+							p: a(href="#modal1" style='color:rgb(255, 155, 0); font-weight:bold;') Forgot password
 				div(id="modal1" class="modal" style='overflow:hidden;')
 					a(href="#!" class="modal-action modal-close" style='float:right; color:black;')
 						i(class='material-icons') clear
-					div(class="modal-content")
-						h1(style='text-align:center; font-size:40px;') Reset password
-						p A password message will be sent to your email address. Please click the link in that message to reset your password
+					div(class="modal-content" style='color:rgba(68, 68, 68, 1); padding:40px;')
+						h1(style='text-align:center; font-size:40px; ') Reset password
+						p(style='font-size:18px;') A password message will be sent to your email address. Please click the link in that message to reset your password
 						div(class='input-field col s12')
 								i(class='material-icons prefix') mail_outline
 								input(class='validate' id='email' type='email' ng-model='email')
 								label(for='email') Email
 					div(class="modal-footer")
-						a(href="#!" class='btn waves-effect btn modal-trigger' style='background:rgba(0, 188, 212, 0.7);') Reset password
+						a(href="#!" class='btn waves-effect btn modal-trigger' style='background:rgba(0, 188, 212, 0.7); width:20%;') Reset
 
 						//- a(href="#!" class="btn waves-effect waves-light modal-action modal-close") Close
 						
