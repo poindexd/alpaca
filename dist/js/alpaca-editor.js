@@ -25193,7 +25193,7 @@ angular.module('alpacaEditor', [
 	'angularResizable',	//Make elements user-resizable
   'ui.codemirror',    //Code editor, for writing jsonata
 	'angularUtils.directives.dirPagination', //pagination 
-  'validation.match',	
+  'validation.match',	//remove??
 	'alpacaViewer', 
 	'alpacaSchemas', 
 	'alpacaTypes',
@@ -25518,6 +25518,11 @@ angular.module('alpacaEditor').controller('demoController', [
 		
 	}
 
+	//DELETE
+	$scope.collectionSettingsTrue = function(){
+		$scope.collectionSettings = true;
+	}
+
 	$scope.codemirrorOpts = {
 		//mode: {name: 'jsonata', jsonata: jsonata, template: true},
 		autoCloseBrackets: {
@@ -25733,6 +25738,8 @@ angular.module('alpacaEditor').controller('demoController', [
 		}
 	} //collection
 
+	$scope.collectionSettings = false;
+	
 	$scope.$watch('currentCollection', function(){
 		$scope.slide.load($scope.currentCollection);
 		$scope.collections.$save($scope.collection.index);

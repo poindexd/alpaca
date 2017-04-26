@@ -65,7 +65,7 @@ html
 			div(ng-show='loading == false' ng-cloak)
 				//include include/side-nav.pug
 
-				div(style='max-height:calc(100% - 64px); overflow:hidden')
+				div(style='max-height:calc(100% - 64px); width:100%;overflow:hidden')
 					.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "collections" && currentCollection')
 						include tabs/edit/edit.pug
 					//- .nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "settings"')

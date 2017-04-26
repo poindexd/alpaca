@@ -1,4 +1,4 @@
-//#slide-nav(style='padding-bottom:200px;padding-right:10px;position:relative;overflow-y:auto')
+//-#slide-nav(style='padding-bottom:200px;padding-right:10px;position:relative;overflow-y:auto')
 	.card-panel.waves-effect.waves-light(ng-repeat='slide in survey.slides' ng-click='setSlide(slide)' ng-class='{selected: selected==slide}' style='display:block') {{slide.title}}
 
 include templates.pug
@@ -6,18 +6,18 @@ include templates.pug
 #slide-nav(style='padding-bottom:150px;padding-right:10px;overflow-y:auto')
 	div(ng-repeat='list in [slides]' ng-include='"list.html"')
 
-		//div(style='position: absolute; bottom: 100px; left: 100px; width:100%')
+		//-div(style='position: absolute; bottom: 100px; left: 100px; width:100%')
 	.fixed-action-btn(style='position:absolute;bottom:87px')
 		a.btn-floating.btn-large(style='background:#fab109')
 			i.material-icons.large add
 		ul
 			li: a.btn-floating.blue(ng-click='slide.add("slide")'): i.material-icons crop_landscape
-			//li: a.btn-floating.red(ng-click='slide.add("folder")'): i.material-icons folder
-			//li: a.btn-floating.green(ng-click='slide.add("external")'): i.material-icons folder_special
+			//-li: a.btn-floating.red(ng-click='slide.add("folder")'): i.material-icons folder
+			//-li: a.btn-floating.green(ng-click='slide.add("external")'): i.material-icons folder_special
 			li: a.btn-floating.purple(ng-click='search()'): i.material-icons search
 
 
-	//.center
+	//-.center
 		.btn-floating.btn-large.waves-effect.waves-light(style='margin:5px' ng-click='slide.add()')
 			i.material-icons add
 		.btn-floating.btn-large.waves-effect.waves-light(ng-click='search()' style='margin:5px')

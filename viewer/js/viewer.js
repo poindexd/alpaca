@@ -1,4 +1,5 @@
 angular.module('alpacaViewer', [
 	'alpacaTemplates', 
-	'swiperRepeat'
+	'swiperRepeat',
+	'firebase'
 ]);

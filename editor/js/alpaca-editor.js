@@ -9,7 +9,7 @@ angular.module('alpacaEditor', [
 	'angularResizable',	//Make elements user-resizable
   'ui.codemirror',    //Code editor, for writing jsonata
 	'angularUtils.directives.dirPagination', //pagination 
-  'validation.match',	
+  'validation.match',	//remove??
 	'alpacaViewer', 
 	'alpacaSchemas', 
 	'alpacaTypes',

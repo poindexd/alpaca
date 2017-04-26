@@ -2,11 +2,11 @@
 	li(ng-repeat='option in slide.options')
 		input(
 			type='radio'
-			name='radio-{{slide.id}}[]'
-			id='radio-{{slide.id}}-{{$index}}'
+			name='radio-{{slide.$id}}[]'
+			id='radio-{{slide.$id}}-{{$index}}'
 			ng-click='fn.result("option", option, slide);fn.next(400)'
 		)
 		label(
-			for='radio-{{slide.id}}-{{$index}}'
+			for='radio-{{slide.$id}}-{{$index}}'
 		)
 .text-labels: .text-label(ng-repeat='option in slide.options') {{option.text}}

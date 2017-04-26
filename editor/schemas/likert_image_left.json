@@ -5,6 +5,11 @@
 		"type": "file"
 	},
 	{
+		"key": "audio",
+		"label": "Audio",
+		"type": "file"
+	},
+	{
 		"key": "content",
 		"label": "Content",
 		"type": "textarea",
@@ -20,6 +25,12 @@
 				"label": "Text",
 				"type": "input",
 				"placeholder": "text"
+			},
+			{
+				"key": "weight",
+				"label": "Weight",
+				"type": "input",
+				"frame": "metadata"
 			}
 		]
 	}

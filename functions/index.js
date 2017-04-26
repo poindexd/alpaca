@@ -9,17 +9,18 @@ exports.score = functions.database.ref('results')
 	
 	var survey = event.data.val();
 	console.log(survey);
-	
-	var endpointsRef = admin.database().ref('endpoints')
-		.orderByChild('collection_id')
-		.equalTo(survey.id);
+
+	//var endpointsRef = admin.database().ref('endpoints')
+	//	.orderByChild('collection_id')
+	//	.equalTo(survey.id);
 
 	var scoredRef = admin.database().ref('scored');
 
-	scoredRef.push({'test':true});
+	return scoredRef.push({'test':true});
 
 	//Get endpoints for the collection
-	endpointsRef.once('value').then(snapshot => {
+	/*
+	return endpointsRef.once('value').then(snapshot => {
 		//For each endpoint, score and push result
 		snapshot.forEach(child => {
 			var endpoint = child.val();
@@ -34,6 +35,6 @@ exports.score = functions.database.ref('results')
 
 		});
 	});
-	
-	res.end();
+	*/
+	//res.end();
 });

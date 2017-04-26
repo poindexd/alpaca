@@ -4,8 +4,19 @@ html
 		link(rel='stylesheet' href='./css/viewer.css')
 	
 	body(ng-app='alpacaViewer' ng-controller='alpacaViewerController')
-		alpaca-viewer(slides='survey.slides' selected='selected' fn='fn')
+		alpaca-viewer(slides='slides' selected='selected' fn='fn')
 
 	script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+	script(src='https://www.gstatic.com/firebasejs/3.6.6/firebase.js')
+	script(src='https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js')
+	script.
+		var config = {
+			apiKey: "AIzaSyBCAJtmUVpWjFUIw4yLUuPhbCJWNufA_gU",
+			authDomain: "hotpath-f9c54.firebaseapp.com",
+			databaseURL: "https://hotpath-f9c54.firebaseio.com",
+			storageBucket: "hotpath-f9c54.appspot.com",
+			messagingSenderId: "340378037531"
+		};
+		firebase.initializeApp(config);
 	script(src='./js/alpaca-templates.js')
 	script(src='./js/alpaca-viewer.min.js')
