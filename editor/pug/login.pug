@@ -53,7 +53,6 @@ html
 								i(class='material-icons prefix') lock_outline
 								input(id='password' type='password' ng-model='password')
 								label(for='password') Password
-						
 							div(class='row'): .col.s12.center
 								btn(class='btn waves-effect btn' style='background:rgba(0, 188, 212, 0.7); width:50%;' ng-click="signIn()") Sign In
 							p: a(href="#modal1" style='color:rgb(255, 155, 0); font-weight:bold;') Forgot password
@@ -68,7 +67,7 @@ html
 								input(class='validate' id='email' type='email' ng-model='email')
 								label(for='email') Email
 					div(class="modal-footer")
-						a(href="#!" class='btn waves-effect btn modal-trigger' style='background:rgba(0, 188, 212, 0.7); width:20%;') Reset
+						a(href="#!" class='btn waves-effect btn modal-trigger' style='background:rgba(0, 188, 212, 0.7); width:20%;' ng-click='resetPassword()') Reset
 
 						//- a(href="#!" class="btn waves-effect waves-light modal-action modal-close") Close
 						

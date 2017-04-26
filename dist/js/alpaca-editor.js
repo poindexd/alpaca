@@ -25198,7 +25198,8 @@ angular.module('alpacaEditor', [
 	'alpacaSchemas', 
 	'alpacaTypes',
   'ui.router',
-  'angular-content-editable'
+  'angular-content-editable',
+  'UserValidation'
 ]);
 
 angular.module('alpacaEditor').filter('toArray', function () {
@@ -25307,6 +25308,19 @@ angular.module('alpacaEditor').directive('alpacaField', [
 			}
 		};
 }]);
+
+angular.module('UserValidation', []).directive('validPasswordC', 
+	function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, elm, attrs, ctrl) {
+            ctrl.$parsers.unshift(function (viewValue, $scope) {
+                var noMatch = viewValue != scope.myForm.password.$viewValue
+                ctrl.$setValidity('noMatch', !noMatch)
+            })
+        }
+    }
+})
 angular.module('alpacaEditor')
 	.controller('collectionsController', ['$scope','$state', function($scope, $state) {
 
@@ -26016,6 +26030,7 @@ angular.module('alpacaEditor')
             lastName: lastName,
             email: email
           }).then(function() {
+            alert('Signed up successfully!')
             $state.go('index').then(function(){
               $window.location.reload(); //this doesn't work
               console.log('routing to index');
@@ -26035,6 +26050,7 @@ angular.module('alpacaEditor')
         $scope.email
         ).then(function() {
           console.log("Password reset email sent successfully!");
+          alert("Password reset email will be sent you shortly!");
       }).catch(function(error) {
           console.error("Error: ", error);
       }); 

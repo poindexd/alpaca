@@ -14,7 +14,8 @@ angular.module('alpacaEditor', [
 	'alpacaSchemas', 
 	'alpacaTypes',
   'ui.router',
-  'angular-content-editable'
+  'angular-content-editable',
+  'UserValidation'
 ]);
 
 angular.module('alpacaEditor').filter('toArray', function () {

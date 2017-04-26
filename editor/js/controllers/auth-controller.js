@@ -65,6 +65,7 @@ angular.module('alpacaEditor')
             lastName: lastName,
             email: email
           }).then(function() {
+            alert('Signed up successfully!')
             $state.go('index').then(function(){
               $window.location.reload(); //this doesn't work
               console.log('routing to index');
@@ -84,6 +85,7 @@ angular.module('alpacaEditor')
         $scope.email
         ).then(function() {
           console.log("Password reset email sent successfully!");
+          alert("Password reset email will be sent you shortly!");
       }).catch(function(error) {
           console.error("Error: ", error);
       }); 

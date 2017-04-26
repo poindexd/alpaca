@@ -53,7 +53,7 @@ html
 				.col.s12.l6.valign-wrapper.hide-on-med-and-down(style='height:100%; padding:60px;')
 					img.responsive-img.valign(src='/img/hamster.png')
 				.col.s12.l6.valign-wrapper(style='height:100%')
-					form.valign(style='padding:60px')
+					form.valign(style='padding:60px' name='myForm')
 						div(style='color:rgba(68, 68, 68, 1);')
 							h4(style='color:rgba(68, 68, 68, 1);') Sign up
 							div(class='input-field col s12')
@@ -70,19 +70,23 @@ html
 								label(for='email' data-error='wrong' data-success='right') Email
 							div(class='input-field col s12')
 								i(class='material-icons prefix') lock_outline
-								input(id='password' type='password' ng-model='password')
+								input(id='password' type='password' name="password" ng-model="password" required)
+								//- input(id='password' type='password' name="password" ng-model="formData.password" ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" required)
 								label(for='password') Password
-							
-							//- div(class='row')
-							//- 	div(class='input-field col s12')
-							//- 		i(class='material-icons prefix') lock_outline
-							//- 		input(id='confirm' type='password' data-match="password" ng-model='passwordConfirm')
-							//- 		label(for='confirm') Confirm Password
-							//- 		div(data-ng-show='myForm.confirmPassword.$error.match') Passwords do not match!
+								//- span(ng-show="myForm.password.$error.required && myForm.password.$dirty") required
+								//- span(ng-show="!myForm.password.$error.required && (myForm.password.$error.minlength || myForm.password.$error.maxlength) && myForm.password.$dirty") Passwords must be between 8 and 20 characters.
+								//- span(ng-show="!myForm.password.$error.required && !myForm.password.$error.minlength && !myForm.password.$error.maxlength && myForm.password.$error.pattern && myForm.password.$dirty") Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol.)
+							div(class='input-field col s12')
+								i(class='material-icons prefix') lock_outline
+								input(id='password_c' type='password' name="password_c" ng-model="password_c" valid-password-c required)
+								label(for='password_c') Confirm Password
+
+								//- span(ng-show="myForm.password_c.$error.required && myForm.password_c.$dirty") Please confirm your password
+								span(ng-show="!myForm.password_c.$error.required && myForm.password_c.$error.noMatch && myForm.password.$dirty" style='color:red;') Passwords do not match
 							div(class='row').col.s12.center
-								btn(class='btn waves-effect btn' ng-click="signUp(firstName, lastName, email, password)" style='background:rgba(0, 188, 212, 0.7);width:50%; margin-bottom:20px;') Sign Up
+								btn(class='btn waves-effect btn' ng-click="signUp(firstName, lastName, email, password)" style='background:rgba(0, 188, 212, 0.7);width:50%; margin-bottom:20px;' ng-disabled="!myForm.password_c.$error.required && myForm.password_c.$error.noMatch && myForm.password.$dirty") Sign Up
 							p(style='font-weight:bold;color:rgba(68, 68, 68, 1);') Already have an account? &nbsp;&nbsp;
-								a(href='#' style='color:rgb(255, 155, 0); font-weight:bold;font-size:18px;' ng-click='signInPageRoute()') Sign in
+								a(href='#' style='color:rgb(255, 155, 0); font-weight:bold;font-size:18px;' ng-click='signInPageRoute()') sign in
 		
 			script(src='https://code.jquery.com/jquery-2.2.4.min.js')
 			script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js')
