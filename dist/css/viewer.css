@@ -7840,3 +7840,6 @@ alpaca-slides {
 
 alpaca-slide {
   height: 100%; }
+  alpaca-slide .card {
+    height: 300px;
+    overflow: hidden; }

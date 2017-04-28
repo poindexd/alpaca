@@ -2,6 +2,7 @@
 	.card
 		.row
 			.col.s4
-				img.responsive-img(ng-src='{{slide.image}}' style='padding:15px; margin-top:8px;')
+				img.responsive-img(ng-src='{{slide.image}}')
 			.col.s8
-				h3 {{slide.content}}
+				.card-content.center
+					h3 {{slide.content}}

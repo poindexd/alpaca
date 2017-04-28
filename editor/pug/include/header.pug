@@ -1,4 +1,4 @@
-div(ng-app='alpacaEditor' ng-controller='authCtrl')
+div(ng-controller='authCtrl')
 
 	header
 		nav.white: .nav-wrapper(style='padding: 0 40px;')
@@ -11,12 +11,16 @@ div(ng-app='alpacaEditor' ng-controller='authCtrl')
 				a.button-collapse.orange-text(href='#' data-activates='side-nav')
 					i.material-icons menu
 
-			ul.left(ng-show='currentCollection' ng-cloak)
-				//a(ng-click='collection.setCurrent(null, null)'): i.material-icons chevron_left
+			//ul.left(ng-show='currentCollection' ng-cloak)
+				a(ng-click='collection.setCurrent(null, null)'): i.material-icons chevron_left
 
-			ul.left(ng-cloak)
+			ul.left(ng-show='currentCollection' ng-cloak)
 				//- a.breadcrumb(ng-click='collection.setCurrent(null, null)') Collections
-				a(ng-show='currentCollection' style='font-size:25px;').breadcrumb {{currentCollection.title}}
+				li
+					a(style='font-size:25px;').breadcrumb {{currentCollection.title}}
+				li
+					a.waves-effect.waves-light(ng-click='collectionSettingsTrue()')
+						i.material-icons settings
 
 			ul.right.hide-on-med-and-down(ng-cloak style='overflow:hidden;')
 				//overflow hidden and position absolute because device preview gets cut off from drop down button
@@ -27,7 +31,7 @@ div(ng-app='alpacaEditor' ng-controller='authCtrl')
 						i(class='material-icons right' style='top:3px;') keyboard_arrow_down
 					ul.dropdown-content(id='dropdown1')
 						li: a(href='#!' ng-click='settingsPageRoute()') Profile
-						li: a(href='#!' ng-click='organizationPageRoute()') Organization
+						//li: a(href='#!' ng-click='organizationPageRoute()') Organization
 						li: a(href='#!' ng-click="signOut()") Sign Out
 				li(ng-cloak)
 					li(ng-show='!isLoggedIn && isLoggedIn !== undefined' ng-cloak): .btn(href='#' ng-click="signInPageRoute()" style='background:#444') Sign In
@@ -39,7 +43,7 @@ div(ng-app='alpacaEditor' ng-controller='authCtrl')
 						img.circle.white.z-depth-1(ng-src = '{{user.profilePic || "/img/user.svg"}}' style='height: 40px;width: 40px; margin-top:12px;')
 						span(style='position:relative; bottom:15px; left: 10px;') {{user.firstName}}
 				li: a(ng-show='isLoggedIn' href='#!' ng-click='settingsPageRoute()') Profile
-				li: a(ng-show='isLoggedIn' href='#!' ng-click='organizationPageRoute()') Organization
+				//li: a(ng-show='isLoggedIn' href='#!' ng-click='organizationPageRoute()') Organization
 				li: a(ng-show='isLoggedIn' href='#!' ng-click="signOut()") Sign Out
 				li: a(ng-show='!isLoggedIn && isLoggedIn !== undefined' href='#!' ng-click='signInPageRoute()') Sign In	
 	//- script.
