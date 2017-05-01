@@ -11,7 +11,7 @@ div(style='display:flex;flex-direction:column;height: 100%;')
 		)
 			include include/slides.pug
 
-		#form-resizable-section.resizable-section.white(
+		#form-resizable-section.resizable-section(
 			
 			r-flex='true' 
 			r-directions='["left","right"]'
@@ -44,6 +44,6 @@ div(style='display:flex;flex-direction:column;height: 100%;')
 						.slide-card.card-panel.waves-effect.waves-light
 							alpaca-slide(slide='slide' single='true')
 
-	.grey.lighten-3(ng-show='collectionSettings' style='position:absolute;top:64;left:0;right:0;bottom:0;z-index:99;')
+	div(ng-show='collectionSettings' style='position:absolute;top:64;left:0;right:0;bottom:0;z-index:99;background:rgba(238,238,238,0.8)')
 		include include/settings.pug
 						

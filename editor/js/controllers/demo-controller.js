@@ -375,6 +375,11 @@ angular.module('alpacaEditor').controller('demoController', [
 		},
 		remove: function(node, list){
 			console.log('Remove', node, list);
+
+			if ($scope.selected === node){
+				$scope.selected = null;	
+			}
+
 			$scope.updateIndexes(
 				list, 
 				node, 
@@ -384,6 +389,7 @@ angular.module('alpacaEditor').controller('demoController', [
 					list.$remove(node);
 				}
 			);
+
 		},
 		save: function(node, list){
 			//console.log('Saving node', node);

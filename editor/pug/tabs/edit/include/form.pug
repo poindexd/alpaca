@@ -16,6 +16,7 @@ div(style='margin-bottom: 100px')
 			li: a(href='#') Metadata
 		.divider
 
-	div(style='width:100%; padding:50px')
-		div(ng-show='selected && !selected.readonly' ng-repeat='field in schemas["index"].concat(schemas[selected.template])')
-			alpaca-field(model='selected[field.key]' type='field.type' field='field' fn='fn[field.type]' templates='templates' slide='selected')
+	ul(style='padding-right: 10px' ng-show='selected && !selected.readonly')
+		li(ng-repeat='field in schemas["index"].concat(schemas[selected.template])')
+			.card-panel
+				alpaca-field(model='selected[field.key]' type='field.type' field='field' fn='fn[field.type]' templates='templates' slide='selected')
