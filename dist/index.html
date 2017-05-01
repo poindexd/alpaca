@@ -1,54 +1,80 @@
-<html><head><title>Editor</title><base href="/"/><link rel="stylesheet" href="./css/editor.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/><style>footer {
-	display: inherit;
-	
-}
-html,body{
-	height: 100%;
-	
-}
-iframe{
-	margin: 0;
-	padding: 0;
-	border: 0;
-}
-.frame-wrapper{
-	height: calc(100% - 64px);
-	width: 100%;
-	//background: #eee;
-	position: relative;
-	overflow:hidden;
-}
-wrap-in-frame {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	//display: flex;
-	//justify-content: center;
-	//align-items:center;
+<html><head><title>Editor</title><base href="/"/><link rel="stylesheet" href="./css/index.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,900" type="text/css"/><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Hotpath description goes in here"/><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-83155286-1', 'auto');
+ga('send', 'pageview');</script><style>body {
+
+	font-family: 'Lato', sans-serif;
+	//font-family: "Raleway", sans-serif;
+	font-weight: 400;
 }
 
-.row {
+.row{
 	margin-bottom: 0px;
 }
 
-.waves-effect{
-	display: block;
+.gradient { 
+	//background:linear-gradient(160deg, #f9b05a 40%, #1adff9 80%);
+	//background:linear-gradient(160deg, #bfe0f9 20%, #ffa900 80% );
+	background:linear-gradient(160deg, rgba(253, 178, 32, 0.34) 40%, #ffa900 80% );
 }
-.pitch-wrap {
-	    width: 100%;
-	    margin-bottom: 42px;
-	    text-align: center;
-	    //background: linear-gradient(90deg, #f9ba71 30%, #09d6f1 100%);
-	    background:linear-gradient(90deg, #f9b05a 30%, #1adff9 100%);
-	    //background: linear-gradient(90deg, #fccf9b 30%, #00bcd4 100%);
-	    
+
+nav {
+	box-shadow: none;
 }
-</style></head><body class="grey lighten-3" ng-app="alpacaEditor" ng-controller="demoController"><div ng-controller="authCtrl"><header><nav class="white"><div class="nav-wrapper" style="padding: 0 40px"><ul class="left"><a href="#" ng-click="indexPageRoute()" style="padding-left:4px"><img src="img/hotpath_logo_small.svg" height="100%" style="padding: 10 0 10 10" ng-cloak="ng-cloak"/><img src="img/hotpath_logo_text.png" height="100%" style="padding: 10px" ng-show="!isLoggedIn &amp;&amp; isLoggedIn !== undefined" ng-cloak="ng-cloak"/></a><a class="button-collapse orange-text" href="#" data-activates="side-nav"><i class="material-icons">menu</i></a></ul><!--ul.left(ng-show='currentCollection' ng-cloak)a(ng-click='collection.setCurrent(null, null)'): i.material-icons chevron_left
---><ul class="left" ng-show="currentCollection" ng-cloak="ng-cloak"><li><a class="breadcrumb" style="font-size:25px">{{currentCollection.title}}</a></li><li><a class="waves-effect waves-light" ng-click="collectionSettingsTrue()"><i class="material-icons">settings</i></a></li></ul><ul class="right hide-on-med-and-down" ng-cloak="ng-cloak" style="overflow:hidden"><!--overflow hidden and position absolute because device preview gets cut off from drop down button--><li ng-show="isLoggedIn" style="position:absolute; right:40px"><a id="dropdown-button" href="#" data-activates="dropdown1" style="height:64px"><img class="circle white z-depth-1" ng-src="{{user.profilePic || &quot;/img/user.svg&quot;}}" style="height: 40px;width: 40px; margin-top:12px"/><span style="position:relative; bottom:15px; left: 10px;font-size:18px">{{user.firstName}}</span><i class="material-icons right" style="top:3px">keyboard_arrow_down</i></a><ul class="dropdown-content" id="dropdown1"><li><a href="#!" ng-click="settingsPageRoute()">Profile</a></li><!--li: a(href='#!' ng-click='organizationPageRoute()') Organization--><li><a href="#!" ng-click="signOut()">Sign Out</a></li></ul></li><li ng-cloak="ng-cloak"><li ng-show="!isLoggedIn &amp;&amp; isLoggedIn !== undefined" ng-cloak="ng-cloak"><div class="btn" href="#" ng-click="signInPageRoute()" style="background:#444">Sign In</div></li><!--li.no: a(href='#' ng-click="signUpRoute()").orange-text Sign Up	--></li></ul><ul class="side-nav" id="side-nav"><!--lia
+nav ul a {
+	color: #f57c00;
+}
+
+input, textarea {
+    width: 100%;
+	background-color: rgba(0,0,0,0.05);
+    border: 0;
+    box-shadow: 0 1px 0 0 rgba(255,255,255,0.05), inset 0 1px 2px 0 rgba(0,0,0,0.15);
+    border-radius: 4px;
+    color: #434e5a;
+    font-family: Lato,sans-serif;
+    font-size: 16px;
+    //padding: 12px 15px;
+    height: 44px;
+    padding: 12px;
+    //width: 339px;
+    outline: none;
+    margin-bottom: 10px;
+
+    &:focus{
+    	background: white;
+    }
+}
+
+textarea{
+	height: 64px;
+}
+
+.btn{
+	height: 44px;
+	line-height: 44px;
+	border-radius: 4px;
+	box-shadow: none;
+	@extend .blue;
+
+	&:hover{
+		box-shadow: none;
+	}
+}
+</style></head><body ng-app="alpacaEditor" ng-controller="authCtrl"><div ng-controller="authCtrl"><header><nav class="white"><div class="nav-wrapper" style="padding: 0 40px;"><ul class="left"><a href="#" ng-click="indexPageRoute()" style="padding-left:4px;"><img src="img/hotpath_logo_small.svg" height="100%" style="padding: 10 0 10 10;" ng-cloak="ng-cloak"/><img src="img/hotpath_logo_text.png" height="100%" style="padding: 10px;" ng-show="!isLoggedIn &amp;&amp; isLoggedIn !== undefined" ng-cloak="ng-cloak"/></a><a class="button-collapse orange-text" href="#" data-activates="side-nav"><i class="material-icons">menu</i></a></ul><!--ul.left(ng-show='currentCollection' ng-cloak)a(ng-click='collection.setCurrent(null, null)'): i.material-icons chevron_left
+--><ul class="left" ng-show="currentCollection" ng-cloak="ng-cloak"><li><a class="breadcrumb" style="font-size:25px;">{{currentCollection.title}}</a></li><li><a class="waves-effect waves-light" ng-click="collectionSettingsTrue()"><i class="material-icons">settings</i></a></li></ul><ul class="right hide-on-med-and-down" ng-cloak="ng-cloak" style="overflow:hidden;"><!--overflow hidden and position absolute because device preview gets cut off from drop down button--><li ng-show="isLoggedIn" style="position:absolute; right:40px;"><a id="dropdown-button" href="#" data-activates="dropdown1" style="height:64px;"><img class="circle white z-depth-1" ng-src="{{user.profilePic || &quot;/img/user.svg&quot;}}" style="height: 40px;width: 40px; margin-top:12px;"/><span style="position:relative; bottom:15px; left: 10px;font-size:18px;">{{user.firstName}}</span><i class="material-icons right" style="top:3px;">keyboard_arrow_down</i></a><ul class="dropdown-content" id="dropdown1"><li><a href="#!" ng-click="settingsPageRoute()">Profile</a></li><!--li: a(href='#!' ng-click='organizationPageRoute()') Organization--><li><a href="#!" ng-click="signOut()">Sign Out</a></li></ul></li><li ng-cloak="ng-cloak"><li ng-show="!isLoggedIn &amp;&amp; isLoggedIn !== undefined" ng-cloak="ng-cloak"><div class="btn" href="#" ng-click="signInPageRoute()" style="background:#444;">Sign In</div></li><!--li.no: a(href='#' ng-click="signUpRoute()").orange-text Sign Up	--></li></ul><ul class="side-nav" id="side-nav"><!--lia
 	img.circle.white.z-depth-1(ng-src = '{{user.profilePic || "/img/user.svg"}}' style='height: 40px;width: 40px; margin-top:12px;')
-	span(style='position:relative; bottom:15px; left: 10px;') {{user.firstName}}--><li><a ng-show="isLoggedIn" href="#!" ng-click="settingsPageRoute()">Profile</a></li><!--li: a(ng-show='isLoggedIn' href='#!' ng-click='organizationPageRoute()') Organization--><li><a ng-show="isLoggedIn" href="#!" ng-click="signOut()">Sign Out</a></li><li><a ng-show="!isLoggedIn &amp;&amp; isLoggedIn !== undefined" href="#!" ng-click="signInPageRoute()">Sign In	</a></li></ul></div></nav></header></div><div><div ng-hide="!loading"><div class="container center" style="height:100vh;display:flex;flex-direction:column;justify-content:center; align-items:center"><div style="width: 400px;height: 200px"><img src="./img/hotpath_logo.png" width="400"/><div class="progress orange lighten-4"><div class="indeterminate orange"></div></div></div></div></div><div ng-show="loading == false" ng-cloak="ng-cloak"><!--include include/side-nav.pug--><div style="max-height:calc(100% - 64px); width:100%;overflow:hidden"><div class="nga-fast nga-stagger nga-fade" ng-show="tab.name == &quot;collections&quot; &amp;&amp; currentCollection"><div style="display:flex;flex-direction:column;height: 100%"><div class="resizable-wrapper" style="flex: 1"><div class="resizable-section grey lighten-3" r-flex="true" r-directions="[&quot;right&quot;]" style="flex:1;position:relative;z-index:99"><script type="text/ng-template" id="list.html"><ul dnd-list="list" dnd-drop="dropCallback(index, item, external, type, list)"><li ng-repeat="node in list | orderBy:&quot;index&quot;" dnd-draggable="node" dnd-effect-allowed="move" ng-include="node.kind + &quot;.html&quot;"></li></ul></script><script type="text/ng-template" id="slide.html"><div class="slide-card card-panel waves-effect waves-light" ng-click="slide.setCurrent(node, list)" ng-class="{selected: selected==node}"><alpaca-slide slide="node" single="true"></alpaca-slide><i class="material-icons" style="position:absolute; top: 10px; right: 10px" ng-click="slide.remove(node, list);$event.stopPropagation();">close</i></div></script><script type="text/ng-template" id="folder.html"><div class="node waves-effect waves-light" ng-click="node.visible = !node.visible" style="position: relative"><i class="material-icons left">folder</i><div content-editable="content-editable" single-line="true" ng-click="$event.stopPropagation();" edit-callback="slide.save(node, list)" ng-model="node.title" style="cursor: text"></div><i class="material-icons" style="position:absolute; top: 10px; right: 10px" ng-click="slide.remove(node, list);$event.stopPropagation();">close</i></div><div style="margin-left: 10px" ng-repeat="list in [node.contents]" ng-show="node.visible" ng-include="&quot;list.html&quot;"></div><div class="clearfix" style="min-height:6px"></div></script><script type="text/ng-template" id="external.html"><div class="node waves-effect waves-light" ng-click="node.visible = !node.visible">{{node.title}}<i class="material-icons left">folder_shared</i></div><div style="margin-left: 10px" ng-repeat="list in [node.contents]" ng-show="node.visible" ng-include="&quot;list.html&quot;"></div><div class="clearfix" style="min-height:6px"></div></script><div id="slide-nav" style="padding-bottom:150px;padding-right:10px;overflow-y:auto"><div ng-repeat="list in [slides]" ng-include="&quot;list.html&quot;"></div><div class="fixed-action-btn" style="position:absolute;bottom:87px"><a class="btn-floating btn-large" style="background:#fab109"><i class="material-icons large">add</i></a><ul><li><a class="btn-floating blue" ng-click="slide.add(&quot;slide&quot;)"><i class="material-icons">crop_landscape</i></a></li><li><a class="btn-floating purple" ng-click="search()"><i class="material-icons">search</i></a></li></ul></div></div></div><div class="resizable-section white" id="form-resizable-section" r-flex="true" r-directions="[&quot;left&quot;,&quot;right&quot;]" style="flex:2;position:relative;z-index:99"><div style="margin-bottom: 100px"><div class="center" ng-show="selected.readonly" style="padding: 50px"><i class="material-icons orange-text large">person</i><p>This slide belongs to a shared folder.</p><p>It cannot be edited here.</p></div><div class="center" ng-show="!selected" style="padding: 50px"><i class="material-icons orange-text large">crop_landscape</i><p>No slide selected</p></div><div style="width:100%; padding:50px"><div ng-show="selected &amp;&amp; !selected.readonly" ng-repeat="field in schemas[&quot;index&quot;].concat(schemas[selected.template])"><alpaca-field model="selected[field.key]" type="field.type" field="field" fn="fn[field.type]" templates="templates" slide="selected"></alpaca-field></div></div></div></div><div class="resizable-section grey lighten-3" id="preview-resizable-section" r-flex="true" r-directions="[&quot;left&quot;]" style="flex:2"><div class="frame-wrapper container center"><wrap-in-frame><device-preview device="device"><alpaca-viewer selected="selected" single="true"></alpaca-viewer></device-preview></wrap-in-frame></div></div></div><div class="grey lighten-3" ng-show="searching &amp;&amp; loading == false" style="position:absolute;top:64;left:0;right:0;bottom:0;z-index:200"><div style="padding-top: 30px"><div class="container center input-field" style="width:40%"><i class="material-icons prefix">search</i><input id="search" type="text" ng-model="searchtext"/><label for="search">Search</label></div><a href="#" style="position:absolute; top: 10px; right: 10px" ng-click="searching = false"><i class="material-icons large grey-text">close</i></a><div class="container"><p class="flow-text" ng-show="!loading &amp;&amp; !searchtext || searchtext == &quot;&quot;">Search for slides by tag. Results will appear here.</p><div class="row" ng-show="searchSlides.length &gt; 0" style="width:100%"><div class="col l3 s12" ng-repeat="slide in searchSlides"><div class="slide-card card-panel waves-effect waves-light"><alpaca-slide slide="slide" single="true"></alpaca-slide></div></div></div></div></div></div><div class="grey lighten-3" ng-show="collectionSettings" style="position:absolute;top:64;left:0;right:0;bottom:0;z-index:99"><div style="position:relative;width: 100%"><a href="#" style="position:absolute; top: 10px; right: 10px" ng-click="collectionSettings = false"><i class="material-icons large grey-text">close</i></a><div class="container"><div class="row"><div class="col s12"><ul class="collection"><li class="collection-item" flow-init="flow-init" flow-files-submitted="collection.setImage($flow, currentCollection)"><div class="row"><div class="col s12 l6"><label>Image</label><div ng-show="!currentCollection.img_url"><img class="responsive-img" ng-src="/img/placeholder2x1.svg"/><div class="btn waves-effect waves-light" flow-btn="flow-btn">Upload</div></div><div ng-show="currentCollection.img_url"><img class="responsive-img" ng-src="{{currentCollection.img_url}}"/><div class="btn red waves-effect waves-light" ng-click="collection.removeImage(currentCollection)">Remove Image</div></div></div><div class="col s12 l6"><label>Title</label><input ng-model="currentCollection.title"/><div class="btn red waves-effect waves-light" data-target="collection-delete">Delete</div></div></div></li></ul></div></div></div><div class="modal" id="collection-delete"><div class="modal-content"><p>Are you sure you want to delete {{currentCollection.title}}?</p></div><div class="modal-footer"><div class="btn-flat waves-effect waves-light modal-close" ng-click="collection.remove(currentCollection, collection.index)">Yes</div><div class="btn-flat waves-effect waves-light modal-close">No<!--label {{currentCollection.img_url}}--></div></div></div></div></div></div></div></div><div style="max-height:100%"><div class="nga-fast nga-stagger nga-fade" ng-show="tab.name == &quot;collections&quot; &amp;&amp; !currentCollection"><div ng-controller="authCtrl"><div class="pitch-wrap" ng-show="!isLoggedIn &amp;&amp; isLoggedIn !== undefined"><div class="container-wide"><div class="row"><div class="col s12 l6"><p class="flow-text white-text" style="font-size:30px; letter-spacing:2px"><b>Step up your data game.</b></p></div><div class="col s12 l6" style="margin-top:35px"><div class="btn" style="background:rgba(68, 68, 68, 0.90)">Learn more</div><div class="btn" style="background:#ee6e73; margin-left:10px" ng-click="signUpRoute()">Join for Free	</div></div></div></div></div><div class="input-field container" style="width:40%"><i class="material-icons prefix">search</i><input id="search" type="text" ng-model="searchValue"/><label for="search">Search</label></div><div id="container-survey"><div class="container"><div class="row"><div class="col s12 l4" dir-paginate="_collection in collections | filter:{title:searchValue} | itemsPerPage: 6"> <div class="card small" ng-click="collection.setCurrent(_collection, $index)"><a href="" alt="#"><div class="card-image"> <img ng-src="{{_collection.img_url || &quot;/img/placeholder2x1.svg&quot;}}"/></div><div class="card-content"><p>{{_collection.title}}</p><label>Organization: {{_collection.organization}}</label><label>Date: {{_collection.date}}</label></div></a></div></div></div></div><div class="fixed-action-btn"><a class="btn-floating btn-large" style="background:#fab109" href="#" ng-click="collection.add()"><i class="material-icons">add</i></a></div><div class="row center"><dir-pagination-controls template-url="/pagination.html"></dir-pagination-controls><!--include include/footer.pug--></div><!--fix me		--></div></div></div></div></div></div></body><!--TODO: REMOVE--><script src="https://code.jquery.com/jquery-2.2.4.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js"></script><script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script><script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script><script>var config = {
+	span(style='position:relative; bottom:15px; left: 10px;') {{user.firstName}}--><li><a ng-show="isLoggedIn" href="#!" ng-click="settingsPageRoute()">Profile</a></li><!--li: a(ng-show='isLoggedIn' href='#!' ng-click='organizationPageRoute()') Organization--><li><a ng-show="isLoggedIn" href="#!" ng-click="signOut()">Sign Out</a></li><li><a ng-show="!isLoggedIn &amp;&amp; isLoggedIn !== undefined" href="#!" ng-click="signInPageRoute()">Sign In	</a></li></ul></div></nav></header></div><!--header.gradient//- nav.transparent: .nav-wrapper
+//- 	.container
+//- 		a.brand-logo
+//- 			img(src='/img/hotpath_logo.png' style='height: 36px;margin: 12px 0px')
+//- 		//ul.right.hide-on-med-and-down(style='font-weight:700')
+//- 			li: a About
+//- 			li: a Contact
+--><div class="gradient"><div class="container"><div class="row" style="padding: 40px 0px 80px 0px;"><div class="col s12 l7"><!--img.responsive-img(src='img/carevoice_white_text.png' style='max-width: 400px')--><h4 style="color:#444;">Hotpath is cool</h4><p class="flow-text" style="line-height: 120%; color:#444;">Hello my name is Haemster and I love Hotpath! <br> Bla bla bla....Bla bla bla....Bla bla bla.... <br> Bla bla bla....Bla bla bla....Bla bla bla.... <br> Bla bla bla....Bla bla bla....Bla bla bla....</p><br/><br/><a class="btn waves-effect btn modal-trigger" href="#!" style="background:rgba(0, 188, 212, 0.7); width:40%;background:#ee6e73;" ng-click="signUpRoute() ">Sign me up! </a></div><div class="col s12 l5"><img class="right" src="img/hamster.png" style="width: 100%; height:auto; max-width: 400px;"/></div></div></div></div><div class="container"><div class="card-panel" style="margin-top: -80px;margin-bottom:80px;border-radius:10px;padding:100px 50px;"><div class="row"><div class="col s12 m4"><i class="material-icons medium green-text">public</i><h5>Public Surveys</h5><p>Browse through public surveys, create your own, and share with the world.<br/><a href="#!" ng-click="surveysRoute()">View surveys<i class="material-icons" style="display:inline-block ;vertical-align: middle;">chevron_right</i></a></p></div><div class="col s12 m4"><i class="material-icons medium blue-text">mode_edit</i><h5>Editor Tools</h5><p>Use our survey creator tool to build your own surveys and collaborate with your research team.<br/><a href="#editor-tools" scroll-on-click="scroll-on-click" scroll-speed="600">Learn more<i class="material-icons" style="display:inline-block ;vertical-align: middle;">chevron_right</i></a></p></div><div class="col s12 m4"><i class="material-icons medium purple-text">timeline</i><h5>Data Analysis</h5><p>Analyze your survey results using our data transformation tool and customize the data destination to submit reports.<br/><a href="#data-analysis" scroll-on-click="scroll-on-click" scroll-speed="600">Learn more<i class="material-icons" style="display:inline-block ;vertical-align: middle;">chevron_right</i></a></p></div></div></div></div><div id="editor-tools" style="background:#F7FAFC; height: 500px;"><div class="container" style="padding-top: 10px; color:#444;"><div class="row center"><h4>Our survey editing tool makes your life easier!</h4><p>Blablabla Blablabla Blablabla Blablabla Blablabla BlablablaBlablablaBlablabla Blablabla</p><img class="img-responsive" src="img/hamster.png" style="height: 300px;"/></div></div></div><div id="data-analysis" style="height: 500px;"><div class="container"><div class="row center"><h4>Use our data transformation tools and submit your survey results to desired destination.</h4></div></div></div><div class="grey lighten-2"><div class="container"><div class="row"><div class="col s12 m6"><img class="responsive-img" src="https://cdn.dribbble.com/users/91300/screenshots/3467957/benyu-02_08_dribbble.gif" style="padding: 10px;"/></div><div class="col s12 m6" style="padding-top:20px; padding-bottom: 40px;"><h5>Contact Us</h5><form class="row" action="https://formspree.io/support@carevoice.org" method="POST"><div class="col l6 s12"><label>Name</label><input type="text" name="name"/></div><div class="col l6 s12"><label>Organization</label><input type="text" name="organization"/></div><div class="col l6 s12"><label>Email</label><input type="text" name="_replyto"/></div><div class="col l6 s12"><label>Phone</label><input type="text" name="phone"/></div><div class="col s12"><label>Any Comments?</label><textarea name="comments"></textarea></div><div class="col s12"><input class="btn" type="submit" value="Go"/></div></form></div></div></div></div><footer class="white clearfix"><div class="container"><div class="right"><p>support@wellopp.com</p></div><div class="left"><p>&copy; Hotpath 2017</p></div></div></footer></body><!--TODO: REMOVE--><script src="https://code.jquery.com/jquery-2.2.4.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js"></script><script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script><script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script><script>var config = {
 	apiKey: "AIzaSyBCAJtmUVpWjFUIw4yLUuPhbCJWNufA_gU",
 	authDomain: "hotpath-f9c54.firebaseapp.com",
 	databaseURL: "https://hotpath-f9c54.firebaseio.com",

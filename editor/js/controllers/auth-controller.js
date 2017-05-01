@@ -26,7 +26,7 @@ angular.module('alpacaEditor')
       ).then(function(user) {
         console.log(user);
         $rootScope.currentUser = user;
-        $state.go('index');
+        $state.go('surveys');
         $window.location.reload();
       }, 
       function(error) {
@@ -66,7 +66,7 @@ angular.module('alpacaEditor')
             email: email
           }).then(function() {
             alert('Signed up successfully!')
-            $state.go('index').then(function(){
+            $state.go('surveys').then(function(){
               $window.location.reload(); //this doesn't work
               console.log('routing to index');
             });
@@ -150,6 +150,11 @@ angular.module('alpacaEditor')
     $scope.organizationPageRoute = function() {
       console.log("route to a new page");
       $state.go('organization');
+      $window.location.reload();
+    };
+    $scope.surveysRoute = function() {
+      console.log("route to a new page");
+      $state.go('surveys');
       $window.location.reload();
     };
 

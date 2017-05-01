@@ -49,6 +49,10 @@ angular.module('alpacaEditor')
       url: '/organization.html',
       controller: 'authCtrl'
     })
+    .state('surveys', {
+      url: '/surveys.html',
+      controller: 'authCtrl'
+    })
     ;
    
 

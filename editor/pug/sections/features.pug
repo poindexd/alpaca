@@ -1,16 +1,29 @@
 .container: .card-panel(style='margin-top: -80px;margin-bottom:80px;border-radius:10px;padding:100px 50px')
-	.row.center
+	.row
 		.col.s12.m4
-			i.material-icons.medium.green-text sentiment_very_satisfied
-			h5 Patient Satisfaction
-			p CareVoice is a 30 minute program presented through Wellopp's acclaimed multimedia survey tool.
+			i.material-icons.medium.green-text public
+			h5 Public Surveys
+			p Browse through public surveys, create your own, and share with the world.
+				br
+				a(href='#!' ng-click='surveysRoute()')
+					| View surveys
+					i.material-icons(style='display:inline-block ;vertical-align: middle') chevron_right
 
 		.col.s12.m4
-			i.material-icons.medium.blue-text picture_as_pdf
-			h5 Simple Reporting
-			p Patient responses are legally binding and can be printed as PDF or appended to any electronic medical record.
+			i.material-icons.medium.blue-text mode_edit
+			h5 Editor Tools
+			p Use our survey creator tool to build your own surveys and collaborate with your research team.
+				br
+				a(href='#editor-tools' scroll-on-click scroll-speed='600')
+					| Learn more
+					i.material-icons(style='display:inline-block ;vertical-align: middle') chevron_right
 
 		.col.s12.m4
-			i.material-icons.medium.purple-text attach_money
-			h5 Reimbursement
-			p Medicare provides reimbursement to providers for each Advance Care Plan completed.
+			i.material-icons.medium.purple-text timeline
+			h5 Data Analysis
+			p Analyze your survey results using our data transformation tool and customize the data destination to submit reports.
+				br
+				a(href='#data-analysis' scroll-on-click scroll-speed='600')
+					| Learn more
+					i.material-icons(style='display:inline-block ;vertical-align: middle') chevron_right
+			//- a(href="#data-analysis" class='btn waves-effect btn' style='background:rgba(0, 188, 212, 0.7);' scroll-on-click scroll-speed='600') Learn More
