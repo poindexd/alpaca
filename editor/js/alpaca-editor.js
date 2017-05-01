@@ -35,3 +35,22 @@ angular.module('alpacaEditor').filter('toArray', function () {
     }
   };
 });
+
+angular.module('alpacaEditor').directive('scrollOnClick', function() {
+  return {
+    restrict: 'A',
+    link: function(scope, $elm, attrs) {
+      var idToScroll = attrs.href;
+    var speed = attrs.scrollSpeed;
+      $elm.on('click', function() {
+        var $target;
+        if (idToScroll) {
+          $target = $(idToScroll);
+        } else {
+          $target = $elm;
+        }
+        $("body").animate({scrollTop: $target.offset().top}, speed || "slow");
+      });
+    }
+  }
+});
