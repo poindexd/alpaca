@@ -1,0 +1,13 @@
+<ul class="dropdown-content" id="device-dropdown"><li ng-repeat="_device in devices | toArray | orderBy:&quot;name&quot;"><a class="waves-effect waves-light" href="#!" ng-class="{selected: device == _device}" ng-click="setDevice(_device)"> <i class="material-icons left">{{_device.material_icon}}</i>{{_device.name}}
+{{_device.width}}x{{_device.height}}</a></li></ul><nav style="position:relative;z-index:100;flex-basis:64px;flex-grow:0;flex-shrink:0"><div class="nav-wrapper"><ul class="left" ng-show="!searching"><a ng-click="collection.setCurrent(null, null)"><i class="material-icons">chevron_left</i></a></ul><ul class="left" ng-show="!searching"><!--a.breadcrumb(content-editable single-line='true' focus-select='false' ng-model='currentCollection.title' style='cursor: text')--><a class="breadcrumb">{{currentCollection.title}}</a><!--a.breadcrumb.dropdown-button(href='#' data-activates='language-dropdown') en--><!--a.breadcrumb.dropdown-button(href='#' data-activates='version-dropdown') v2--></ul><ul class="right" ng-show="!searching"><!--lia.waves-effect.waves-light(style='margin-right:10px') Print
+	i.material-icons.left print--><!--li(ng-show='false')a.waves-effect.waves-light Publish
+	i.material-icons.left publish
+--><!--li(ng-show='true')a.waves-effect.waves-light.green-text Published
+	i.material-icons.left done
+--><!--lia.waves-effect.waves-light Rules
+	i.material-icons.left format_list_bulleted
+--><!--lia.waves-effect.waves-light Endpoints
+	i.material-icons.left settings_ethernet
+
+--><!--lia.dropdown-button(href='#!' data-activates='device-dropdown' style='min-width:300px !important;padding: 0px 50px') {{device.name || 'Device Preview'}}
+	i.material-icons.right arrow_drop_down--><li><a class="waves-effect waves-light" ng-click="collectionSettings = true"><i class="material-icons">settings</i></a></li></ul><form ng-show="searching"><div class="input-field"><input id="search" type="search" ng-model="searchtext" required="required"/><label class="label-icon" for="search"><i class="material-icons">search</i></label><i class="material-icons" ng-click="searching = false">close</i></div></form></div></nav>

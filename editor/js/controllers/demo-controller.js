@@ -7,6 +7,7 @@ angular.module('alpacaEditor').controller('demoController', [
 	'$firebaseObject',
 	'$firebaseArray',
 	'$firebaseStorage',
+	'$collectionService',
 	'$window',
 	function(
 		$scope, 
@@ -16,76 +17,14 @@ angular.module('alpacaEditor').controller('demoController', [
 		$firebaseAuth, 
 		$firebaseObject, 
 		$firebaseArray,
-		$firebaseStorage, 
+		$firebaseStorage,
+		$collectionService,
 		$window){
 
 	var config = firebase.database().ref().child('config');
 	$firebaseObject(config).$bindTo($scope, 'config');
 
-	$scope.defaultTags = function(){
-		var tags = ['blah', 'ahah'];
-		return tags;
-	};
-
 	$scope.templates = $templateList.templates;
-	console.log($templateList);
-
-	$scope.newDevice = {};
-	$scope.addDevice = function(){
-			$scope.devices.push(angular.copy($scope.newDevice));
-			$scope.newDevice = null;	
-	}
-
-	$scope.tabs = [
-		{
-			name: 'collections',
-			icon: 'view_module'
-		},
-		//{
-		//	name: 'edit',
-		//	icon: 'mode_edit'
-		//},
-		{
-			name: 'organization',
-			icon: 'language'
-		},
-		{
-			name: 'settings',
-			icon: 'face'
-		}
-	];
-
-	$scope.users = [
-		{
-			name: 'Dan Poindexter',
-			email: 'dan@wellopp.com',
-			img: 'http://danpoindexter.com/img/danpoindexter.png'
-		},
-		{
-			name: 'Haemin Park',
-			email: 'haemin@wellopp.com',
-			img: '/img/haemin.png'
-			//img: 'http://cdn3.volusion.com/hpwvr.gdwwx/v/vspfiles/photos/PE-ZA1733-1.jpg?1458140223'
-		},
-		{
-			name: 'Poo',
-			email: 'poo@poo.com',
-			img: 'http://rs619.pbsrc.com/albums/tt276/cardunne09/so_poo.jpg~c200'
-		}
-
-
-	];
-
-
-	$scope.tab = $scope.tabs[0];
-	
-	$scope.setTab = function(tab){
-		$scope.tab = null;
-		$timeout(function(){
-			$scope.tab = tab;
-		}, 200)
-		
-	}
 
 	//DELETE
 	$scope.collectionSettingsTrue = function(){
@@ -104,20 +43,7 @@ angular.module('alpacaEditor').controller('demoController', [
 		lineNumbers: true
 	}
 
-	//$scope.selected = $scope.survey.nodes[1];
 	$scope.schemas = $schemas.schemas;
-
-	$scope.maximized = false;
-
-	$scope.maximizePreview = function(maximized){
-		/*$('.resizable-section.white').animate({
-			flex: '0 0 0px'
-		}, 1000, function(){
-			maximized = !maximized;
-		})*/
-		$('.resizable-wrapper').toggleClass('minimized');
-		$scope.maximized = !$scope.maximized;
-	}
 
 	$scope.devices = [
 		{
@@ -144,11 +70,6 @@ angular.module('alpacaEditor').controller('demoController', [
 		$scope.device = device;
 		console.log('set device:', device);
 	}
-
-	//$scope.setSlide = function(slide){
-	//	$scope.selected = slide;
-	//	console.log(slide);
-	//}
 
 	$scope.loading = false;
 
@@ -243,75 +164,16 @@ angular.module('alpacaEditor').controller('demoController', [
 		}
 	} //organization
 
-	$scope.collections = [];
-	$scope.collection = {
-		init: function(){
-			var ref = firebase.database().ref('collections/').orderByChild('user_id').equalTo($scope.currentUser.id);
-			$scope.collections = $firebaseArray(ref);
-		},
-		add: function(){
-			var collection = {
-				title: 'Untitled Collection',
-				user_id: $scope.currentUser.id,
-			}
-
-			$scope.collections.$add(collection).then(function(ref) {
-			  //collectionid = ref.key;
-			  //console.log("added record with id " + id);
-			  //list.$indexFor(id);
-			  $scope.currentCollection = $scope.collections[$scope.collections.$indexFor(ref.key)];
-			});
-		},
-		remove: function(collection, index){
-			$scope.collections.$remove(collection);
-			
-			$scope.collection.index = null;
-			$scope.currentCollection = null;
-			
-			var storageRef = firebase.storage().ref("collection")
-				.child(collection.$id)
-				.child('image');
-			$scope.storage = $firebaseStorage(storageRef);
-			$scope.storage.$delete().then(function(){
-				//lol
-			});
-		},
-		setCurrent: function(collection, index){
-			$scope.currentCollection = collection;
-			$scope.collection.index = index;
-		},
-		setImage: function($flow, collection){
-			var file = $flow.files[$flow.files.length - 1].file;
-			//console.log(file);
-
-			var storageRef = firebase.storage().ref("collection")
-				.child(collection.$id)
-				.child('image');
-  		$scope.storage = $firebaseStorage(storageRef);
-
-  		var uploadTask = $scope.storage.$put(file);
-  		uploadTask.$complete(function(snapshot) {
-				//console.log(snapshot.downloadURL);
-				collection.img_url = snapshot.downloadURL;
-				//console.log('collection', model);
-			});
-		},
-		removeImage: function(collection){
-			var storageRef = firebase.storage().ref("collection")
-				.child(collection.$id)
-				.child('image');
-			$scope.storage = $firebaseStorage(storageRef);
-			$scope.storage.$delete().then(function(){
-				collection.img_url = null;
-			});
-		}
-	} //collection
-
+	//$scope.collections = {};
+	$scope.collections = $collectionService.collections;
+	$scope.collection = $collectionService;
+	$scope.currentCollection = $collectionService.currentCollection;
 	$scope.collectionSettings = false;
 	
 	$scope.$watch('currentCollection', function(){
 		$scope.slide.load($scope.currentCollection);
-		$scope.collections.$save($scope.collection.index);
+		if ($scope.collections.$save)
+			$scope.collections.$save($scope.collection.index);
 		if (!$scope.currentCollection){
 			$scope.collectionSettings = false;
 			$scope.slide.setCurrent(null, null);

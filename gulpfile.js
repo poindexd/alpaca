@@ -24,7 +24,8 @@ gulp.task('server', function() {
   connect.server({
     port: 8000,
     root: 'dist',
-    livereload: true
+    livereload: true,
+    fallback: 'dist/index.html'
   });
 });
 
@@ -54,7 +55,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('editor-pug', function(){
-	return gulp.src('./editor/pug/*.pug')
+	return gulp.src('./editor/pug/**/*.pug')
 		.pipe(pug())
 		.pipe(gulp.dest('dist'))
 		.pipe(connect.reload());

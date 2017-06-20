@@ -24,7 +24,7 @@ gulp.task('build-editor', function(){
 		'editor/js/alpaca-editor.js',
 		'editor/js/config.js',
 		'editor/js/directives/alpaca-field.js',
-		'editor/js/controllers/collections-controller.js',
+		'editor/js/services/collectionService.js',
 		'editor/js/controllers/settings-controller.js',
 		'editor/js/controllers/demo-controller.js',
 		'editor/js/controllers/auth-controller.js',

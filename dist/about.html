@@ -1,0 +1,111 @@
+<html><head><title>Editor</title><base href="/"/><link rel="stylesheet" href="./css/index.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,900" type="text/css"/><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Hotpath description goes in here"/><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-83155286-1', 'auto');
+ga('send', 'pageview');</script><style>body {
+
+	font-family: 'Lato', sans-serif;
+	//font-family: "Raleway", sans-serif;
+	font-weight: 400;
+}
+
+.row{
+	margin-bottom: 0px;
+}
+
+.gradient { 
+	//background:linear-gradient(160deg, #f9b05a 40%, #1adff9 80%);
+	//background:linear-gradient(160deg, #bfe0f9 20%, #ffa900 80% );
+	background:linear-gradient(160deg, rgba(253, 178, 32, 0.34) 40%, #ffa900 80% );
+}
+
+nav {
+	box-shadow: none;
+}
+nav ul a {
+	color: #f57c00;
+}
+
+input, textarea {
+    width: 100%;
+	background-color: rgba(0,0,0,0.05);
+    border: 0;
+    box-shadow: 0 1px 0 0 rgba(255,255,255,0.05), inset 0 1px 2px 0 rgba(0,0,0,0.15);
+    border-radius: 4px;
+    color: #434e5a;
+    font-family: Lato,sans-serif;
+    font-size: 16px;
+    //padding: 12px 15px;
+    height: 44px;
+    padding: 12px;
+    //width: 339px;
+    outline: none;
+    margin-bottom: 10px;
+
+    &:focus{
+    	background: white;
+    }
+}
+
+textarea{
+	height: 64px;
+}
+
+.btn{
+	height: 44px;
+	line-height: 44px;
+	border-radius: 4px;
+	box-shadow: none;
+	@extend .blue;
+
+	&:hover{
+		box-shadow: none;
+	}
+}
+</style></head><body ng-app="alpacaEditor" ng-controller="authCtrl"><div ng-controller="authCtrl"><header><nav class="white"><div class="nav-wrapper" style="padding: 0 40px"><ul class="left"><a href="#" ng-click="indexPageRoute()" style="padding-left:4px"><img src="img/hotpath_logo_small.svg" height="100%" style="padding: 10 0 10 10" ng-cloak="ng-cloak"/><img src="img/hotpath_logo_text.png" height="100%" style="padding: 10px" ng-show="!isLoggedIn &amp;&amp; isLoggedIn !== undefined" ng-cloak="ng-cloak"/></a><a class="button-collapse orange-text" href="#" data-activates="side-nav"><i class="material-icons">menu</i></a></ul><!--ul.left(ng-show='currentCollection' ng-cloak)a(ng-click='collection.setCurrent(null, null)'): i.material-icons chevron_left
+--><ul class="left" ng-show="currentCollection" ng-cloak="ng-cloak"><li><a class="breadcrumb" style="font-size:25px">{{currentCollection.title}}</a></li><li><a class="waves-effect waves-light" ng-click="collectionSettingsTrue()"><i class="material-icons">settings</i></a></li></ul><ul class="right hide-on-med-and-down" ng-cloak="ng-cloak" style="overflow:hidden"><!--overflow hidden and position absolute because device preview gets cut off from drop down button--><li ng-show="isLoggedIn" style="position:absolute; right:40px"><a id="dropdown-button" href="#" data-activates="dropdown1" style="height:64px"><img class="circle white z-depth-1" ng-src="{{user.profilePic || &quot;/img/user.svg&quot;}}" style="height: 40px;width: 40px; margin-top:12px"/><span style="position:relative; bottom:15px; left: 10px;font-size:18px">{{user.firstName}}</span><i class="material-icons right" style="top:3px">keyboard_arrow_down</i></a><ul class="dropdown-content" id="dropdown1"><li><a href="#!" ng-click="settingsPageRoute()">Profile</a></li><!--li: a(href='#!' ng-click='organizationPageRoute()') Organization--><li><a href="#!" ng-click="signOut()">Sign Out</a></li></ul></li><li ng-cloak="ng-cloak"><li ng-show="!isLoggedIn &amp;&amp; isLoggedIn !== undefined" ng-cloak="ng-cloak"><div class="btn" href="#" ng-click="signInPageRoute()" style="background:#444">Sign In</div></li><!--li.no: a(href='#' ng-click="signUpRoute()").orange-text Sign Up	--></li></ul><ul class="side-nav" id="side-nav"><!--lia
+	img.circle.white.z-depth-1(ng-src = '{{user.profilePic || "/img/user.svg"}}' style='height: 40px;width: 40px; margin-top:12px;')
+	span(style='position:relative; bottom:15px; left: 10px;') {{user.firstName}}--><li><a ng-show="isLoggedIn" href="#!" ng-click="settingsPageRoute()">Profile</a></li><!--li: a(ng-show='isLoggedIn' href='#!' ng-click='organizationPageRoute()') Organization--><li><a ng-show="isLoggedIn" href="#!" ng-click="signOut()">Sign Out</a></li><li><a ng-show="!isLoggedIn &amp;&amp; isLoggedIn !== undefined" href="#!" ng-click="signInPageRoute()">Sign In	</a></li></ul></div></nav></header></div><!--header.gradient//- nav.transparent: .nav-wrapper
+//- 	.container
+//- 		a.brand-logo
+//- 			img(src='/img/hotpath_logo.png' style='height: 36px;margin: 12px 0px')
+//- 		//ul.right.hide-on-med-and-down(style='font-weight:700')
+//- 			li: a About
+//- 			li: a Contact
+--><div class="gradient"><div class="container"><div class="row" style="padding: 40px 0px 80px 0px"><div class="col s12 l7"><!--img.responsive-img(src='img/carevoice_white_text.png' style='max-width: 400px')--><h4 style="color:#444">Hotpath is cool</h4><p class="flow-text" style="line-height: 120%; color:#444">Hello my name is Haemster and I love Hotpath! <br> Bla bla bla....Bla bla bla....Bla bla bla.... <br> Bla bla bla....Bla bla bla....Bla bla bla.... <br> Bla bla bla....Bla bla bla....Bla bla bla....</p><br/><br/><a class="btn waves-effect btn modal-trigger" href="#!" style="background:rgba(0, 188, 212, 0.7); width:40%;background:#ee6e73" ng-click="signUpRoute() ">Sign me up! </a></div><div class="col s12 l5"><img class="right" src="img/hamster.png" style="width: 100%; height:auto; max-width: 400px"/></div></div></div></div><div class="container"><div class="card-panel" style="margin-top: -80px;margin-bottom:80px;border-radius:10px;padding:100px 50px"><div class="row"><div class="col s12 m4"><i class="material-icons medium green-text">public</i><h5>Public Surveys</h5><p>Browse through public surveys, create your own, and share with the world.<br/><a href="#!" ng-click="surveysRoute()">View surveys<i class="material-icons" style="display:inline-block ;vertical-align: middle">chevron_right</i></a></p></div><div class="col s12 m4"><i class="material-icons medium blue-text">mode_edit</i><h5>Editor Tools</h5><p>Use our survey creator tool to build your own surveys and collaborate with your research team.<br/><a href="#editor-tools" scroll-on-click="scroll-on-click" scroll-speed="600">Learn more<i class="material-icons" style="display:inline-block ;vertical-align: middle">chevron_right</i></a></p></div><div class="col s12 m4"><i class="material-icons medium purple-text">timeline</i><h5>Data Analysis</h5><p>Analyze your survey results using our data transformation tool and customize the data destination to submit reports.<br/><a href="#data-analysis" scroll-on-click="scroll-on-click" scroll-speed="600">Learn more<i class="material-icons" style="display:inline-block ;vertical-align: middle">chevron_right</i></a></p></div></div></div></div><div id="editor-tools" style="background:#F7FAFC; height: 500px"><div class="container" style="padding-top: 10px; color:#444"><div class="row center"><h4>Our survey editing tool makes your life easier!</h4><p>Blablabla Blablabla Blablabla Blablabla Blablabla BlablablaBlablablaBlablabla Blablabla</p><img class="img-responsive" src="img/hamster.png" style="height: 300px"/></div></div></div><div id="data-analysis" style="height: 500px"><div class="container"><div class="row center"><h4>Use our data transformation tools and submit your survey results to desired destination.</h4></div></div></div><div class="grey lighten-2"><div class="container"><div class="row"><div class="col s12 m6"><img class="responsive-img" src="https://cdn.dribbble.com/users/91300/screenshots/3467957/benyu-02_08_dribbble.gif" style="padding: 10px"/></div><div class="col s12 m6" style="padding-top:20px; padding-bottom: 40px"><h5>Contact Us</h5><form class="row" action="https://formspree.io/support@carevoice.org" method="POST"><div class="col l6 s12"><label>Name</label><input type="text" name="name"/></div><div class="col l6 s12"><label>Organization</label><input type="text" name="organization"/></div><div class="col l6 s12"><label>Email</label><input type="text" name="_replyto"/></div><div class="col l6 s12"><label>Phone</label><input type="text" name="phone"/></div><div class="col s12"><label>Any Comments?</label><textarea name="comments"></textarea></div><div class="col s12"><input class="btn" type="submit" value="Go"/></div></form></div></div></div></div><footer class="white clearfix"><div class="container"><div class="right"><p>support@wellopp.com</p></div><div class="left"><p>&copy; Hotpath 2017</p></div></div></footer></body><!--TODO: REMOVE--><script src="https://code.jquery.com/jquery-2.2.4.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js"></script><script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script><script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script><script>var config = {
+	apiKey: "AIzaSyBCAJtmUVpWjFUIw4yLUuPhbCJWNufA_gU",
+	authDomain: "hotpath-f9c54.firebaseapp.com",
+	databaseURL: "https://hotpath-f9c54.firebaseio.com",
+	storageBucket: "hotpath-f9c54.appspot.com",
+	messagingSenderId: "340378037531"
+};
+firebase.initializeApp(config);</script><script src="./js/alpaca-templates.js"></script><script src="./js/alpaca-schemas.js"></script><script src="./js/alpaca-types.js"></script><script src="./js/alpaca-viewer.min.js"></script><script src="./js/alpaca-editor.min.js"></script><script>$(document).ready(function(){
+	$('#device-dropdown').dropdown();
+	$('select').material_select();
+	$('.button-collapse').sideNav({
+		menuWidth: 300, // Default is 300
+		//edge: 'right', // Choose the horizontal origin
+		//closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+		draggable: true // Choose whether you can drag to open on touch screens
+	});
+	$('.modal').modal({
+		ready: function(){
+			$('body').addClass('modal-open');
+		},
+		complete: function(){
+			$('body').removeClass('modal-open');
+		}
+	});
+	$('#dropdown-button').dropdown({
+	      inDuration: 300,
+	      outDuration: 225,
+	      constrainWidth: true, // Does not change width of dropdown to that of the activator
+	      hover: false, // Activate on hover
+	      gutter: 0, // Spacing from edge
+	      belowOrigin: true, // Displays dropdown below the button
+	      alignment: 'left', // Displays dropdown with edge aligned to the left of button
+	      stopPropagation: false // Stops event propagation
+	    });
+});</script></html>

@@ -1,33 +1,36 @@
-// angular.module('alpacaEditor').run(["$rootScope", "$state", function($rootScope, $state) {
-//   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
-//     // We can catch the error thrown when the $requireSignIn promise is rejected
-//     // and redirect the user back to the home page
-//     if (error === "AUTH_REQUIRED") {
-//       $state.go("home");
-//     }
-//   });
-// }]);
-
 angular.module('alpacaEditor')
-.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
+.config([
+  '$stateProvider', 
+  '$urlRouterProvider', 
+  '$locationProvider', 
+  function ($stateProvider, $urlRouterProvider, $locationProvider) {
   
   $locationProvider.html5Mode({
     enabled: true,
     requireBase: false
   });
-  // $urlRouterProvider.rule(function ($injector, $location) {
-  //   var path = $location.path();
-  //   console.log(path);
-  //   // if (path == '/login.html*') {
-  //   //   console.log(path);
-  //   //   path = '/';
-  //   // }
-  // });
   
  $stateProvider
+    .state('home', {
+      url: '/',
+      templateUrl: 'about.html'
+    })
     .state('login', {
-      url:'/login.html',
+      url: '/login',
       controller: 'authCtrl'
+    })
+    .state('collections', {
+      url: '/collections',
+      templateUrl: 'collections.html',
+    })
+    .state('collections.collection', {
+      url: '/{collectionId}',
+      templateUrl: 'tabs/edit/edit.html',
+      resolve: {
+        slide: function(){
+          return {content: 'blah'}
+        }
+      }
     })
     // .state('editor', {
     //   url: '/editor.html',
@@ -52,8 +55,7 @@ angular.module('alpacaEditor')
     .state('surveys', {
       url: '/surveys.html',
       controller: 'authCtrl'
-    })
-    ;
+    });
    
 
   $urlRouterProvider.otherwise('/');  

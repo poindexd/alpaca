@@ -1,0 +1,126 @@
+html
+	head
+		title Hotpath
+		link(rel='stylesheet' href='./css/editor.css')
+		link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
+		style.
+			footer {
+				display: inherit;
+				
+			}
+			html,body{
+				height: 100%;
+				
+			}
+			iframe{
+				margin: 0;
+				padding: 0;
+				border: 0;
+			}
+			.frame-wrapper{
+				height: calc(100% - 64px);
+				width: 100%;
+				//background: #eee;
+				position: relative;
+				overflow:hidden;
+			}
+			wrap-in-frame {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				//display: flex;
+				//justify-content: center;
+				//align-items:center;
+			}
+
+			.row {
+				margin-bottom: 0px;
+			}
+
+			.waves-effect{
+				display: block;
+			}
+			.pitch-wrap {
+				    width: 100%;
+				    margin-bottom: 42px;
+				    text-align: center;
+				    //background: linear-gradient(90deg, #f9ba71 30%, #09d6f1 100%);
+				    background:linear-gradient(90deg, #f9b05a 30%, #1adff9 100%);
+				    //background: linear-gradient(90deg, #fccf9b 30%, #00bcd4 100%);  
+			}
+
+	body.grey.lighten-3(ng-app='alpacaEditor' ng-controller='demoController')
+
+		include include/header.pug
+
+		div
+
+			div(ng-hide='!loading')
+				include include/loading.pug
+
+			div(ng-show='loading == false' ng-cloak)
+				//include include/side-nav.pug
+
+				div(style='max-height:calc(100% - 64px); width:100%;overflow:hidden')
+					.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "collections" && currentCollection')
+						include tabs/edit/edit.pug
+
+				div(style='max-height:100%')
+					.nga-fast.nga-stagger.nga-fade(ng-show='tab.name == "collections" && !currentCollection')
+						include collections.pug
+
+	
+	//div(style='background:white')
+		include sections/footer.pug			
+
+	script(src='https://code.jquery.com/jquery-2.2.4.min.js')
+	script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js')
+	script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+	script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js')
+	script(src='https://www.gstatic.com/firebasejs/3.6.6/firebase.js')
+	script(src='https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js')
+	script.
+		var config = {
+			apiKey: "AIzaSyBCAJtmUVpWjFUIw4yLUuPhbCJWNufA_gU",
+			authDomain: "hotpath-f9c54.firebaseapp.com",
+			databaseURL: "https://hotpath-f9c54.firebaseio.com",
+			storageBucket: "hotpath-f9c54.appspot.com",
+			messagingSenderId: "340378037531"
+		};
+		firebase.initializeApp(config);
+	script(src='./js/alpaca-templates.js')
+	script(src='./js/alpaca-schemas.js')
+	script(src='./js/alpaca-types.js')
+	script(src='./js/alpaca-viewer.min.js')
+	script(src='./js/alpaca-editor.min.js')
+	script.
+		$(document).ready(function(){
+			$('#device-dropdown').dropdown();
+			$('select').material_select();
+			$('.button-collapse').sideNav({
+				menuWidth: 300, // Default is 300
+				//edge: 'right', // Choose the horizontal origin
+				//closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+				draggable: true // Choose whether you can drag to open on touch screens
+			});
+			$('.modal').modal({
+				ready: function(){
+					$('body').addClass('modal-open');
+				},
+				complete: function(){
+					$('body').removeClass('modal-open');
+				}
+			});
+			$('#dropdown-button').dropdown({
+			      inDuration: 300,
+			      outDuration: 225,
+			      constrainWidth: true, // Does not change width of dropdown to that of the activator
+			      hover: false, // Activate on hover
+			      gutter: 0, // Spacing from edge
+			      belowOrigin: true, // Displays dropdown below the button
+			      alignment: 'left', // Displays dropdown with edge aligned to the left of button
+			      stopPropagation: false // Stops event propagation
+			    });
+		});	

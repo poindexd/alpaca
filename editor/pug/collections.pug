@@ -18,7 +18,7 @@ div(ng-controller='authCtrl')
 	div(id='container-survey')
 		.container
 			.row
-				.col.s12.l4(dir-paginate="_collection in collections | filter:{title:searchValue} | itemsPerPage: 6") 
+				.col.s12.m6.l4(dir-paginate="_collection in collection.collections | filter:{title:searchValue} | itemsPerPage: 6") 
 					//-a(class='card small' href="#" style='box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.7);')
 					.card.small(ng-click='collection.setCurrent(_collection, $index)')
 						a(href='' alt='#')
@@ -39,27 +39,3 @@ div(ng-controller='authCtrl')
 		.row.center
 			dir-pagination-controls(template-url="/pagination.html")
 			//include include/footer.pug
-		//fix me		
-		//- footer(style='height:0px; display:inherit;')
-		//- 	include include/footer.pug		
-	//- script(src='https://code.jquery.com/jquery-2.2.4.min.js')
-	//- script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js")
-	//- script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
-	//- script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js')
-	//- script(src='https://www.gstatic.com/firebasejs/3.6.6/firebase.js')
-	//- script(src='https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js')
-	//- script.
-	//- 	var config = {
-	//- 		apiKey: "AIzaSyBCAJtmUVpWjFUIw4yLUuPhbCJWNufA_gU",
-	//- 		authDomain: "hotpath-f9c54.firebaseapp.com",
-	//- 		databaseURL: "https://hotpath-f9c54.firebaseio.com",
-	//- 		storageBucket: "hotpath-f9c54.appspot.com",
-	//- 		messagingSenderId: "340378037531"
-	//- 	};
-	//- 	firebase.initializeApp(config);
-	//- script(src='./js/alpaca-templates.js')
-	//- script(src='./js/alpaca-schemas.js')
-	//- script(src='./js/alpaca-types.js')
-	//- script(src='./js/alpaca-viewer.min.js')
-	//- script(src='./js/alpaca-editor.min.js')
-
